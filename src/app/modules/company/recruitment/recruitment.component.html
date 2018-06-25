@@ -1,0 +1,14 @@
+<nav mat-tab-nav-bar class="recruitment" aria-label="weather navigation links" id="aa">
+  <a mat-tab-link
+      *ngFor="let routeLink of masterValue; let i = index"
+       [routerLink]="routeLink.urlLink"
+      
+       [active]="activeLinkIndex === i"      
+       (click)="activeLinkIndex = i;RecMenuActiveFun(routeLink.urlLink)"
+       [ngClass]="{'active123': RecruitmentMenuActive==routeLink.urlLink}"  >
+       {{routeLink.urlName}} 
+   </a>
+</nav>
+
+<router-outlet></router-outlet>
+

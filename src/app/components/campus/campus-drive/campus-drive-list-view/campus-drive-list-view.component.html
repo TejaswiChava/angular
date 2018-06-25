@@ -1,0 +1,95 @@
+<div class="" *ngIf="!selectedDrive || !isSearchActive">
+    
+      <div class="flexcroll table-scroll">
+        <!-- <input class="pull-left filter-input" [(ngModel)]="filterQuery" placeholder="Filter by Drive Name" /> -->
+    
+     
+    
+      <table class="table table-striped" id="myProgram" [mfData]="data | campusDrive : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+        [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+    
+        <thead>
+            <input type="checkbox" (change)="showInactiveDrives($event)"> <b> Include Inactive Drives</b><br>
+            <br>
+          <tr>
+    
+    
+            <th>
+              <mfDefaultSorter by="driveName">Drive Name</mfDefaultSorter>
+            </th>
+            <th>
+    
+              <mfDefaultSorter by="description">Description</mfDefaultSorter>
+            </th>
+            <th>
+              <mfDefaultSorter by="driveTypeValueId"> Drive Type </mfDefaultSorter>
+            </th>
+            <th>
+            
+           
+              <mfDefaultSorter by="driveStatusValueId"> Drive Status </mfDefaultSorter>
+            </th>
+            <th>
+            
+           
+                <mfDefaultSorter by="createDatetime"> Creation Date </mfDefaultSorter>
+              </th>
+    
+          </tr>
+          <tr>
+    
+          </tr>
+        </thead>
+        <tbody>
+        
+          <tr *ngFor="let instituteDriveList of mf.data" class="notfirst cursor-pointer"
+           (click)=onSelect(instituteDriveList)>
+            <td>
+              {{instituteDriveList.driveName}}
+            </td>
+            <td *ngIf="instituteDriveList.description">
+              {{instituteDriveList.description | limitTo:[20]}}
+            </td>
+            <td *ngIf="!instituteDriveList.description">
+              {{instituteDriveList.description}}
+            </td>
+            <td>
+                {{instituteDriveList.campusDriveTypeLookupValue.lookupValue}}
+            </td>
+           
+            <td class="color_green">
+              <button type="button"
+              class="btn" 
+              id="btn{{instituteDriveList.driveStatusValueId}}">
+              {{educationStatus[instituteDriveList.driveStatusValueId].lookupValue}}
+              </button>
+            </td>
+            <td>
+                {{instituteDriveList.createDatetime | date}}
+            </td>
+    
+          </tr>
+          <tr *ngIf="mf.data == ''">
+            <td colspan="5" class="text-center">
+              <span>
+                No Data Found
+              </span>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="6">
+              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    
+    </div>
+    
+    <div *ngIf="isSearchActive">
+      <app-create-campus-drive [driveList]="selectedDrive" [(getSearchStatus)]="isSearchActive"></app-create-campus-drive>
+    </div>
+    <router-outlet></router-outlet>

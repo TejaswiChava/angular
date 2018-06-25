@@ -1,0 +1,759 @@
+<div class=" row mbtm-20 m-top20">
+  <!-- It is for preview start -->
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="font_robotomedium" class="" style="float:right;margin-top:-25px">
+      <p style="margin-top:-50px">
+        <button class="btn preview-btn">
+          <a routerLink="/companyListProfile/{{loginData.companyId}}" target="_blank" style="font-size:14px;padding:10px;color: #000000;">
+          Preview Profile </a>
+        </button>
+
+      </p>
+    </div>
+  </div>
+  <!-- It is for preview end-->
+  <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
+    <form #companyform="ngForm">
+      <div class="flexcroll row border_css margin0 box_shadow" style="">
+        <!-- company details starts -->
+
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 padding0">
+          <!-- <h4><b>Company Details</b></h4> -->
+        </div>
+
+        <div class="col-lg-4 col-md-8 col-sm-8 col-xs-8">
+          <a class="address-anchortag pull-right cursor-pointer" id="editcompanySubmit" (click)="editcompanySubmit()">
+
+            <img class="width35" src="assets/images/adress_edit_lighter icon (1).png" title="Edit Company Details" *ngIf="showImagDisable"
+              onmouseover="this.src='assets/images/adress_edit_enable_colored.png'" onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'">
+            <!-- <img class="width45" src="assets/images/edit icon_enable.png" *ngIf="!showImagDisable"> -->
+          </a>
+          <div *ngIf="!showImagDisable">
+            <br>
+            <p></p>
+          </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  ">
+            <mat-form-field class="width100">
+              <input matInput [readonly]="readonly" placeholder={{labelData.companyName}} id="companyName" name="companyName" required="required"
+                [(ngModel)]="company.name" #companyName="ngModel" minlength="3" maxlength="100">
+            </mat-form-field>
+            <div *ngIf="companyName.errors && (companyName.dirty || companyName.touched)" class="color-red m-btm5">
+              <div [hidden]="!companyName.errors.minlength">{{labelData.campusName}} Must be at least 3 characters long.</div>
+              <!-- <div [hidden]="!companyName.hasError('pattern')">Special charecters not allowed</div> -->
+            </div>
+
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12   ">
+            <mat-form-field class="width100">
+              <input matInput [readonly]="readonly" placeholder={{labelData.companyShortName}} id="companyShortname" name="companyShortname"
+                [(ngModel)]="company.shortName" #companyShortname="ngModel" maxlength="50">
+            </mat-form-field>
+            <!-- <div *ngIf="companyShortname.errors && (companyShortname.dirty || companyShortname.touched)" class="color-red m-btm5" >
+              <div [hidden]="!companyShortname.errors.minlength">{{labelData.campusShortName}} Must be at least 3 characters long.</div>              
+              <div [hidden]="!companyShortname.hasError('pattern')">Special charecters not allowed</div>
+            </div> -->
+          </div>
+        </div>
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <mat-form-field class="width100" id="cmpSize">
+              <mat-select placeholder={{labelData.companySize}} [disabled]="readonly" name="companySize" [(ngModel)]=company.companySizeValueId
+                id="companySizeValueId" #companySizeValueId="ngModel" required="required">
+                <mat-option [value]="null">Select Employer Size</mat-option>
+                <mat-option *ngFor=" let cmpSize of companySize" [value]="cmpSize.lookupValueId">{{cmpSize.lookupValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div *ngIf="companySizeValueId.errors && (companySizeValueId.dirty || companySizeValueId.touched)" class="color-red m-btm5">
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+            <mat-form-field class="width100" id="cmpType">
+              <mat-select placeholder={{labelData.companyType}} [disabled]="readonly" name="companyTypeValueId" [(ngModel)]=company.companyTypeValueId
+                id="companyTypeValueId" #companyTypeValueId="ngModel" required="required">
+                <mat-option [value]="null">Select Employer Type</mat-option>
+                <mat-option *ngFor=" let cmpType of companyType" [value]="cmpType.lookupValueId">{{cmpType.lookupValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngIf="companyTypeValueId.errors && (companyTypeValueId.dirty || companyTypeValueId.touched)" class="color-red m-btm5">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0  ">
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+            <mat-form-field class="width100 ">
+              <input matInput [disabled]="readonly" placeholder={{labelData.website}} name="websiteAddress" [(ngModel)]="company.websiteAddress"
+                #websiteAddress="ngModel" required="required" >
+            </mat-form-field>
+
+            <!-- pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$" -->
+            <!-- <div *ngIf="websiteAddress.errors && (websiteAddress.dirty || websiteAddress.touched)" class="color-red m-btm5">
+              <div [hidden]="!websiteAddress.hasError('pattern')">
+                Must be a valid URL
+              </div>
+            </div> -->
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <mat-form-field class="width100" id="industryType">
+              <mat-select placeholder={{labelData.industryType}} [disabled]="readonly" name="industryTypeValueId" [(ngModel)]=company.industryTypeValueId
+                id="industryTypeValueId" #industryTypeValueId="ngModel" required="required">
+                <mat-option [value]="null">Select Industry Type</mat-option>
+                <mat-option *ngFor=" let cmpInd of companyIndustryType" [value]="cmpInd.lookupValueId">{{cmpInd.lookupValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngIf="industryTypeValueId.errors && (industryTypeValueId.dirty || industryTypeValueId.touched)" class="color-red m-btm5">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 ">
+          <div class="col-lg-4">
+            <b>{{labelData.internshipHead}}*</b>
+          </div>
+          <div class="col-lg-8">
+            <mat-radio-group [(ngModel)]="company.internshipInd" name='fff'>
+              <mat-radio-button value="Y" id="internYes" [checked]="true" [disabled]="readonly" [checked]="company.internshipInd == 'Y'"> {{labelData.yes}}</mat-radio-button>
+              <mat-radio-button value="N" id="internNo" [disabled]="readonly" [checked]="company.internshipInd == 'N'"> {{labelData.no}} </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top10">
+          <label>{{labelData.about}}</label>
+          <textarea placeholder={{labelData.about}} [readonly]="readonly" name="desc" id="desc" minlength="4" maxlength="2000" class="flexcroll textarea_boxes width100"
+            [(ngModel)]="company.description" #description="ngModel"></textarea>
+          <div *ngIf="description.errors && (description.dirty || description.touched)" class="color-red m-btm5">
+            <div [hidden]="!description.errors.minlength">description must be at least 4 characters long.</div>
+            <div [hidden]="!description.errors.maxlength">description cannot be more than 2000 characters long.</div>
+          </div>
+        </div>
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top5">
+          <label>{{labelData.missionStmt}}</label>
+          <textarea id="mstatement" [readonly]="readonly" placeholder={{labelData.missionStmt}} name="missionStatement" minlength="4"
+            maxlength="2000" class="flexcroll textarea_boxes width100" [(ngModel)]="company.missionStatement" #missionStatement="ngModel"></textarea>
+          <div *ngIf="missionStatement.errors && (missionStatement.dirty || missionStatement.touched)" class="color-red m-btm5">
+            <div [hidden]="!missionStatement.errors.minlength">mission statement must be at least 4 characters long.</div>
+            <div [hidden]="!missionStatement.errors.maxlength">mission statement cannot be more than 2000 characters long.</div>
+          </div>
+        </div>
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top5">
+          <label>{{labelData.objective}}</label>
+          <textarea id="Objective" [readonly]="readonly" placeholder={{labelData.objective}} name="objective" minlength="4" maxlength="2000"
+            class="textarea_boxes flexcroll width100" [(ngModel)]="company.objective" #objective="ngModel"></textarea>
+          <div *ngIf="objective.errors && (objective.dirty || objective.touched)" class="color-red m-btm5">
+            <div [hidden]="!objective.errors.minlength">
+              objective must be at least 4 characters long.
+            </div>
+            <div [hidden]="!objective.errors.maxlength">
+              objective cannot be more than 2000 characters long.
+            </div>
+          </div>
+        </div>
+
+
+        <!--company details ends-->
+
+
+
+        <!--social media starts-->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top5">
+          <label class="m-top15 ">{{labelData.socialMediaHead}}</label>
+        </div>
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 m-top5">
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+            <mat-form-field class="width100">
+              <input matInput [readonly]="readonly" placeholder={{labelData.facebook}} name="facebook" id="companyfacebook" #companyfacebook="ngModel"
+                [(ngModel)]="company.facebook" #facebook="ngModel">
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <mat-form-field class="width100">
+              <input matInput [readonly]="readonly" placeholder={{labelData.twitter}} name="twitter" [(ngModel)]="company.twitter" id="companyTwitter"
+                #companyTwitter="ngModel">
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <mat-form-field class="width100">
+              <input matInput [readonly]="readonly" placeholder={{labelData.youtube}} name="youtube" [(ngModel)]="company.youtube" id="companyYoutube"
+                #companyYoutube="ngModel">
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <mat-form-field class="width100">
+              <input matInput [readonly]="readonly" placeholder={{labelData.linkedIn}} name="linkedin" [(ngModel)]="company.linkedin" id="companyLinkedin"
+                #companyLinkedin="ngModel">
+            </mat-form-field>
+          </div>
+        </div>
+        <!--social media ends-->
+
+        <!-- upload image section starts -->
+
+        <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-5" style="margin-bottom:5px;">
+          <!-- <div class="row"> -->
+          <div style="margin-top:15px;" class=" border_css  clearfix height240">
+            <h4>
+              <b>{{labelData.uploadImgHead}}</b>
+            </h4>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 company_logo_inst">
+
+              <!-- <div class="fileUpload btn padding0">
+                            <span *ngIf="!readonly">
+                              <img style="width:40%" src="assets/images/upload_side icon.png">
+                              <p class="f-size12">{{labelData.uploadCmpLogoText}}</p>
+                            </span>
+                             <input type="file" class="upload" [disabled]="readonly" [(ngModel)]="company.logo" (change)="uploadDatasource($event.target.files)" name="logo"
+                             id="logo" accept=".jpeg,.jpg,.png,.pdf" />
+                           </div> 
+                           <img style="width:40%" src="{{apiEndPoint}}Attachments/company-logo/download/{{company.logo}}"> -->
+              <div class="fileUpload btn padding0 mtop-20">
+                <span *ngIf="!readonly">
+                  <img style="width:40px" src="assets/images/upload_side icon.png">
+                  <!-- <p class="f-size14">{{labelData.uploadCmpLogoText}}</p> -->
+                  <p class="f-size14">Upload Logo</p>
+                </span>
+                <input type="file" class="upload" [disabled]="readonly"  (change)="uploadDatasource($event)"
+                  name="logo" id="logo" accept=".jpeg,.jpg,.png,.pdf" />
+              </div>
+              <div *ngIf="company.logo == '' || company.logo == null && readonly ">
+                <b>Logo</b>
+              </div>
+              <div *ngIf="company.logo">
+                <img class="uplodimg_css" src="{{company.logo}}">
+                <br>
+                <b style="padding:5px;">Logo</b>
+                <p class="logo_recomendation">Recommended Image Resolution: 245x150</p>
+              </div>
+
+
+
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 branding_logo_inst">
+
+              <div class="fileUpload btn padding0 mtop-20">
+                <span *ngIf="!readonly">
+                  <img style="width:40px" src="assets/images/upload_side icon.png">
+                  <p class="f-size14">{{labelData.uploadBrdLogoText}}</p>
+                </span>
+                <input type="file" class="upload" [disabled]="readonly"  (change)="uploadBrandLogo($event)"
+                  name="campusBrandImg" id="brandingImage" accept=".jpeg,.jpg,.png,.pdf" />
+              </div>
+              <div *ngIf="company.brandingImage == '' || company.brandingImage == null && readonly " style="height:70px;">
+                <b>Branding Image</b>
+              </div>
+              <div *ngIf="company.brandingImage">
+                <img class="uplodimg_css" src="{{company.brandingImage}}">
+                <br>
+                <b style="padding:5px;">Branding Image</b>
+                <p class="logo_recomendation">Recommended Image Resolution: 1366x275</p>
+              </div>
+            </div>
+
+          </div>
+          <!-- </div> -->
+        </div>
+
+
+        <!-- upload image section ends -->
+
+        <!-- buttons for company details starts -->
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+          <div class="pull-right" *ngIf="!disableBtn">
+            <!-- <button type="submit" *ngIf="!btnSaveReadonly" class="btn submit-btn" [disabled]="!companyform.form.valid" id="CompanySubmit"
+              (click)="CompanySubmit()"> {{labelData.btnSave}}</button> -->
+            <button *ngIf="btnSaveReadonly" class="btn submit-btn" id="updateCompanySubmit" (click)="updateCompanySubmit()" [disabled]="!companyform.form.valid">
+            {{labelData.btnUpdate}}</button>
+            <a *ngIf="btnSaveReadonly" class="btn submit-btn" id="cancelCompanySubmit" (click)="cancelCompanySubmit()"> {{labelData.btnCancel}}</a>
+          </div>
+        </div>
+
+
+        <!-- buttons for company details ends -->
+
+      </div>
+    </form>
+  </div>
+
+
+
+  <!-- secound half diviosn starts -->
+  <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+    <!-- contact information starts-->
+
+    <div class="row">
+      <div class="">
+        <div class="flexcroll border_css box_shadow col-lg-12" style="overflow:hidden;height:378px">
+          <div class="m-top5">
+
+            <h4 style="display: inline" class="text-capitalize f-size16">
+              <b>{{labelData.contactInfoHead}}</b>
+            </h4>
+
+            <div class="pull-right ">
+
+              <button type="submit" class="btn backgroundColor_transperent color-theme f-size16" id="addNewContact" (click)="addNewContact()">
+                <!-- <img class="width35 m-tr20" src="assets/images/add disable.png" *ngIf="!showAddImagDisable"> -->
+                <img class="width35 m-tr20" title="Add Contact" src="assets/images/add__plus_icon.png" *ngIf="showContactImagDisable">
+              </button>
+            </div>
+            <br>
+            <br>
+            <div>
+              <div class="text-center" *ngIf="!companyContactList || companyContactList =='' && !showContactForm">
+                <br>
+                <br>
+                <img class="width45" src="assets/images/add contact_icon.png"> {{labelData.noContactInfo}}
+
+              </div>
+
+
+              <div *ngIf="!showContactForm  && companyContactList " class="col-lg-12 padding0 col-md-12 col-xs-12 col-sm-12 flexcroll"
+                style="height: 310px;
+              overflow: auto;
+              overflow-x: hidden;">
+
+                <div class="col-lg-12  ull-striped" *ngFor="let dataCon1 of companyContactList ;let i = index">
+                  <div class="row flexcroll" style="padding:0px 0px;margin-bottom:5px " [ngClass]="{'color': i%2==0, 'three':i%2==1}">
+
+
+
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12" style="padding-top:4px">
+                      <ul style="list-style:none;margin-left:-45px">
+                        <li style="float:left;width:30px" *ngIf="dataCon1.companyContact.contactTypeValueId == '13'">
+                          <i class="fa fa-envelope f-size1em color_btn" aria-hidden="true"></i>
+                        </li>
+                        <li style="float:left;width:30px" *ngIf="dataCon1.companyContact.contactTypeValueId == '14'">
+                          <i class="fa fa-mobile f-size1em color_btn" aria-hidden="true"></i>
+                        </li>
+                        <li style="float:left;width:30px" *ngIf="dataCon1.companyContact.contactTypeValueId == '15'">
+                          <i class="fa fa-phone f-size1em color_btn" aria-hidden="true"></i>
+                        </li>
+                        <li style="float:left;width:30px" *ngIf="dataCon1.companyContact.contactTypeValueId == '16'">
+                          <i class="fa fa-fax f-size1em color_btn" aria-hidden="true"></i>
+                        </li>
+                        <li style="float:left"> {{dataCon1.companyContact.contactInfo}}</li>
+
+                      </ul>
+                    </div>
+
+
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                      <a (click)="editCompanyContact(dataCon1,i)" id="editCompanyContact" class="color_btn pull-right cursor-pointer">
+
+                        <img class="width35" title="Edit" id="editCompanyContactImg" style="margin-right: -16px" src="assets/images/adress_edit_lighter icon (1).png" onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+                          onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'">
+                      </a>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div *ngIf="showContactForm">
+              <form #companycontact="ngForm">
+                <div *ngFor="let companyCont of companyContNew">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top10">
+
+
+                    <mat-form-field class="width100" id="cmpContact">
+                      <mat-select (change)="onSelect(companyCont.contactTypeValueId)" placeholder={{labelData.contactType}} [(ngModel)]="companyCont.contactTypeValueId"
+                        (ngModelChange)="companyCont.contactInfo=''" name="contactTypeValueId" id="contactTypeValueId" #contactTypeValueId="ngModel" required="required">
+                        <mat-option [value]="">Select Contact Type</mat-option>
+                        <mat-option *ngFor="let cntLookup of ContactLookups" [value]="cntLookup.lookupValueId">{{cntLookup.lookupValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <!-- <div *ngIf="option == 'Contact Type'">
+                      <mat-form-field class="width100 mar-top15">
+                        <input matInput [disabled]="disabled" name="contactInfo" [(ngModel)]="companyCont.contactInfo" placeholder={{labelData.contactInfo}}
+                          id="contactInfo" #contactInfo="ngModel" required="required">
+                      </mat-form-field>
+                      <div *ngIf="contactInfo.errors && (contactInfo.dirty || contactInfo.touched)" class="color-red m-btm5">
+                        
+                      </div>
+                    </div> -->
+
+                    <div *ngIf="option == '13'">
+                      <mat-form-field class="width100">
+                        <input matInput type="text" email name="contactInfo" #contactInfo="ngModel" [(ngModel)]="companyCont.contactInfo" placeholder={{labelData.email}}
+                          id="contactInfo" pattern="^\w+([.-]\w+)*@\w+([.-]\w+)*(\.\w{2,3})+$" required/>
+                      </mat-form-field>
+                      <div *ngIf="contactInfo.errors && (contactInfo.dirty || contactInfo.touched)" class="color-red m-btm5">
+                        <div [hidden]="!contactInfo.hasError('required')">Email is required</div>
+                        <div [hidden]="!contactInfo.errors.pattern" class="color-red m-btm5">Email format should be
+                          <small>
+                            <b>abcd@abc.com</b>
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div *ngIf="option == '14'">
+                      <mat-form-field class="width100">
+                        <input matInput type="text" class="" name="Mobile" placeholder={{labelData.mobile}} [(ngModel)]="companyCont.contactInfo"
+                          #companyMobile="ngModel" id="companyMobile" pattern="^[6789]\d{9}$" minlength="10" maxlength="10"
+                          required/>
+                      </mat-form-field>
+                      <div *ngIf="companyMobile.errors && (companyMobile.dirty || companyMobile.touched)" class="color-red m-btm5 f-size12">
+                        <div [hidden]="!companyMobile.hasError('pattern') && !companyMobile.hasError('minlength') && !companyMobile.hasError('maxlength')">Please Enter Valid Mobile Number</div>
+                      </div>
+                    </div>
+
+
+
+                    <div *ngIf="option == '15'">
+                      <mat-form-field class="width100">
+                        <input matInput type="text" pattern="[0-9]+" minlength="6" maxlength="11" name="cmpPhone" placeholder={{labelData.phone}}
+                          [(ngModel)]="companyCont.contactInfo" id="cmpPhone" #cmpPhone="ngModel" required/>
+                      </mat-form-field>
+                      <div *ngIf="cmpPhone.errors && (cmpPhone.dirty || cmpPhone.touched)" class="color-red m-btm5 f-size12">
+                        <div [hidden]="!cmpPhone.hasError('pattern') && !cmpPhone.hasError('minlength') ">Please Enter Valid Phone Number</div>
+                      </div>
+                    </div>
+
+                    <!-- <div *ngIf="option == '16'">
+                      <mat-form-field class="width100">
+                        <input matInput type="text" name="fax" placeholder={{labelData.fax}} [(ngModel)]="companyCont.contactInfo" id="companyfax"
+                          #companyfax="ngModel" minlength="10"  pattern="[0-9\+\-]+" required/>
+                      </mat-form-field>
+                      <div *ngIf="companyfax.errors && (companyfax.dirty || companyfax.touched)" class="color-red m-btm5" >
+                        <div [hidden]="!companyfax.hasError('minlength') && !companyfax.hasError('pattern')">Enter Valid Fax Number</div>                           
+                      </div>
+                    </div> -->
+
+                  </div>
+
+                  <!-- buttons for contact information starts -->
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:30px">
+                    <div class="pull-right">
+                      <button type="submit" *ngIf="!btnContactreadonly" class="btn submit-btn" [disabled]="!companycontact.form.valid" id="companyContactSubmit"
+                        (click)="companyContactSubmit($event)">{{labelData.btnSave}}</button>
+                      <button type="submit" *ngIf="btnContactreadonly" [disabled]="!companycontact.form.valid" class="btn submit-btn" id="updateCompanyContactSubmit"
+                        (click)="updateCompanyContactSubmit()"> {{labelData.btnUpdate}}</button>
+                      <a class="btn submit-btn " id="cancelCompanyContact" (click)="cancelCompanyContact()"> {{labelData.btnCancel}}</a>
+                    </div>
+
+                  </div>
+                  <!-- buttons for contact information ends -->
+                </div>
+              </form>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--contact information ends-->
+
+    <!-- address information starts -->
+
+    <div class="">
+      <div class="m-top15">
+        <form #companyAddress="ngForm">
+          <div class="row border_css1 flexcroll box_shadow" style="height: 704px !important;">
+
+            <div class="m-top10">
+              <h4 class="display-inline text-capitalize f-size16">
+                <b>{{labelData.addressInfoHead}}</b>
+              </h4>
+
+
+              <div class="pull-right">
+                <button type="submit" class="btn backgroundColor_transperent color-theme f-size16" id="addCompanyAddressId" (click)="addCompanyAddress(companyAddress)">
+                  <!-- <img class="width35 m-right15" src="assets/images/add disable.png" *ngIf="!showAddImagDisable"> -->
+                  <img class="width35 mtop-20 m-right15" src="assets/images/add__plus_icon.png" id="addCompanyAddressIdImg" title="Add Address" *ngIf="showAddImagDisable">
+
+                </button>
+
+
+              </div>
+
+              <div>
+
+                <div class="text-center f-bold" *ngIf="!companyAddList && !showEditAddress">
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <img class="width45" src="assets/images/add address_icon.png"> {{labelData.noAddressInfo}}
+                </div>
+                <!-- {{companyAddList | json}} -->
+                <div *ngIf="!showEditAddress && companyAddList" class="col-lg-12  col-md-12 col-xs-12 col-sm-12 flexcroll" style="height: 593px;overflow: auto; overflow-x: hidden;">
+                  <div class="col-lg-12 padding0 ull-striped" *ngFor="let cmpData of companyAddList ;let k = index">
+                    <div class="row" style="padding:0px 0px;margin-bottom:5px " [ngClass]="{'color': k%2==0, 'three':k%2==1}">
+                      <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10 ">
+                        <!-- {{cmpData.companyAddress | json}} -->
+                        <ul class="ul_style">
+                          <li>
+                            <b>{{AddressLookup[cmpData.addressTypeValueId].lookupValue}}:</b>
+                          </li>
+                          <!-- <li>{{cmpData.addressTypeValueId}}:</li> -->
+                          <li class="pull-left wordBreak">{{cmpData.addressLine1}}</li>
+                          <li *ngIf="cmpData.addressLine2" class="pull-left wordBreak">,{{cmpData.addressLine2}}</li>
+                          <li *ngIf="cmpData.addressLine3" class="wordBreak">, {{cmpData.addressLine3}} </li>
+                          <!-- <li class="pull-left">{{cmpData.cityId}},</li> -->
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                            <li class="pull-left" *ngFor="let city of cityCacheList">
+                              <span *ngIf="city.cityId == cmpData.cityId">
+                                {{city.cityName}}
+                              </span>
+                            </li>
+                            <li class="pull-left" *ngFor="let state of stateList">
+                              <span *ngIf="state.stateCode == cmpData.stateCode">
+                                , {{state.stateName}}
+                              </span>
+                            </li>
+                            <li class="pull-left" *ngFor="let country of countryList">
+                              <span *ngIf="country.countryCode == cmpData.countryCode">
+                                ,{{country.countryName}}
+                              </span>
+                            </li>
+                            <!-- <li class="pull-left">{{cmpData.cityId}},</li> -->
+                            <!-- <li class="pull-left">{{cmpData.stateCode}}, </li> -->
+                            <!-- <li class="pull-left">{{cmpData.countryCode}},</li> -->
+                            <li *ngIf="cmpData.postalId" class="pull-left">,{{cmpData.postalId}}</li>
+                          </div>
+
+                        </ul>
+                      </div>
+
+
+
+                      <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2">
+                        <input type="radio" class="m-top12" id="primaryCompany" title="Mark Address as Primary" (click)="primary(cmpData, k)" [checked]="cmpData.primaryInd == 'Y'"
+                          name="primaryInd">
+                        <img class="width35 pull-right cursor-pointer" src="assets/images/adress_edit_lighter icon (1).png" (click)="editAddress(cmpData,k)"
+                          style="margin-right: -16px" title="Edit" onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+                          onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- </div> -->
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-12 flexcroll" *ngIf="showEditAddress" style="height:480px;overflow-y:scroll;overflow-x:hidden;">
+              <div class="row" *ngFor="let companyAdd of companyAddNew">
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                  <mat-form-field class="width100" id="cmpAddressType">
+                    <mat-select placeholder={{labelData.addressType}} name="address_Dropdown" [disabled]="readonlyAdd" [(ngModel)]="companyAdd.addressTypeValueId"
+                      #selectAddr="ngModel" id="selectAddr" required="required">
+                      <mat-option [value]="">Select Address Type</mat-option>
+                      <mat-option *ngFor="let AddLookup of AddressLookupArray " [value]="AddLookup.lookupValueId">{{AddLookup.lookupValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div *ngIf="selectAddr.errors && (selectAddr.dirty || selectAddr.touched)" class="color-red m-btm5">
+
+                  </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <mat-form-field class="width100">
+                    <input matInput [readonly]="readonlyAdd" placeholder={{labelData.addLine1}} [(ngModel)]="companyAdd.addressLine1" name="address1"
+                      #addressLine1="ngModel" required="required">
+                  </mat-form-field>
+                  <div *ngIf="addressLine1.errors && (addressLine1.dirty || addressLine1.touched)" class="color-red m-btm5">
+                  </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-15">
+                  <mat-form-field class="width100">
+                    <input matInput [readonly]="readonlyAdd" id="companyaddressLine2" placeholder={{labelData.addLine2}} [(ngModel)]="companyAdd.addressLine2" name="address2">
+                  </mat-form-field>
+                </div>
+
+
+
+
+                <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 m-top-15 ">
+
+                  <mat-form-field class="width100">
+                    <input matInput [(ngModel)]="companyAdd.addressLine3" id="companyaddress3" #address3="ngModel" name="address3" placeholder={{labelData.addLine3}}>
+                  </mat-form-field>
+                </div>
+
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  padding0 m-top-15">
+
+
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                    <mat-form-field class="width100" id="cmpCountry">
+                      <mat-select placeholder="Select Country" [disabled]="readonlyAddCountry" name="country" (ngModelChange)="getStateDet($event)"
+                        [(ngModel)]="companyAdd.countryCode" list="countries" placeholder={{labelData.country}} id="countryCode"
+                        #countryCode="ngModel" required="required" readonly>
+                        <mat-option [value]="">Select Country</mat-option>
+                        <mat-option *ngFor=" let s of countryList" [value]="s.countryCode">{{s.countryName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <div *ngIf="countryCode.errors && (countryCode.dirty || countryCode.touched)" class="color-red m-btm5">
+                    </div>
+
+                    <!-- <mat-form-field class="width100">
+                      <input matInput [disabled]="readonlyAdd" name="country" (ngModelChange)="getStateDet($event)" [(ngModel)]="companyAdd.countryCode"
+                        list="countries" placeholder={{labelData.country}} id="countryCode" #countryCode="ngModel" required="required"
+                        readonly>
+                    </mat-form-field>
+                    <datalist id="countries">
+                      <option *ngFor=" let s of countryList" [value]="s.countryCode">{{s.countryName}}</option>
+                    </datalist> -->
+
+                  </div>
+
+
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+
+                    <mat-form-field class="width100" id="cmpState">
+                      <mat-select placeholder="Select State" [disabled]="readonlyAdd" name="state" list="states" (ngModelChange)="getCityDet($event);companyAdd.cityId=''"
+                        [(ngModel)]="companyAdd.stateCode" placeholder={{labelData.state}} id="state" #stateCode="ngModel"
+                        required="required">
+                        <mat-option [value]="">Select State</mat-option>
+                        <mat-option *ngFor=" let s of stateList" [value]="s.stateCode">{{s.stateName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <div *ngIf="stateCode.errors && (stateCode.dirty || stateCode.touched)" class="color-red m-btm5">
+                    </div>
+                    <!-- <mat-form-field class="width100">
+                      <input matInput [disabled]="readonlyAdd" name="state" list="states" (ngModelChange)="getCityDet($event)" [(ngModel)]="companyAdd.stateCode"
+                        placeholder={{labelData.state}} id="state" #stateCode="ngModel" required="required">
+                    </mat-form-field>
+                    <datalist id="states">
+                      <option *ngFor=" let s of stateList" [value]="s.stateCode">{{s.stateName}}</option>
+                    </datalist> -->
+
+                  </div>
+                </div>
+
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 m-top-15">
+
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  ">
+
+
+                    <mat-form-field class="width100" id="cmpCity">
+                      <mat-select placeholder="Select City" [disabled]="readonlyAdd" name="city" list="cities" [(ngModel)]="companyAdd.cityId"
+                        placeholder={{labelData.city}} id="city" #cityId="ngModel" required="required">
+                        <mat-option [value]="">Select City</mat-option>
+                        <mat-option *ngFor=" let s of cityList" [value]="s.cityId">{{s.cityName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <div *ngIf="cityId.errors && (cityId.dirty || cityId.touched)" class="color-red m-btm5">
+                    </div>
+
+                    <!-- <mat-form-field class="width100">
+                      <input matInput [disabled]="readonlyAdd" name="city" list="cities" (ngModelChange)="getPostalDet($event)" [(ngModel)]="companyAdd.cityId"
+                        placeholder={{labelData.city}} id="city" #cityId="ngModel" required="required">
+                    </mat-form-field>
+                    <datalist id="cities">
+                      <option *ngFor=" let s of cityList" [value]="s.cityId">{{s.cityName}}</option>
+                    </datalist> -->
+
+                  </div>
+
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+
+
+                    <!-- <mat-form-field class="width100">
+                          <mat-select placeholder="Postal Code" [disabled]="readonlyAdd" name="postalId" list="postals" 
+                          [(ngModel)]="companyAdd.postalId" 
+                          id="postalId" #postalId="ngModel" required="required">
+                          <mat-option [value]="">Select Postal Code</mat-option> 
+                          <mat-option  *ngFor=" let s of postalList" [value]="s.postalId">{{s.postalCode}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field> -->
+
+                    <mat-form-field class="width100">
+                      <input matInput placeholder="Postal Code" [readonly]="readonlyAdd" name="postalCode" [(ngModel)]="companyAdd.postalId" minlength="6"
+                        maxlength="6" id="postalCode" pattern="^[0-9]*$" #postalCode="ngModel">
+                    </mat-form-field>
+                    <div *ngIf="postalCode.errors && (postalCode.dirty || postalCode.touched)" class="color-red m-btm5 f-size12">
+                      <div [hidden]="!postalCode.hasError('pattern') && !postalCode.hasError('minlength') && !postalCode.hasError('maxlength')">Please Enter Valid Postal Code</div>
+                    </div>
+
+                    <!-- <mat-form-field class="width100">
+                      <input matInput [disabled]="readonlyAdd" name="postalId" list="postalId" [(ngModel)]="companyAdd.postalId" placeholder={{labelData.city}}
+                        id="postalId" #postalId="ngModel" required="required">
+                    </mat-form-field>
+                    <datalist id="postalId">
+                      <option *ngFor=" let s of postalList" [value]="s.postalId">{{s.postalCode}}</option>
+                    </datalist> -->
+
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <!-- buttons for Address information starts -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-5 mbtm-20">
+                  <div class="pull-right">
+                    <button type="submit" *ngIf="!btnaddressreadonly" id="companyAddressSubmitId" (click)="companyAddressSubmit($event)" [disabled]="!companyAddress.form.valid"
+                      class="btn  submit-btn"> {{labelData.btnSave}}</button>
+                    <button type="submit" [disabled]="!companyAddress.form.valid" *ngIf="btnaddressreadonly" class="btn submit-btn" id="updateCompanyAddressSubmitId" (click)="updateCompanyAddressSubmit(companyAdd)">
+                    {{labelData.btnUpdate}}</button>
+                    <a class="btn submit-btn " id="cancelCompanyAddressId" (click)="cancelCompanyAddress()"> {{labelData.btnCancel}}</a>
+                  </div>
+                </div>
+                <!-- buttons for Address information ends -->
+                <div class="clearfix"></div>
+              </div>
+
+
+            </div>
+
+          </div>
+
+        </form>
+      </div>
+    </div>
+    <!-- address information ends -->
+
+
+
+
+
+
+  </div>
+  <!-- secound half diviosn ends -->
+</div>

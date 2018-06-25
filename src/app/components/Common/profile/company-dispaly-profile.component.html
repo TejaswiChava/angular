@@ -1,0 +1,329 @@
+<div class="container-fluid padding-left-right0 font_robotoregular regulartext">
+
+  <!-- background image setc=ion starts -->
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+      <div>
+        <img class="width100 coverPic"  alt="Employer Cover Photo"  
+        src="{{brandingImage}}" onerror="this.src='assets/images/Profile_Page_Icons/company_default_cover_image.jpg'">
+        <!-- <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
+          <button class="btn btn1 submit-btn pull-right" style="margin-top:-2px">Edit Profile</button>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12"></div> -->
+        <div class="for_more_info" *ngIf="loginData.campusId">
+            <p class="content" >For More Information 
+              <button style="margin-left:5px" class="btn submit-btn" (click)="sendContact()">Contact</button></p>
+        </div>
+          <br>
+        <!-- <div>
+          <h2 class="color_ffff companyname_css">{{companyName}}</h2>
+        </div> -->
+        <!-- <ul class="button_ul">
+          <li class="companytype_css margin-right30">
+            <a class="companytype_a">Company Type : {{compType}}</a>
+          </li>
+          <li class="companytype_css">
+            <a class="companytype_a">Industry Type : {{industryType}}</a>
+          </li>
+        </ul> -->
+      </div>
+    </div>
+  </div>
+  <!-- background image setc=ion ends -->
+
+
+
+
+  <!-- dashboard view section starts -->
+  <div class="row" style="background:#ffffff">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="margin-top:25px;margin-bottom:20px">
+        <div class="text-center">
+         Numbers From Last Year
+        </div>
+</div>          
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" style="border-right:1px solid #ddd;margin-bottom:10px;text-align:center">
+        <div>
+          <p class="color-orange" style="font-size:30px;">{{totalCampusRectuitment}}</p>
+          <p class="f-size16">No. of Campus Recruitment</p>
+        </div>
+
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" style="border-right:1px solid #ddd;text-align:center">
+        <div>
+          <p class="color-orange" style="font-size:30px;">{{totalnumberofinterns}}</p>
+          <p class="f-size16">No. of Interns</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" style="border-right:1px solid #ddd;text-align:center">
+        <div>
+          <p class="color-orange" style="font-size:30px;">{{campusHire}}</p>
+          <p class="f-size16">Highest Salary Offered </p>
+
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 " style=" text-align:center">
+        <div>
+          <p class="color-orange" style="font-size:30px;">{{highestCampusHire}}</p>
+          <p class="f-size16">No. of Campus Visited</p>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- dashboard view section ends -->
+  <!-- <hr class="banner"> -->
+  <div class="row" >
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+        <div>
+          <ul class="button_ul1">
+            <li class="companytype_css margin-right30">
+              <a class="companytype_a">Company Type : {{compType}}</a>
+            </li>
+            <li class="companytype_css">
+              <a class="companytype_a">Industry Type : {{industryType}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  <!-- about company section starts -->
+  <div class="row background_fff">
+    <div style="margin-top:5%">
+      <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <!-- left side section starts -->
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding0">
+            <img src="{{logo}}"  onerror="this.src='assets/images/Profile_Page_Icons/company default profile image.png'"
+            class="logo_css" >
+            <p class="url_css"><a href="http://{{websiteAddress}}" target="_blank">{{websiteAddress}}</a></p>
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <h4 style="margin-top:0px" class="font_robotobold headings text-uppercase">
+              {{companyName}}
+            </h4>
+            <!-- <P class="font_robotobold headings">Objective:</P> -->
+            <!-- <p>{{objective}} </p> -->
+            <p>{{missionStatement}}</p>
+            <!-- <p class="pull-right">
+            <a>{{ReadMore}}</a>
+          </p> -->
+          </div>
+        </div>
+        <!-- left side section ends -->
+        <!-- social media links starts -->
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <div *ngIf="socialSection">
+            <h4 *ngIf="socialmedia" style="margin-top:0px" class="font_robotomedium headings">
+              Social Media Links
+            </h4>
+
+            <!-- <ul style="list-style:none" class="padding0">
+              <li *ngIf="fb">
+                <img class="img_social" src="assets/images/Profile_Page_Icons/facebook_icon.png"> &emsp;
+                <a class="socialMediaLinks regulartext" style="color:blue" target="_blank" href="{{facebook}}">{{facebook}}</a>
+              </li>
+              <li class="m-top10" *ngIf="linkdn">
+                <img class="img_social" src="assets/images/Profile_Page_Icons/linkedin_icon.png"> &emsp;
+                <a href="{{linkedin}}" target="_blank" style="color:blue" class="socialMediaLinks regulartext">{{linkedin}}</a>
+              </li>
+              <li class="m-top10" *ngIf="twiit">
+                <img class="img_social" src="assets/images/Profile_Page_Icons/twitter_icon.png"> &emsp;
+                <a href="{{twitter}}" target="_blank" style="color:blue" class="socialMediaLinks regulartext">{{twitter}}</a>
+              </li>
+              <li class="m-top10" *ngIf="utube">
+                <img class="img_social" src="assets/images/Profile_Page_Icons/youtube_icon.png"> &emsp;
+                <a href="{{youtube}}" target="_blank" style="color:blue" class="socialMediaLinks regulartext">{{youtube}}</a>
+              </li>
+            </ul> -->
+
+
+            <table class="m-top10 profileStrength">
+                <tr *ngIf="fb">
+                  <td class="p-right5"> <img class="img_social" src="assets/images/Profile_Page_Icons/facebook_icon.png" alt="facebook image" class="Social_profile_Icons"></td>
+                  <td><a class="wordBreak f-size13 regulartext" style="color:blue" target="_blank" href="{{facebook}}">{{facebook}}</a> </td>
+                </tr>
+                <tr *ngIf="linkdn">
+                  <td class="p-right5">  <img class="img_social" src="assets/images/Profile_Page_Icons/linkedin_icon.png" class="Social_profile_Icons" alt="linkedin image"> </td>
+                  <td>  <a href="{{linkedin}}" target="_blank" style="color:blue" class="wordBreak f-size13 regulartext">{{linkedin}}</a></td>
+                </tr>
+                <tr *ngIf="twiit">
+                  <td class="p-right5"> <img class="img_social" src="assets/images/Profile_Page_Icons/twitter_icon.png" class="Social_profile_Icons" alt="twitter image"></td>
+                  <td>  <a href="{{twitter}}" target="_blank" style="color:blue" class="wordBreak f-size13 regulartext">{{twitter}}</a> </td>
+                </tr>
+                <tr *ngIf="utube">
+                  <td  class="p-right5"><img class="img_social" src="assets/images/Profile_Page_Icons/youtube_icon.png" alt="Youtube image" class="Social_profile_Icons"> </td>
+                  <td><a href="{{youtube}}" target="_blank" style="color:blue" class="wordBreak f-size13 regulartext">{{youtube}}</a></td>
+                </tr>
+              </table>
+          </div>
+        </div>
+        <!-- social media links ends -->
+      </div>
+    </div>
+  </div>
+  <!-- about company section ends -->
+
+  <!-- organization section starts -->
+  <div class="row background_fff" *ngIf="orgDetails.length !==0">
+    <div style="margin-top:50px">
+      <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <h4 style="margin-top:0px;" class=" font_robotomedium headings">
+        Organization
+        </h4>
+        <p style="border-bottom: 3px solid #ea9215;width: 20%;"></p>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 m-top20">
+
+
+          <!-- <img class="uplodimg_css" src="{{apiEndPoint}}Attachments/organization-branding-image/download/{{orgs.brandingImage}}"><br> -->
+
+          <!-- <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 " *ngFor="let org of orgDetails.slice(0,4);let i = index">
+            <img class="img_organization" src="{{org.brandingImage}}"
+              onerror="this.src='assets/images/Profile_Page_Icons/organizations_default image_company profile.png'">
+            <div>
+              <p style="display:inline" class="font_robotomedium">{{org.name}}</p>
+            </div>
+          </div> -->
+
+          <ngx-carousel
+          [inputs]="carouselTile"
+          (carouselLoad)="carouselTileLoad($event)">
+     
+                <ngx-tile NgxCarouselItem *ngFor="let Tile of orgDetails">
+                    <img class="img_organization" src="{{Tile.brandingImage}}"
+                    onerror="this.src='assets/images/Profile_Page_Icons/organizations_default image_company profile.png'">
+                    <div>   
+                    <p style="display:inline;text-align:center" class="font_robotomedium">{{Tile.name}}</p>
+                    </div>
+                  </ngx-tile>
+     
+              <p NgxCarouselPrev class='leftRs'></p>
+              <p NgxCarouselNext class='rightRs'></p>
+        </ngx-carousel>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- organization section ends -->
+  <!-- descrption section starts -->
+  <div class="row background_fff">
+    <div style="margin-top:50px">
+      <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 padding0">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+          <h4 style="margin-top:0px;" class=" font_robotomedium headings">
+            Description
+          </h4>
+          <p style="border-bottom: 3px solid #ea9215;width: 50%;"></p>
+          <p style="font-size:15px" class="m-top20 headings">
+            {{description}}</p>
+          <p style="font-size:15px" class="m-top20 font_robotomedium headings">
+            {{objective}}</p>
+
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="margin-bottom:40px">
+            <div class="m-top20" *ngIf="!noData">
+                <h4 style="margin-top:0px;" class="font_robotomedium headings">
+                    {{driveHeading}}<span style="color:red">(Sample Data)</span>
+                  </h4>
+                  <p style="border-bottom: 3px solid #ea9215;width: 70%;"></p>
+          </div> 
+            <div class="m-top20" *ngIf="noData">
+                <h4 style="margin-top:0px;" class="font_robotomedium headings">
+                    {{driveHeading}}
+                  </h4>
+                  <p style="border-bottom: 3px solid #ea9215;width: 70%;"></p>
+                <!-- <app-drives [sendDriveData]="driveData"></app-drives> -->
+            </div>                
+            <app-drives [sendDriveData]="driveData"></app-drives>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <!-- descrption section ends -->
+
+  <!-- job role starts -->
+  <div class="row background_fff">
+    <div style="margin-top:50px;">
+      <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 padding0" style="margin-bottom:25px;">
+
+        <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <h4 style="margin-top:0px;" class="font_robotomedium headings">
+            Hiring From Campuses - Last 5 Years
+          </h4>
+          <p style="border-bottom: 3px solid #ea9215;width: 80%;"></p>
+         <div class="text-center">
+           <div *ngIf="campusDefault;else barchart">
+          <app-pie-chart [data]="companyJobDetail"></app-pie-chart>
+           </div>
+           <ng-template #barchart><app-pie-chart [data]="CampusAndDetails"></app-pie-chart> </ng-template> 
+         </div>
+       
+        </div> -->
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                       
+            <div *ngIf="campusDefault">
+                <h4 style="margin-top:0px;" class="font_robotomedium headings"> Hiring From Campuses - Last 5 Years  </h4>
+                  <p style="border-bottom: 3px solid #ea9215;width: 80%;"></p>      
+              <app-pie-chart [data]="companyJobDetail"></app-pie-chart>
+             </div>
+             
+             <div *ngIf="!campusDefault">
+              <h4 style="margin-top:0px;" class="font_robotomedium headings"> Hiring From Campuses - Last 5 Years<span style="color:red">(Sample Data)</span>  </h4>
+              <p style="border-bottom: 3px solid #ea9215;width: 80%;"></p> 
+           <app-pie-chart [data]="CampusAndDetails"></app-pie-chart> 
+          </div> 
+          </div>
+
+      
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
+           <div  *ngIf="offerDefault">
+              <h4 style="margin-top:0px;" class="font_robotomedium headings">
+                  Average Compensation Offered - Last 5 Years
+                  </h4>
+                  <p style="border-bottom: 3px solid #ea9215;width: 80%;"></p>
+            <app-bar-graph  [data]="avgOffer"></app-bar-graph>
+           </div>
+
+           <div *ngIf="!offerDefault">
+              <h4 style="margin-top:0px;" class="font_robotomedium headings">
+                  Average Compensation Offered - Last 5 Years<span style="color:red">(Sample Data)</span>  </h4>
+                  <p style="border-bottom: 3px solid #ea9215;width: 90%;"></p>
+           <app-bar-graph  [data]="jobs"></app-bar-graph> 
+            </div>
+          </div>
+
+
+
+        <!-- <div class="row" >
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background: #eee;padding:10px;margin-bottom:50px;margin-top:50px">
+          <h4 class="f-size20 text-center headings" style=" margin-top: 15px;">For More Information</h4>
+          <button class="btn submit-btn" style=" margin-bottom: 10px;margin-top:10px;font-size:15px;margin-right:9%">Send</button>
+           -->
+          <!-- <h4 class="f-size20 text-center font_robotomedium headings">CONTACT</h4> -->
+          <!-- <p class="text-center">This information is private and confidential so please provide your Email Id</p> -->
+          <!-- <div class="box center-block" style="background:white;padding:20px">
+            <input type="text" placeholder="Enter Your Message and contact details" class="form-control" >
+            <div class="text-center">
+              <button class="btn submit-btn" style=" margin-bottom: 10px;margin-top:10px;font-size:15px;margin-right:9%">Send</button>
+              
+            </div>
+          </div> -->
+          <!-- </div>
+        </div> -->
+
+
+      </div>
+    </div>
+  </div>
+<div class="clearfix"></div>
+<app-footer></app-footer>

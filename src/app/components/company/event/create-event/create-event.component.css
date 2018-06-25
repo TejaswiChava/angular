@@ -1,0 +1,14 @@
+.inputTime1{
+    width:80%;
+    float: left;
+}
+.inputTime2 {
+    background-image: url("../../../../../assets/images/clock-circular-outline.png");
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    float: right;
+    width: 20px;
+    height: 20px;
+    border: none !important;
+}

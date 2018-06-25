@@ -1,0 +1,123 @@
+<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 padding0">
+    <div class="col-lg-12 padding0" style="height:30px">
+      <div class="pull-right">
+          <img class="width35 cursor-pointer" src="assets/images/adress_edit_lighter icon (1).png" 
+          onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+          onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'"   
+        title="Edit" *ngIf="driveList1 && editButton" (click)="editList()">
+        
+  
+        <!-- <i class="fa fa-times width35 m-btm5p backgroundColor_transperent cursor-pointer
+        color-theme f-size16 m-right18"  *ngIf="driveList" (click)="cancelDrive(false)"></i> -->
+        <!-- <button type="button" class="btn submit-btn" *ngIf="driveList" (click)="cancelDrive(false)"> Cancel </button> -->
+          </div>
+      </div>
+  
+   <form [formGroup]="employerDriveForm" [class.toggled]="getSearchStatus">
+      
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  padding0">
+              <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+            <mat-form-field class="width100">
+              <input matInput [readonly]="fieldreadonly"  placeholder="Drive Name" id="driveName" name="driveName"
+                class="input1 width95" required="required" formControlName="driveName"  tabindex="1"
+                style="margin-top:8px"
+                minlength="3" maxlength="50"
+                  required>
+               
+            </mat-form-field>
+            <div *ngIf="employerDriveForm.get('driveName').invalid
+            &&  employerDriveForm.get('driveName').dirty" class="color-red m-btm5">
+               <div *ngIf="employerDriveForm.get('driveName').dirty">Drive Name must be at least 3 characters long.</div>             
+  
+           </div>
+
+
+            <mat-form-field class="width100">
+          <mat-select placeholder="Drive Type" formControlName="driveTypeValueId"  
+           [disabled]="fieldreadonly" 
+           name="driveType" id="driveType" style="margin-top:-17px" tabindex="3" required>
+           <mat-option [value]="">Select Drive Type</mat-option>         
+            <mat-option *ngFor="let driveType of driveType" [value]="driveType.lookupValueId">
+              {{driveType.lookupValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+          <!-- <div *ngIf="driveType.errors && (driveType.dirty || driveType.touched)" class="color-red m-btm5" >
+            #driveType="ngModel"
+          </div> -->
+        </div>
+      </div>
+
+
+
+
+  
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12   padding0">
+        <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+         
+
+       
+              <mat-form-field class="width100">
+          <mat-select placeholder="Status"  style="margin-top:8px" formControlName="driveStatusValueId" 
+           tabindex="2"
+          name="status" id="status" [disabled]= "fieldreadonly1" required>
+          <mat-option [value]="">Select Status</mat-option>
+            <mat-option *ngFor="let status of empDriveStatus" [value]="status.lookupValueId">
+              {{status.lookupValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- <mat-form-field class="width100">
+          <mat-select placeholder="Department" formControlName="departmentId"  
+           [disabled]="fieldreadonly" 
+           class="width100 m-top10" name="departmentId" id="departmentId"
+            style="margin-top:-17px" tabindex="4" required>
+           <mat-option [value]="">Select Department</mat-option>         
+            <mat-option *ngFor="let depart of departmentDetails" [value]="depart.departmentId">
+              {{depart.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+ 
+
+<!-- 
+
+        <mat-form-field class="width100">
+            <input matInput  placeholder="Description" [readonly]= "fieldreadonly"    tabindex="7"
+            id="desc" class="input1 width95" required="required" formControlName="description"
+              maxlength="100">
+          </mat-form-field> -->
+        </div>
+  
+  
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+          <label>Description </label>
+          <textarea placeholder="Description" [readonly]="fieldreadonly" tabindex="5" id="desc"
+            formControlName="description" name="desc" 
+             maxlength="100" class="flexcroll textarea_boxes width100"></textarea>
+  </div>
+  
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
+         
+        <div class="pull-right m-top20" *ngIf='showBtn' >
+          <button type="submit" class="btn submit-btn" tabindex="6" 
+          *ngIf="!driveList" [disabled]="!employerDriveForm.valid" (click)="submitCampusDrive($event)"> Submit </button>
+  
+            <button type="submit" class="btn submit-btn" *ngIf="driveList && !fieldreadonly"  tabindex="6" 
+            [disabled]="!employerDriveForm.valid" (click)="updateCampusrDrive()"> Update </button>
+            <button type="button" *ngIf="!driveList && !fieldreadonly && !cancelBtn" class="btn submit-btn"  tabindex="7" (click)="clearForm()">Clear </button>
+            <button type="button" *ngIf="!driveList && !fieldreadonly && cancelBtn" class="btn submit-btn"  tabindex="7" (click)="cancelDrive(false)">Cancel </button>
+        </div>
+      </div>
+  
+    </form>
+  <br>
+  <div class="clearfix"></div>
+  
+   
+  
+  </div>
+  

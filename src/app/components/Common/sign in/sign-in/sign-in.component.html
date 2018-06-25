@@ -1,0 +1,58 @@
+<div data-aos="flip-left" data-aos-duration="2500">
+  <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" class="row" novalidate class="m-top10">  
+<h2 class="text-center font_robotobold themeColor">SIGN IN</h2>
+<div class="classlogin_Inner">
+
+    <div [ngClass]="{ 'has-error': f.submitted && !campusUsername.valid }">
+      <mat-form-field  class="width100 m-top10" >
+      <input matInput  pattern="^\w+([.-]\w+)*@\w+([.-]\w+)*(\.\w{2,3})+$" name="campusUsername" [(ngModel)]="loginData.email"
+      maxlength="512" id="campusUsername" minlength="6" #campusUsername="ngModel" placeholder="Email ID" required>
+      </mat-form-field>
+
+      <div *ngIf="campusUsername.errors && (campusUsername.dirty || campusUsername.touched)" class="color-red">
+          <div [hidden]="!campusUsername.errors.pattern" class="color-red ">Email format should be
+            <small>
+              <b>abcd@abc.com</b>
+            </small>
+          </div>
+          <div [hidden]="!campusUsername.errors.maxlength" class="color-red text-left">Email ID cannot be more than 512 characters long.</div>
+        </div>
+      </div>
+     
+
+      <div [ngClass]="{ 'has-error': f.submitted && !campusPassword.valid }">
+          <mat-form-field class="width100">
+              <input matInput minlength="6" name="campusPassword" [(ngModel)]="loginData.password" id="campusPassword"
+              #campusPassword="ngModel" placeholder="Password" required [type]="hide ? 'password' : 'text'">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            </mat-form-field>
+            <div *ngIf="campusPassword.errors && (campusPassword.dirty || campusPassword.touched)" class="color-red">
+                <div [hidden]="!campusPassword.errors.minlength" class="color-red text-left"> Password must be minimum 6 characters long </div>
+              </div>
+      </div>
+
+      <div>
+      <a style="font-size: 12px;color: #3BA9FE;" class="btn pull-right f-bold padding0" (click)="setForgotPasswordStatus(true)">
+          Forgot Password ? </a> 
+      </div>
+     <br>
+     <div>
+        <button type="submit" class="btn student_login cursor-pointer">SIGN IN</button>
+     </div>
+</div>
+  <div style="margin-top:30px">
+  <span class="intrsted_in">Interested in ScoraXchange ?</span>
+  <span class="request_demo cursor-pointer"   (click)="setSignUpStatus(true)">Request For Demo</span>
+  </div>
+</form>
+</div>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,89 @@
+
+<form  [formGroup]="addressForm">
+  <div class="col-lg-6">
+  <div class="form-group ">
+  
+      <mat-form-field class="width100">
+          <input matInput placeholder={{labelData.addLine1}} formControlName="addressLine1" 
+          name="address1" 
+            required="required">
+        </mat-form-field>
+   
+  </div>
+
+  <div class="form-group ">
+    
+      <mat-form-field class="width100">
+          <input matInput placeholder={{labelData.addLine2}} formControlName="addressLine2" 
+          name="address2">
+        </mat-form-field>
+
+
+   
+  </div>
+  <div class="form-group ">
+    
+
+    
+    <mat-form-field class="width100">
+      <input matInput formControlName="addressLine3" id="address3" 
+       name="address3" placeholder={{labelData.addLine3}}>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group ">
+    
+
+    <mat-form-field class="width100">
+      <input matInput placeholder={{labelData.addLine1}} formControlName="postalId" 
+      name="postalId" 
+        required="required">
+    </mat-form-field>
+  </div>
+  </div>
+  <div class="col-lg-6">
+  <div class="form-group ">
+   
+
+    <mat-form-field class="width100">
+      <input matInput name="city" list="cities" (change)="getPostalDet($event)"
+       
+      formControlName="cityId" placeholder={{labelData.city}}
+        id="city"  required="required">
+    </mat-form-field>
+    <datalist id="cities">
+      <option *ngFor=" let s of cityList" [value]="s.cityId">{{s.cityName}}</option>
+    </datalist>
+  </div>
+
+  <div class="form-group ">
+        
+        <mat-form-field class="width100">
+          <input matInput name="country" (change)="getStateDet($event)"  list="state"
+          placeholder={{labelData.state}} formControlName="stateCode" 
+          id="stateCode"  required="required">
+        </mat-form-field>
+        <datalist id="state">
+          <option *ngFor=" let s of stateList" [value]="s.stateCode">{{s.stateName}}</option>
+        </datalist>
+      </div>
+
+    <div class="form-group ">
+    
+
+        <mat-form-field class="width100">
+          <input matInput name="country" (change)="getCountryDet($event)" 
+        list="countries"
+          placeholder={{labelData.country}} formControlName="countryCode" id="countryCode"
+          required="required">
+        </mat-form-field>
+        <datalist id="countries">
+          <option *ngFor=" let s of countryList" [value]="s.countryCode">{{s.countryName}}</option>
+        </datalist>
+    </div>
+
+  </div>
+
+   
+
+</form>

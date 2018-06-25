@@ -1,0 +1,627 @@
+.container_padding{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.assisted_btn{
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding: 6px 20px;
+    border: 1px solid #6391b2;
+    background: transparent;
+    font-size: 14px;
+    color: #6391b2;
+}
+.signupStudent-btn,
+.signupStudent:hover {
+  background-image: linear-gradient(to bottom, #3f9ddd 0%, #3f9ddd 100%);
+  background-repeat: repeat-x;
+  border-color: #3f9ddd;
+  margin-bottom: 20px;
+  color: #ffffff;
+  width: 40%;
+  padding: 7px;
+  border-radius: 0px;
+}
+
+.signupFb-btn,
+.signupFb:hover {
+  background-image: linear-gradient(to bottom, #315f9a 0%, #315f9a 100%);
+  background-repeat: repeat-x;
+  border-color: white;
+  color: #ffffff;
+  width: 32%;
+  padding: 7px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.signupLd-btn,
+.signupLd:hover {
+  background-image: linear-gradient(to bottom, #24c2df 0%, #24c2df 100%);
+  background-repeat: repeat-x;
+  border-color: #ffffff;
+  color: #ffffff;
+  width: 32%;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+
+
+
+.signup,
+.signup:hover {
+    background-color: white;
+    border-color: #24c2df;
+    margin-bottom: 20px;
+    color: #24c2df;
+    width: 26%;
+    padding: 7px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-top:17px;
+}
+
+/* flmfdk */
+/* The outermost element*/
+
+.color-fff{
+    background-color: #ffffff;
+}
+.color-000{
+    columns: #000000;
+}
+.fontColor_fff{
+    color:#ffffff;
+}
+.register_background{
+    background: -moz-linear-gradient(89deg, #5597bb 0%, #5597bb 9%, #4e4d57 23%, #4e4d57 100%); /* ff3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4e4d57), color-stop(77%, #4e4d57), color-stop(91%, #5597bb), color-stop(100%, #5597bb)); /* safari4+,chrome */
+background: -webkit-linear-gradient(89deg, #5597bb 0%, #5597bb 9%, #4e4d57 23%, #4e4d57 100%); /* safari5.1+,chrome10+ */
+background: -o-linear-gradient(89deg, #5597bb 0%, #5597bb 9%, #4e4d57 23%, #4e4d57 100%); /* opera 11.10+ */
+background: -ms-linear-gradient(89deg, #5597bb 0%, #5597bb 9%, #4e4d57 23%, #4e4d57 100%); /* ie10+ */
+background: linear-gradient(1deg, #5597bb 0%, #5597bb 9%, #4e4d57 23%, #4e4d57 100%); /* w3c */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e4d57', endColorstr='#5597bb',GradientType=0 ); /* ie6-9 */
+height: 496px;
+margin-top: -1px;
+}
+
+.width168{
+  width: 168px;
+}
+.m-top25{
+    margin-top:25px;
+}
+.student_submit {
+    padding: 13px 40px;
+    border-radius: 25px;
+    color: white;
+    background-color: #33c0e8;
+    font-size: 15px;
+}
+
+.student_login {
+    padding: 5px 20px;
+    border-radius: 25px;
+    color: white;
+    background-color: #33c0e8;
+    font-size: 14px;
+    display: block;
+    margin:auto;
+} 
+.hr_login{
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #29272c;
+    width: 89%;
+}
+.hr_login1 a{
+    color:#fff;
+}
+.hr_login1 a:hover{
+    color:#ffcb3c;
+}
+
+.student_font{
+    font-size: 16px;
+    line-height: 28px;
+}
+
+.width70{
+    width:70%;
+}
+.margintop40{
+    margin-top: 40px;
+}
+.margintop142{
+    margin-top: 40px;
+}
+.margintop100{
+    margin-top: -18px;
+}
+.lineheight50{
+    height:50px;
+}
+.lineheight120{
+    height:120px;
+}
+.contactwidth98{
+    width:98%;
+}
+.contactwidth99{
+    width:99%;
+}
+.height535_student{
+    min-height:470px;
+    height: auto !important;
+   } 
+.arrow2{
+   width: 40%;
+   position: relative;
+   right: -12%;
+  margin-top: -50px;
+}
+.arrow3{
+    position: relative;
+    margin-top: -16%;
+    width: 590px;
+    left: -11%;
+}
+
+.arrow4{
+    width: 40%;
+    position: relative;
+    right: -12%;
+   /* margin-top: -150px; */
+ }
+
+
+ .arrow1 {
+    width: 7%;
+    position: relative;
+    right: -20px;
+}
+.student_text{
+    margin-top: 20%;
+    margin-left: 10%;
+}
+ /* #student_register .mat-form-field-ripple {
+    background-color: white;
+  }
+  
+  #student_register .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-placeholder, .mat-form-field-empty.mat-form-field-placeholder {
+    color: white ;
+  } */
+
+  /* .mat-input-placeholder-wrapper .mat-form-field-placeholder-wrapper .mat-form-field-placeholder{
+      color: white !important;
+  } */
+
+  md-input-container label {
+    color: pink !important;
+  }
+  
+  md-input-container.md-input-focused label {
+    color: white !important;
+  }
+
+
+/* media quires starts */
+/* @media(max-width:1200px){
+    .margintop40{
+        margin-top: 5px;
+    } 
+}
+@media(max-width:1266px){
+    .arrow2 {
+        margin-top: 6px;
+    }
+}
+
+@media(max-width:1100px){
+    .arrow4 {
+        margin-top: -103px;
+    }
+}
+
+@media(max-width:1120px){
+    .arrow3 {
+        
+        margin-top: -11%;
+        width: 415px;
+       
+    }
+}
+@media(max-width:991px){
+    .margin_mediaquey{
+        margin-left: 3%;
+        margin-right: 3%;
+    }
+    .width70{
+        width:auto;
+    }
+    .background_color_grey{
+        background-color: #4e4d57;
+    }
+    .margintop100{
+        margin-top: 10px;
+    }
+    .margintop142{
+        margin-top: 10px;
+    }
+    .contactwidth98{
+        width:100% !important;
+    }
+    .margintop10{
+        margin-top: 10px;
+    }
+    .height535_student{
+        min-height:585px;
+        height: auto !important;
+       } 
+    .contactwidth99{
+        width:100%;
+    }
+} */
+    /* Modified code */
+
+
+.arrow2[_ngcontent-c2]{
+    width: 43% !important;
+    position: relative !important;
+    right: -9.5% !important;
+    margin-top: -30px !important;
+}
+.margintop100[_ngcontent-c2] {
+    margin-top: -18px;
+    width: 70%;
+}
+.arrow4[_ngcontent-c2] {
+    right: -9.5% !important;
+}
+.Star_Header1{
+    color:#555;
+    
+}
+.text-justify{
+    text-align: inherit;
+}
+.arrow3[_ngcontent-c2]{
+    position: relative !important;
+    margin-top: -16% !important;
+    width: 590px !important;
+    left: -24% !important;
+}
+.Star_DivStyle{
+    padding: 0px !important;
+    margin: 0px !important;
+}
+.mat-input-placeholder .mat-form-field-placeholder .ng-tns-c3-0 .mat-empty .mat-form-field-empty {
+    color: #fff !important;
+    font-size: 2em;
+}
+
+.mat-form-field-placeholder
+{
+    color: #fff !important;
+}
+ /* Media Query Sarts Here */
+ @media only screen and (max-width: 1920px) and (min-width: 1367px)  {
+    #register_background{
+        height: 797px;
+    }
+    #student_bg {
+        height: 878px;
+    }
+    .student_font{
+        font-size: 20px;
+    }
+    .perere{
+        margin-top:30px !important;
+    }
+}
+
+ @media only screen and (max-width: 990px) {
+    body{
+        font-size: 5em;
+        text-align: justify;
+    }
+    .Star_Register_Bnr{
+        width:30% !important;
+        float: left !important;
+        height: 525px !important;
+    }
+    .Star_BannerImg{
+        width: 70% !important;
+        float: left !important;
+        height: 520px !important;
+    }
+    #student_bg{
+        height: 520px !important;
+    }
+    .width70[_ngcontent-c2] {
+        margin-top: 20px;
+        width: 90%;
+    }
+    .margintop100{
+        margin-top: 80px;
+        width: 80%;
+    }
+    .arrow2[_ngcontent-c2]{
+        width: 30% !important;
+        position: relative !important;
+        right: -30% !important;
+        margin-top: 0px !important;
+        align-self: center;
+
+    }
+    .arrow3[_ngcontent-c2]{
+        width: 35% !important;
+        position: relative !important;
+        margin-top: 0px !important;
+        align-self: center;
+        left: 20% !important;
+    }
+    .margintop100[_ngcontent-c2]{
+        margin-top:50px;
+    }
+    .fontColor_fff{
+        color: #ccc;
+    }
+    .Star_FontStyle{
+        color:#838386 !important;
+    }
+    .arrow4[_ngcontent-c2] {
+        width: 30%;
+        align-self: center;
+        right: -30% !important;
+    }
+    .contactwidth98[_ngcontent-c2] {
+        width: 99%;
+    }
+    .contactwidth98[_ngcontent-c2][_ngcontent-c2]{
+        margin-top: 10px !important;
+    }
+    .background_color_grey{
+        background-color: #4e4d57;
+        float: left;
+    }
+
+ }
+ @media only screen and (max-width: 1024px) {
+    body{
+        font-size: 5em;
+        text-align: justify;
+    }
+    .Star_Register_Bnr{
+        width:30% !important;
+        float: left !important;
+        height: 525px !important;
+    }
+    .Star_BannerImg{
+        width: 70% !important;
+        float: left !important;
+        height: 520px !important;
+    }
+    #student_bg{
+        height: 525px !important;
+    }
+    .width70[_ngcontent-c2] {
+        margin-top: 20px;
+        width: 90%;
+    }
+    .margintop100{
+        margin-top: 80px;
+        width: 80%;
+    }
+    .arrow1[_ngcontent-c2] {
+        right: -12px;
+    }
+    .arrow2[_ngcontent-c2]{
+        width: 30% !important;
+        position: relative !important;
+        right: -30% !important;
+        margin-top: 0px !important;
+        align-self: center;
+
+    }
+    .arrow3[_ngcontent-c2]{
+        width: 35% !important;
+        position: relative !important;
+        margin-top: 0px !important;
+        align-self: center;
+        left: 20% !important;
+    }
+    .margintop100[_ngcontent-c2]{
+        margin-top:50px;
+    }
+    .fontColor_fff{
+        color: #ccc;
+    }
+    .Star_FontStyle{
+        color:#838386 !important;
+    }
+    .arrow4[_ngcontent-c2] {
+        width: 30%;
+        align-self: center;
+        right: -30% !important;
+    }
+    .contactwidth98[_ngcontent-c2] {
+        width: 99%;
+    }
+    .contactwidth98[_ngcontent-c2][_ngcontent-c2]{
+        margin-top: 10px !important;
+    }
+
+ }
+
+ @media only screen and (max-width: 800px)
+ {
+    .arrow1[_ngcontent-c2] {
+    right: -45px;
+    }
+    #student_bg{
+        height: 500px !important;
+    }
+    p{
+        font-size: 1em !important;
+
+    }
+    h1{
+        font-size: 2em !important;
+    }
+    .signupFb-btn[_ngcontent-c2], .signupFb[_ngcontent-c2]:hover{
+        width:auto;
+    }
+    .signupLd-btn[_ngcontent-c2], .signupLd[_ngcontent-c2]:hover
+    {
+        width:auto;
+    }
+    .signup[_ngcontent-c2], .signup[_ngcontent-c2]:hover{
+        width:auto;
+    }
+
+ }
+ @media only screen and (max-width: 768px) {
+    body{
+        text-align: justify;
+    }
+    p{
+        font-size: 1em !important;
+
+    }
+    h1{
+        font-size: 2em !important;
+    }
+    .Star_Register_Bnr{
+        width:30% !important;
+        float: left !important;
+        height: 525px !important;
+    }
+    .Star_BannerImg{
+        width: 70% !important;
+        float: left !important;
+    }
+    #student_bg{
+        height: 520px !important;
+    }
+    .width70[_ngcontent-c2] {
+        margin-top: 20px;
+        width: 100%;
+    }
+    .margintop100{
+        margin-top: 80px;
+        width: 100% !important;
+    }
+    .arrow2[_ngcontent-c2]{
+        display: none;
+
+    }
+    .arrow3[_ngcontent-c2]{
+        display: none;
+    }
+    .margintop100[_ngcontent-c2]{
+        margin-top:50px;
+    }
+    .fontColor_fff{
+        color: #ccc;
+    }
+    .Star_FontStyle{
+        color:#838386 !important;
+    }
+    .arrow4[_ngcontent-c2] {
+        display: none;
+    }
+    .contactwidth98[_ngcontent-c2] {
+        width: 98%;
+    }
+    .width70[_ngcontent-c2] {
+    float: left !important;
+    }
+    .arrow1[_ngcontent-c2] {
+        right: -50px;
+    }
+    #student_bg[_ngcontent-c2] {
+        height: 495px !important;
+    }
+    #perfect_presentation{
+        height: auto !important;
+    }
+    .signupFb-btn[_ngcontent-c2], .signupFb[_ngcontent-c2]:hover{
+        width:auto;
+    }
+    .signupLd-btn[_ngcontent-c2], .signupLd[_ngcontent-c2]:hover
+    {
+        width:auto;
+    }
+    .signup[_ngcontent-c2], .signup[_ngcontent-c2]:hover{
+        width:auto;
+    }
+    .background_color_grey{
+        background-color: #4e4d57;
+        float: left;
+    }
+}
+@media only screen and (max-width: 500px) {
+    #student_bg[_ngcontent-c2][_ngcontent-c2] {
+        height: 500px !important;
+        width: 100% !important;
+    }
+    .width70[_ngcontent-c2] {
+        float: left !important;
+        width: 60%;
+        margin-left: 20%;
+    }
+    .arrow1{
+        display: none;
+    }
+    .Star_Header1[_ngcontent-c2] {
+        color: #555;
+        clear: both;
+        margin-top: 30px !important;
+        float: left !important;
+        width:100% !important;
+    }
+    h1{
+        font-size: 1.7em;
+        /* text-align: center !important; */
+    }
+    .p123{
+         text-align: center !important;
+         font-size: 20px !important;
+     }
+    p{
+        text-align: justify !important;
+
+    }
+    .Star_Per_Pre{
+        margin-top:0px !important;
+    }
+    .margintop100[_ngcontent-c2]{
+        width: 70% !important;
+    }
+    #register_background {
+        height: 570px;
+        margin-top: -260px;
+        width: 80% !important;
+        margin-left: 10% !important;    
+    }
+    .contactwidth98[_ngcontent-c2] {
+        width: 99%;
+    }
+
+}
+@media only screen and (max-width: 1025px) {
+    #student_bg{
+        background-size: 100% 100%;
+    }
+    #register_background{
+        width: 30%;
+        /* margin-top: -267px; */
+    }
+    .slantingText{
+        display: none;
+    }
+}
+

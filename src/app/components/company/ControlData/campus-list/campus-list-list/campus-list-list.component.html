@@ -1,0 +1,97 @@
+<div class="flexcroll table-scroll" *ngIf="!list">
+
+    <div class="pull-right">
+        <!-- <input class="pull-left filter-input" [(ngModel)]="filterQuery" placeholder="Filter by List Name" />   -->
+    </div>
+
+    <table class="table table-striped" id="myProgram" [mfData]="data | campusListSearch : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+      [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+
+      <thead>
+        <tr>
+
+
+          <th>
+            <mfDefaultSorter by="listName">List Name</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="jobRoleName">JobRole Name</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="campusListLength">No. Of Campuses Added</mfDefaultSorter>
+          </th>
+          <th>
+  
+
+            <mfDefaultSorter by="description">Description</mfDefaultSorter>
+          </th>
+          <!-- <th>
+            <mfDefaultSorter by="driveTypeValueId"> Drive Type </mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="jobRoleId"> Job role </mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="noOfPositions"> No. of Position </mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="employerDriveLookupValue.lookupValue"> Status </mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="budget"> Budget </mfDefaultSorter>
+          </th> -->
+
+        </tr>
+        <tr>
+
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let cList of mf.data" class="notfirst cursor-pointer" (click)="viewCampusList(cList); statusChage()">
+          <td>
+            {{cList.listName}}
+          </td>
+          <td>
+            <span *ngIf="cList.jobRoleDetails">
+              {{cList.jobRoleDetails.jobRoleName}}
+            </span>
+          </td>
+          <td>
+            <span *ngIf="cList.campusListLength">
+              {{cList.campusListLength}}
+            </span>
+          </td>
+          <td *ngIf="cList.description ">
+            {{cList.description | limitTo:[20]}}
+          </td>
+          <td *ngIf="!cList.description ">
+            {{cList.description}}
+          </td>
+
+
+        </tr>
+        <tr *ngIf="mf.data == ''">
+          <td colspan="8" class="text-center">
+            <span>
+              No Data Found
+            </span>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="6">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+
+
+  </div>
+
+  <div *ngIf="list">
+    <app-create-campus-list [clickedCampusList]="selectedCampusList" [(getCListStatus)]="list" ></app-create-campus-list>
+  </div>
+  <router-outlet></router-outlet>

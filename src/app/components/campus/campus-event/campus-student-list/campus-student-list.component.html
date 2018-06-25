@@ -1,0 +1,165 @@
+<!-- <div class="row" *ngIf="selectedEventData.eventStatusValueId == 240"> Shared with Company status. -->
+  <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 padding0 ">
+
+    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 padding0">
+      <h3 class="m-top10">Student Details</h3>
+      <div  class=" data-count ">Total Count: <span class="data-number">{{totalcount}}</span></div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 padding0" *ngIf="showStudentExportBtn">
+        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 padding0" >
+            <input class="filter-input" style="width:100%" [(ngModel)]="filterQuery" placeholder="Search By Student Name"/>
+        </div>
+
+        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+          <button mat-raised-button type="button" class="btn submit-btn" style="width:100%" (click)="exportStudentList()">Export Student List</button>
+        </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- <div class="row" *ngIf="data">
+  <div class="col-md-2 pull-right">
+    <button type="button" class="btn btn-default" style="width:100%" (click)="exportStudentList()">Export Student List</button>
+  </div>
+</div> -->
+<div class="col-lg-12 search-box m-top10">
+<table class="table table-striped" id="myProgram" [mfData]="data | eventStudentList : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+[(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+<!-- <table class="table table-striped" id="myProgram" [mfData]="data " #mf="mfDataTable"> -->
+  <thead>
+    <tr>
+      <th>
+        <mfDefaultSorter by="studentInfo.firstName">Student Name</mfDefaultSorter>
+        <!-- Student Name -->
+      </th>
+      <th>
+        <mfDefaultSorter by="studentInfo.depName">Department Name</mfDefaultSorter>
+        <!-- Department Name -->
+      </th>
+      <th>
+        <mfDefaultSorter by="studentInfo.programName">Programme Name</mfDefaultSorter>
+        <!-- Programme Name -->
+      </th>
+      <th style="width:auto">
+        <mfDefaultSorter by="studentInfo.skills">Skills</mfDefaultSorter>
+        <!-- Skills -->
+      </th>
+      <th style="width:auto">
+          <mfDefaultSorter by="studentInfo.interest">Interests</mfDefaultSorter>
+        <!-- Interests -->
+      </th>
+      <th style="color: #ea9215">
+          <!-- <mfDefaultSorter by="programName">Status</mfDefaultSorter>         -->
+          Status
+        </th>
+        <th style="color: #ea9215">
+            Availability
+        </th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- (click)="viewPckg(searchList)" -->
+    <tr *ngFor="let studentList of mf.data,let i= index" class="notfirst cursor-pointer">
+
+      <td>
+
+   <a routerLink='/studentProfile/{{studentList.studentInfo.studentId}}' style="color:blue" target="_blank">{{studentList.studentInfo.firstName}} {{studentList.studentInfo.lastName}}</a>
+      </td>
+      <td>{{studentList.studentInfo.depName}}</td>
+      <td>{{studentList.studentInfo.programName}}</td>
+      <!-- <td>
+        {{studentList.duration}} </td> -->
+      <td class="three-dots">
+        <span *ngIf="studentList.skills">
+            <span  *ngFor="let skills of studentList.skills">
+                {{skillsData[skills.skillTypeValueId].lookupValue}},
+            </span>
+        </span>
+        <!-- <div *ngFor="let skills of studentList.StudentInfo.skills">
+          {{skills.lookupValue}}
+        </div> -->
+      </td>
+      <td class="three-dots">
+          <span *ngIf="studentList.intrests">
+        <span *ngFor="let interest of studentList.intrests">
+          {{intrestsData[interest.interestTypeValueId].lookupValue}},
+        </span>
+        </span>
+        <!-- <div *ngFor="let interest of studentList.StudentInfo.intrests">
+          {{interest.lookupValue}}
+        </div> -->
+      </td>
+      <td>
+        <!-- <span *ngIf="studentList.StudentInfo.studentStatus.candidateStatusValueId">
+            {{studentStatus[studentList.StudentInfo.studentStatus.candidateStatusValueId].lookupValue}}
+        </span> -->
+        <!-- (change)="changeStatus(studentList.StudentInfo.studentStatus)" -->
+        <span *ngIf="this.selectedEventData.employerEventId || this.selectedEventData.eventStatusValueId != 239;else displayStudentStatus">
+            <span *ngIf="studentList.status.candidateStatusValueId">
+              {{studentStatusObject[studentList.status.candidateStatusValueId].lookupValue}}
+             </span>
+          </span>
+          <ng-template #displayStudentStatus>
+            <mat-form-field>
+              <mat-select placeholder="Status" [(ngModel)]="studentList.status.candidateStatusValueId" class="width100" name="status"
+                id="status" (change)="changeStatus(studentList.status)" [disabled]="this.selectedEventData.eventStatusValueId != 239 || studentList.status.campusPublishInd==='N'">
+                <mat-option *ngFor="let statusData of filteredDriveStatus" [value]="statusData.lookupValueId">
+                  {{statusData.lookupValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ng-template>
+       <!-- <span *ngIf="studentList.StudentInfo.studentStatus.candidateStatusValueId">
+         {{studentStatusObject[studentList.StudentInfo.studentStatus.candidateStatusValueId].lookupValue}}
+        </span> -->
+        <span *ngIf="studentList.status.totalCompPkgValue">
+          <span matTooltip={{studentList.status.totalCompPkgValue}}>
+            <i class="fas fa-suitcase" *ngIf="studentList.status.candidateStatusValueId === 381" aria-hidden="true"> </i>
+          </span>
+        </span>
+
+        <span *ngIf="studentList.status.totalCompValue">
+          <span matTooltip={{studentList.status.totalCompValue}}>
+              <i class="fas fa-suitcase" *ngIf="studentList.status.candidateStatusValueId === 381" aria-hidden="true"> </i>
+          </span>
+      </span>
+      </td>
+      <td >
+          <div matTooltip="Un-available" class="ClassRedCOlor toolTip" *ngIf="studentList.status.studentSubscribeInd==='N' || studentList.status.campusPublishInd==='N';else displayGreen"> </div>
+          <ng-template #displayGreen>
+            <div  matTooltip="Avaliable" class="ClassGreenCOlor" >
+            </div>
+          </ng-template>
+        </td>
+      <td>
+        <!-- <i class="delete_css" type="submit"
+        *ngIf="selectedEventData.eventStatusValueId===241&&!deleteButton"
+        (click)="removeFromEvent(studentList, i)">
+        <i class="fa fa-trash-o f-size18" aria-hidden="true"></i>
+      </i> -->
+        <i title="Delete" class="delete_css" type="submit"
+        *ngIf="selectedEventData.eventStatusValueId===238&&!deleteButton"
+        (click)="openModal(studentList, i)">
+        <i class="fa fa-trash-o f-size18" aria-hidden="true"></i>
+    </i>
+       </td>
+    </tr>
+    <tr *ngIf="mf.data === []">
+      <td colspan="8" class="text-center">
+        <span>
+          No Data Found
+        </span>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="12">
+        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+</div>

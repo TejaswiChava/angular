@@ -1,0 +1,14 @@
+.terms-page {
+    font-family: 'Times New Roman', Times, serif;
+}
+.terms-page h4,.terms-page h3{
+    font-weight: bold;
+}
+.terms-page P{
+    font-size: 16px;
+    text-align: justify;
+} 
+.container_padding{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}

@@ -1,0 +1,143 @@
+<div id="custom-bootstrap-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid" style="max-width:1366px !important; margin:auto;">
+    <div class="navbar-header">
+      <img class="logo_icon"  src="assets/images/Logo favicon_64.png" >
+      <img class="logo_text"  src="assets/images/logo_text_64.png" >
+      
+      <!-- class="logo_Css" -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse navbar-menubuilder">
+
+      <ul class="nav navbar-nav navbar-right m-right20" style="margin-top:26px;" *ngIf="!hideHeader">
+
+        <li *ngFor="let list of urlValues" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a routerLink={{list.urlLink}}>{{list.urlName}}</a>
+        </li>
+
+
+        <li id="noti_Container" style="padding-right: 30px;" class="dropdown headerDropdown" *ngIf="loginData && loginData!=''">
+            <div id="noti_Counter" *ngIf="awaitingNotificationsCount">{{awaitingNotificationsCount}}</div>
+
+            <a style="margin-top: -6px" id="noti_Button" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+              (click)="loadNotifications()">
+                <img src="assets/images/notifications_enable.png"></a>
+
+            <ul class="dropdown-menu headerDropdown notificationDropdown">
+
+                <div class="dropdown-header">
+		                <span class="triangle"></span>
+		                <div class="heading text-left" >Notifications</div>
+		                <!-- <span class="count" id="dd-notifications-count">{{allNotificationCount}}</span> -->
+                </div>
+              <div class="dropdown-body"  *ngIf="readNotifications || newNotifications">
+
+                    <div class="notification new" *ngFor="let unreadnotification of newNotifications; trackBy: trackList">
+                        <div class="notification-image-wrapper">
+                          <div class="notification-image" *ngIf="unreadnotification.senderDetails.logo;else displayNoImage">
+                            <img src="{{unreadnotification.senderDetails.logo}}" alt="Logo" width="32" height="32">
+                          </div>
+                          <ng-template #displayNoImage>
+                            <div class="notification-image">
+                              <img src="https://imagemoved.files.wordpress.com/2011/07/no-strings-attached-natalie-portman-19128381-850-1280.jpg" alt="" width="32">
+                            </div>
+                          </ng-template>
+
+                        </div>
+                        <div class="notification-text">
+                            <a (click)="showNotifications(newNotifications)"><span class="highlight">{{unreadnotification.notificationTemplate.notificationName}}</span><br /> {{unreadnotification.notificationTemplate.messageText}}
+                              <br />
+                              <span  class="time-info">{{unreadnotification.notificationDetails.createDatetime | date}} | {{unreadnotification.notificationDetails.createDatetime | date:'shortTime'}}</span>
+                            </a>
+                           <!-- <span class="highlight">{{unreadnotification.name}}</span> {{unreadnotification.action}} {{unreadnotification.target}} -->
+                        </div>
+                      </div>
+
+                    <div class="notification" *ngFor="let readNotification of readNotifications">
+                      <div class="notification-image-wrapper">
+                        <!-- <div class="notification-image">
+                          <img src="https://imagemoved.files.wordpress.com/2011/07/no-strings-attached-natalie-portman-19128381-850-1280.jpg" alt="" width="32">
+                        </div> -->
+                        <div class="notification-image" *ngIf="readNotification.senderDetails.logo;else displayNoImage">
+                          <img src="{{readNotification.senderDetails.logo}}" alt="Logo" width="32" height="32">
+                        </div>
+                        <ng-template #displayNoImage>
+                          <div class="notification-image">
+                            <img src="https://imagemoved.files.wordpress.com/2011/07/no-strings-attached-natalie-portman-19128381-850-1280.jpg" alt="" width="32">
+                          </div>
+                        </ng-template>
+                      </div>
+                      <div class="notification-text">
+                          <a routerLink="notifications"><span class="highlight">{{readNotification.notificationTemplate.notificationName}}</span> <br />{{readNotification.notificationTemplate.messageText}}
+                            <br />
+                            <span class="time-info">{{readNotification.notificationDetails.createDatetime | date}} | {{readNotification.notificationDetails.createDatetime | date:'shortTime'}}</span>
+                          </a>
+
+                      </div>
+                    </div>
+
+
+
+                </div>
+                <div class="dropdown-body" style="background:#fff;">
+
+                       <div
+                       *ngIf="notifications == '' || notifications == null || notifications == undefined">
+                         <img src="/../assets/images/notifications_icon.png" class="img-responsive notifctnImg" >
+                         <div class="f-size16 font_robotomedium text-center">All Caught Up! </div>
+                         <p class="f-size12 font_robotomedium color-ddd text-center" style="margin-bottom:20px;"> there are no new notifications for you</p>
+                       </div>
+               </div>
+                <!-- <li *ngFor="let notification of notifications">
+                  <a routerLink="notifications" style="color: #337ab7;cursor: pointer;"  >{{notification.name}}</a>
+                  <hr style="margin-top:5px;margin-bottom:5px;">
+                </li> -->
+                <!-- <div class="dropdown-footer">
+		                <span class="heading"><a routerLink="notifications">See All</a></span>
+                </div> -->
+
+            </ul>
+          </li>
+
+          <!-- <li class="dropdown" *ngIf="personProfileDetails">
+             <a></a>Hello! {{personProfileDetails.firstName}}
+          </li> -->
+
+        <li class="dropdown" id="dropdownid" *ngIf="loginData && loginData!=''">
+
+            <a href="#" style="margin-top: -4px;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <span *ngIf="personProfileDetails" style="padding-right: 6px;vertical-align: text-bottom;font-size: 16px;">
+                {{personProfileDetails.firstName}}</span>
+
+                <img *ngIf="personProfileDetails" style="width: 30px;height: 30px;border-radius:50%;" src="{{apiEndPoint}}{{personProfileDetails.pictureUrl}}"
+                onerror="this.src='assets/images/default_user_icon.png'">
+                <i *ngIf="personProfileDetails == ''" class="fa fa-user-circle fa-1x" style="font-size: 24px;" aria-hidden="true">
+                </i>
+                <span class="caret"></span>
+            </a>
+          <ul class="dropdown-menu" style="width:160px;">
+              <!-- <span class="triangle1"></span> -->
+              <li><a routerLink="myProfile" class="cursor-pointer font_robotobold" style="padding: 8px 20px;">My Profile</a></li>
+             <li class="divider" style="margin: 0px 0;"></li>
+              <li><a class="cursor-pointer font_robotobold" style="padding: 8px 20px;" (click)="signOut()">Sign Out</a></li>
+
+
+
+
+            <!-- <li><a routerLink="myProfile"><b>My Profile</b></a></li> -->
+            <!-- <li class="divider"></li> -->
+
+            <!-- <li><button type="submit" class="btn" style="background:none" (click)="signOut()">Sign Out</button></li> -->
+
+          </ul>
+        </li>
+
+      </ul>
+
+
+
+
+    </div>
+  </div>
+</div>

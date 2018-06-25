@@ -1,0 +1,139 @@
+<!-- upload box starts -->
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  profile padding0">
+  <div id="massupload_bg">
+    <h4 class="color-heading font_robotomedium">DATA UPLOAD</h4>
+    <div class="col-lg-offset-3 col-lg-6 col-lg-offset-3 col-md-offset-3 col-md-6 col-md-offset-3  col-sm-12 col-xs-12 text-center massuploadBox">
+      <!-- start campus upload form -->
+      <div>
+        <form #campusUploadForm="ngForm">
+
+          <mat-form-field class=" width100 ">
+            <mat-select placeholder="Choose Document Type" [(ngModel)]="upObj.campusUploadTypeValueId" (change)="onSelect(upObj.campusUploadTypeValueId)"
+              name="campusUploadTypeValueId" id="campusUploadTypeValueId" required>
+              <mat-option [value]="">Select Document Type</mat-option>
+              <mat-option *ngFor="let docType of campusUploadDocTypes" [value]="docType.lookupValueId">{{ docType.lookupValue }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- <div *ngIf="documentTypeValueId.errors && (documentTypeValueId.dirty || documentTypeValueId.touched)" class="color-red">
+        <div [hidden]="!documentTypeValueId.errors.required">
+          Document Type is required
+        </div>
+      </div> -->
+          <div *ngIf="option == 371">
+            <div class="col-lg-6 col-xs-12">
+              <mat-form-field class="width100">
+                <mat-select placeholder="Choose Department" [(ngModel)]="upObj.departmentId" name="departmentId" id="departmentId" (change)="getCampusDeptPrograms(upObj.departmentId);upObj.programId=''" required>
+                    <mat-option [value]="">Select Department</mat-option>
+                  <mat-option *ngFor="let department of campusDepartments" [value]="department.departmentId">{{ department.name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>  
+
+            <div class="col-lg-6 col-xs-12">
+              <mat-form-field class="width100">
+                <mat-select placeholder="Choose Program" [(ngModel)]="upObj.programId" name="programId" id="programId" required>
+                    <mat-option [value]="">Select Program</mat-option>
+                  <mat-option *ngFor="let program of campusPrograms" [value]="program.programId">{{ program.programName }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <!-- <div *ngIf="eventValueId.errors && (eventValueId.dirty || eventValueId.touched)" class="color-red">
+          <div [hidden]="!eventValueId.errors.required">
+            Event Name is required
+          </div>
+        </div> -->
+          </div>
+
+          <div *ngIf="option == 372">
+            <div class="col-lg-4 col-xs-12">
+              <mat-form-field class="width100">
+                <mat-select placeholder="Choose Department" [(ngModel)]="upObj.departmentId" name="departmentId" id="departmentId" (change)="getCampusDeptPrograms(upObj.departmentId);upObj.programId=''" required>
+                    <mat-option [value]="">Select Department</mat-option>
+                  <mat-option *ngFor="let department of campusDepartments" [value]="department.departmentId">{{ department.name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-lg-4 col-xs-12">
+              <mat-form-field class="width100">
+                <mat-select placeholder="Choose Program" [(ngModel)]="upObj.programId" name="programId" id="programId" required>
+                    <mat-option [value]="">Select Program</mat-option>
+                  <mat-option *ngFor="let program of campusPrograms" [value]="program.programId">{{ program.programName }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-lg-4 col-xs-12">
+              <mat-form-field class="width100">
+                <mat-select placeholder="Choose Program Unit Type" [(ngModel)]="upObj.programUnitTypeValueId" name="programUnitTypeValueId"
+                  id="programUnitTypeValueId" required>
+                  <mat-option [value]="">Select Program Type</mat-option>
+                  <mat-option *ngFor="let proType of campusProgramType" [value]="proType.lookupValueId">{{ proType.lookupValue }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+          </div>
+          <div *ngIf="option == 513">
+              <div class="col-lg-12 col-xs-12">
+                  <mat-form-field class="width100">
+                    <mat-select placeholder="Choose Events" [(ngModel)]="upObj.campusEventId" name="campusEventId" id="campusEventId" required>
+                        <mat-option [value]="">Select Event</mat-option>
+                      <mat-option *ngFor="let unregisterEvent of unregisteredEvents" [value]="unregisterEvent.campusEventId">{{ unregisterEvent.eventName }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+              </div>  
+          </div>
+          <br>
+          <div class="fileUpload btn" style="margin-left:7%;float:left;margin-bottom:20px">
+            <!-- <span><img  src="assets/images/upload_side icon.png" style="width: 40%;" > <div class="font_robotomedium">Click Here for</div></span>
+           <div class="font_robotoregular color-ddd"> Upload Media(.CSV)</div>
+            <input type="file" [(ngModel)]="upObj.datasourcelistdata" (change)="uploadDatasource($event.target.files)" name="datasourcelistdata" class="upload" 
+              id="datasourcelistdata" accept=".csv" /> -->
+
+              <span>
+                  <input type="file" [(ngModel)]="upObj.datasourcelistdata" (change)="uploadDatasource($event)" name="datasourcelistdata" class="inputfile" 
+                  id="datasourcelistdata" accept=".csv" />
+                  <label>
+                      <img src="assets/images/upload_side icon.png" style="width:50px;height:50px;">
+                      <div *ngIf="this.fileName == ''" class="font_robottomedium">Click Here for</div>
+                      <div *ngIf="this.fileName" class="font_robottomedium">{{this.fileName}}</div>
+                  </label>
+                </span>
+                <div class="font_robotoregular color-ddd"> Upload Media(.CSV)</div>
+
+          </div>
+                    <div class="fileUpload btn" style="margin-right:7%;float:right;margin-bottom:20px">
+            <!-- <span><img  src="assets/images/upload_side icon.png" style="width: 40%;" > <div class="font_robotomedium">Click Here for</div></span>
+           <div class="font_robotoregular color-ddd"> Upload Media(.CSV)</div>
+            <input type="file" [(ngModel)]="upObj.datasourcelistdata" (change)="uploadDatasource($event.target.files)" name="datasourcelistdata" class="upload" 
+              id="datasourcelistdata" accept=".csv" /> -->
+
+              <span>
+                  <label>
+                      <img src="assets/images/upload_side icon.png" style="width:50px;height:50px;transform: rotate(180deg);" (click)="downloadFile()">
+                      <div class="font_robottomedium">Download Sample File</div>
+                  </label>
+                </span>
+                <div class="font_robotoregular color-ddd">(CSV)</div>
+
+          </div>
+          <div class="col-lg-12 ">
+            <div class="pull-right">
+              <button type="submit" (click)="submitFile(campusUploadForm)" [disabled]="!campusUploadForm.form.valid" class="btn  submit-btn">Submit</button>
+              <a class="btn submit-btn " id="cancelCampsAddress" (click)="cancelSubmitFile(campusUploadForm)">Cancel</a>
+
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <!-- end campus upload form -->
+
+
+    </div>
+  </div>
+</div>
+<!-- upload box ends -->

@@ -1,0 +1,76 @@
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">          
+    <h3>Notifications</h3>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        
+    <input class="pull-right filter-input m-top10" [(ngModel)]="filterQuery" 
+    placeholder="Search by Message"/>
+    </div>
+    <hr>
+
+    <div class="col-md-12 col-lg-12" style="margin-bottom:15px;">
+      <div class="row">
+        <div class="col-md-12 notification-content" *ngFor="let notification of allNotifications| notifications : filterQuery">
+       <div *ngIf="!notification.notificationTemplate.messageText" class="m-top30 text-center">
+        No Data Found
+       </div>
+          <div class="notification-card">
+                <div class="col-md-4 col-lg-4 col-xs-12">
+                        <h4 class="noti-head font_robotomedium">{{notification.notificationTemplate.notificationName}}</h4>
+                        <p class="noti-subtext font_robotoregular">{{notification.notificationTemplate.messageText}}</p>
+                </div>
+                <div class="col-md-2 col-lg-2 col-xs-12 noti-date">
+                        <p>{{notification.notificationDetails.createDatetime | date}} | {{notification.notificationDetails.createDatetime | date:'shortTime'}}</p>
+                </div>
+                <div class="col-md-2 col-lg-2 col-xs-6 noti-sender-info">
+                        <p class="font_robotomedium">Sender:</p>
+                        
+                        <p class="sender-content font_robotoregular" *ngIf="notification.senderDetails.name && notification.senderDetails.companyId">
+                          <a routerLink='/companyListProfile/{{notification.senderDetails.companyId}}' target="_blank">
+                          {{notification.senderDetails.name}}
+                          </a>
+                        </p>
+                        
+                        <p class="sender-content font_robotoregular" *ngIf="notification.senderDetails.firstName"> 
+                        <a routerLink='/studentProfile/{{notification.senderDetails.studentId}}' target="_blank">  
+                          {{notification.senderDetails.firstName}} <span> </span>  {{notification.senderDetails.lastName}}
+                        </a>
+                        </p>
+                        
+                          <p class="sender-content font_robotoregular" *ngIf="notification.senderDetails.name && notification.senderDetails.campusId ">
+                          <a routerLink='/campusListProfile/{{notification.senderDetails.campusId}}' target="_blank">
+                            {{notification.senderDetails.name}} 
+                          </a>
+                          </p>
+
+                </div>
+                <div class="col-md-4 col-lg-4 col-xs-6">
+                    <span *ngIf="notification.notificationTemplate.flag && (notification.notificationTemplate.notificationTemplateId==1 || notification.notificationTemplate.notificationTemplateId==20)">
+                        <button class="btn dismiss-btn" (click)="acceptEvent(notification)">Accept </button>
+                        <button class="btn dismiss-btn" (click)="rejectEvent(notification)">Reject</button>
+                      </span>
+                        <button class="btn dismiss-btn" (click)="dissmissMessage(notification)">Clear</button>
+                </div>
+        </div>
+        <div class="col-md-12 col-lg-12"><hr class="noti-bootom-hr"></div>
+          <!-- <mat-card>
+                <mat-card-title></mat-card-title>
+                <mat-card-subtitle></mat-card-subtitle>
+          </mat-card> -->
+        </div>
+
+       
+      </div>
+
+
+    </div>
+
+  </div>
+</div>
+
+<!-- <div *ngIf='event'> -->
+  <div hidden="qwerty">
+  <app-create-campus-event [acceptedEvent]='eventAccepted'> </app-create-campus-event>
+</div>

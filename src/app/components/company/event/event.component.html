@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="row" style="margin-bottom:10px;margin-top:-7px">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 padding0">
+          <div class="col-lg-6">
+            <!-- <img class="width35 m-btm5p cursor-pointer" src="assets/images/drive_icon_heading.png" title="drives" title="Add">
+            <span class="f-size16">Event</span> -->
+
+          </div>
+          <div class="col-lg-6">
+            <div class="pull-right searchboxCampuslist">
+                <span *ngIf="!showFilter && !isSearchActive">
+                <input class="pull-left filter-input" [(ngModel)]="filterQuery" placeholder="Search by Event Name" *ngIf="!showFilter && !isSearchActive "/>    
+              <img class="width35 m-btm5p cursor-pointer" src="assets/images/add__plus_icon.png" title="Add"  (click)="addEvent()"
+                title="Add">
+                </span>
+              <!-- <img class="width35 m-right15" src="assets/images/add disable.png" *ngIf="!showAddImagDisable"> -->
+              <!-- "list" -->
+              <i class="fa fa-times width35 mbtm-23 backgroundColor_transperent cursor-pointer 
+           color-theme f-size16 m-right18" aria-hidden="true" title="Cancel" *ngIf="isSearchActive || showFilter" (click)="cancelEvents()"></i>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <br>
+      </div>
+    </div>
+    <div class=" box-border col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div *ngIf="!list">
+        <!-- <app-event-list [(sendList)]='clickData' [(listStatus)]='list'></app-event-list> -->
+        <app-event-list [filterQuery]="filterQuery" [(showFilter)]="showFilter"></app-event-list>
+      </div>
+      <div class="row" *ngIf="list">
+        <app-create-event [(getEventStatus)]='list'  ></app-create-event>
+      </div>
+    </div>
+  </div>
+</div>

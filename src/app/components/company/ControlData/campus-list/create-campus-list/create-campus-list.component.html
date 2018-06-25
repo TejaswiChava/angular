@@ -1,0 +1,157 @@
+<div class="font_robotoregular">
+  <div class="">
+    <div class="col-lg-12 col-md-12">
+      <!-- <div style="border: 1px solid #ccc;background : white;"> -->
+          <div class="pull-right" *ngIf="btnEdit">
+              <img class="width35 cursor-pointer" src="assets/images/adress_edit_lighter icon (1).png"
+              onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+              onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'"
+            title="Edit"  id="editCampusList" (click)="editCampusList()">
+
+
+            <!-- <i class="fa fa-times width35 m-btm5p backgroundColor_transperent cursor-pointer
+            color-theme f-size16 m-right18"  (click)="cancelClist(false)"></i> -->
+            <!-- <button type="button" class="btn submit-btn" *ngIf="driveList" (click)="cancelDrive(false)"> Cancel </button> -->
+              </div>
+          <!-- <a *ngIf="btnEdit" class=" pull-right cursor-pointer" (click)="editCampusList()">
+              <img class="width35" src="assets/images/adress_edit_lighter icon (1).png"
+              onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+              onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'">
+            </a>
+            <i class="fa fa-times width35 m-btm5 backgroundColor_transperent cursor-pointer pull-right
+            color-theme f-size16 m-right18" aria-hidden="true" title="Cancel" (click)="cancelClist(false)"></i> -->
+      <div style="min-height:400px">
+        <form [formGroup]="campusListForm" >
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <mat-input-container class="width100">
+                <input matInput placeholder="Name of the List" [readonly]= "readonly" name="listName" id="listName"
+                formControlName="listName" required>
+              </mat-input-container>
+            </div>
+
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+              <mat-form-field class="width100" id="campusJobRoleID">
+                <mat-select placeholder="Job Role" [disabled]="readonly" formControlName="jobRoleId" class="width100" name="jobrole" id="jobrole" [disabled]="readonly"
+                  required>
+                   <mat-option [value]="">Select Job Role</mat-option>
+                  <mat-option *ngFor="let role of jobRoles" [value]="role.jobRoleId">
+                    {{role.jobRoleName}}
+                  </mat-option>
+                  <!-- <mat-option *ngFor="let status of CmpApprovalLookups" [value]="status.lookupValueId">
+                          {{status.lookupValue}}
+                        </mat-option> -->
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+              <mat-form-field>
+                <mat-select placeholder="Status" [disabled]="statusReadOnly" formControlName="compApprovalStatusValueId" class="width100"
+                  name="compApprovalStatusValueId" id="compApprovalStatusValueId">
+                  <mat-option *ngFor="let status of CmpApprovalLookups" [value]="status.lookupValueId">
+                    {{status.lookupValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div> -->
+          </div>
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top5">
+
+            <label class="">Description</label>
+            <textarea placeholder={{labelData.description}}  [readonly]= "readonly" name="description" id="description"
+            class="flexcroll textarea_boxes width100" maxlength="2000" formControlName="description"></textarea>
+          </div>
+        </form>
+
+
+
+
+
+        <form [formGroup]="AddCompensationForm">
+          <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12 m-top10">
+            <label class="display-block">Compensation Packages *</label>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"   *ngIf="!btnCompensation">
+              <button type="submit" [disabled]= "readonly" class="btn submit-btn" id="addCompensationPackage" (click)="addCompensationPackage()">
+                <i class="fa fa-plus" aria-hidden="true"></i> &nbsp;Add Compensation </button>
+            </div>
+            <div class="col-lg-2 col-md-2" *ngFor="let cData of selectedCompensationData;let i = index" >
+              <div style="border:1px solid #ea9215;height: 65px;width: 100%;border-radius: 4px" class="text-center">
+                <button class="fa fa-times pull-right cursor-pointer crossBtn12"
+                *ngIf="!readonly" id="deleteComp" (click)="deleteComp(cData,i)" aria-hidden="true"></button>
+                <div style="text-overflow:ellipsis;white-space: nowrap;overflow: hidden;color:#ea9215">
+                  <br>
+                  <a title="{{cData.compPackageName}}" class="cursor-pointer " style="color: #ea9215 !important;">
+                    {{cData.compPackageName}} 
+                    <br>
+                    - {{cData.totalCompPkgValue}}
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-3" *ngIf="btnCompensation">
+              <!-- <angular2-multiselect [data]="compensationPackages" formControlName="compPackageId"
+                [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+                [selectedItems]="selectedCompensationData">
+              </angular2-multiselect> -->
+
+              <!-- <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" formControlName="compPackageId"
+              [settings]="dropdownSettings"
+              (onSelect)="onItemSelect($event)"
+              (onDeSelect)="OnItemDeSelect($event)"
+              (onSelectAll)="onSelectAll($event)"
+              (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect> -->
+
+              <mat-form-field>
+              <mat-select multiple placeholder="Compensation Packages" id="compPackageIdCampusList" [disabled]= "readonly"  class="width100"
+                name="compPackageId" id="compPackageId"  formControlName = "compPackageId"   >
+                <mat-option [value]="">Select Compensation Package</mat-option>
+                <mat-option *ngFor="let status of compensationPackages" [value]="status"
+                  (click)="selectedCompensation( status, $event)">
+                  {{status.compPackageName}} - {{status.totalCompPkgValue}}
+                </mat-option>
+              </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+        
+
+        <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12 m-top10">
+          <label class="display-block"> Search & Add Campus *</label>
+          <div class="col-lg-3 col-md-3" *ngIf="!btnCollege">
+            <button type="submit" [disabled]= "readonly" id="addCollege"  class="btn submit-btn" (click)="addCollege()">
+              <i class="fa fa-plus" aria-hidden="true"></i> &nbsp;Add Campus </button>
+          </div>
+          <div *ngIf="btnCollege">
+            <app-campus-list-search [(getSelectCampus)]='campusData' [selectedCampusResponse]="empDetailsResponce"></app-campus-list-search>
+          </div>
+          <div class="clearfix"></div>
+          <div *ngIf="selectedList" class="m-top20">
+            <label class="display-block">Selected Campus List</label>
+            <div class="search-box">
+              <app-selected-campus-list [selectedCampusResponse]="empDetailsResponce" [campusListCount]="clickedCampusList.campusListLength"></app-selected-campus-list>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- [disabled]="!campusListForm.form.valid" -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top10 ">
+          <div class="pull-right">
+              <button type="submit"   *ngIf="!btnSubmit" [disabled]="!campusListForm.valid || campusData.length == 0 || selectedCompensationData.length == 0" class="btn  submit-btn" 
+              id="campusListSubmit" (click)="campusListSubmit($event)"> Submit</button>
+              <button type="submit"  *ngIf="btnSubmit && !readonly" class="btn  submit-btn" id="campusListUpdate" [disabled]="!campusListForm.valid  || selectedCompensationData.length == 0" (click)="campusListUpdate()"> Update</button>
+              <button type="submit" *ngIf="btnSubmit && !readonly"  class="btn submit-btn" id="cancelClist" (click)="cancelClist(false)"> Cancel</button>
+              <button *ngIf="!btnSubmit" class="btn submit-btn" type="button" id="clearJobrole" (click)="cancelCampusList()">Clear</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- </div> -->
+    </div>
+  </div>
+</div>

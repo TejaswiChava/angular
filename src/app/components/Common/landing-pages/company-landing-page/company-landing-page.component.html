@@ -1,0 +1,311 @@
+<!-- background image section starts -->
+<div></div>
+<div style="background-color:white; max-width:1366px !important; margin:auto;">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+       
+        <div id="employe_bg">
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <div class="employeTheme" data-aos="fade-up"  data-aos-duration="2500">
+                    <h3 class="textColor_fff font_robotomedium">Thousands of institutes, at your click</h3>
+                    <H1 class="themeColor margin-top-5 font_robotobold">Hire the best minds at the best price</H1>
+                </div>
+    
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 loginDiv"  >
+              
+    
+                  <div class="LoginClass" id="loginBox" *ngIf="!showLoginDetails && !showForgotDetails">
+                      <app-sign-in  [(showSignup)]="showLoginDetails"  [(showForgotPassword)]="showForgotDetails"></app-sign-in>
+                   </div>
+    
+                    <div class="LoginClass" id="loginBox" *ngIf="showLoginDetails">
+                        <app-request-for-demo  [(showSignup)]="showLoginDetails"  [(showForgotPassword)]="showForgotDetails"></app-request-for-demo>                        
+                    </div>
+    
+    
+                    <div class="LoginClass" id="loginBox" *ngIf="showForgotDetails">
+                      <div  data-aos="flip-left" data-aos-duration="2500">
+                          <form #campusForgotPasswordform="ngForm">
+                        <h2>Forgot Password</h2>
+    
+                        <div class="classlogin_Inner">
+    
+                            <mat-form-field class="width100">
+                                <input matInput type="text" email name="email" #email="ngModel" [(ngModel)]="forgotObj.email" placeholder=" Email ID" id="email"
+                                pattern="^\w+([.-]\w+)*@\w+([.-]\w+)*(\.\w{2,3})+$" required/>
+                              </mat-form-field>
+                              <div *ngIf="email.errors && (email.dirty || email.touched)" class="color-red m-btm5 f-size12">
+                                  <div [hidden]="!email.hasError('pattern')">Email format should be 
+                                      <small><b>abcd@abc.com</b></small></div>
+                                </div>
+    
+                                <button type="submit" id="campusSignup" [disabled]="!campusForgotPasswordform.form.valid" 
+                                class="btn student_login" (click)="forgotPasswordSubmit(campusForgotPasswordform)">
+                                  SUBMIT</button>
+                             
+                                <!-- <input type="button" value="Request for demo" class="btn student_login"> -->
+                                <div class="clear"></div>
+                        </div>
+                                  <!-- <div style="border-bottom:1px solid #FFCA3C; margin-top:50px"> -->
+                            <span class="in1">Already have an account ?</span>
+                            <span class="in2 cursor-pointer"  (click)="Signin()">SIGN IN</span>
+                            
+                    </form>
+                          </div>
+                </div>
+    
+    
+    
+              </div>
+        
+           
+          <!-- singup ends -->
+    
+       
+    
+    
+    
+        </div>
+      </div>
+    
+    <div class="col-lg-12">
+                    <img style="margin-top: -69px; width: 4%; cursor:pointer" id="col1" class=" first img-responsive center-block"  src="../../../../../assets/images/Scora_HomePage/scroll-down3.gif">
+    </div>
+    
+    </div>
+    
+    <!-- background image section ends -->
+    <div class="clearfix"></div>
+    <!-- we connect you starts -->
+    <div class="second col1"></div>
+    <div class="row background_fff">
+      <!-- <div class="col-lg-12 " style="box-shadow: box-shadow: 0 -27px 73px -17px #ccc;"></div> -->
+      <div class="col-lg-12">
+        <div class="text-center">
+        <h2 style="color:#35383c;margin-top:50px;" class="font_robotobold">WE CONNECT YOU</h2>
+         <p style="font-size:24px;color:#555" class="font_robotomedium">to the best talent at the right price across the country</p>      
+        </div>
+      </div>
+    
+    
+      <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-offset-1 col-sm-10 col-sm-offset-1  col-xs-12 m-top15">
+    <div class="col-lg-4 col-sm-4 col-xs-4 m-top20 top1">
+      <img  class="center-block img-responsive weConnect_img" data-aos="zoom-in" data-aos-duration="2500"
+      src="assets/images/employer_page_icons/hexa_02.png">
+      <div class="text-center font_robotoregular">
+      <p class="f-size16 color_grey" >Much more than </p>
+      <p class="f-size16 color_grey margintop-8">Recruitment</p>   
+      <div class="weConnect cursor-pointer">
+          <img style="height:70px"  data-aos="fade-up" data-aos-duration="2500" src="assets/images/employer_page_icons/arrow_1.png">
+      </div> 
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-4 col-xs-4 m-top20">
+        <img  class="center-block img-responsive weConnect_img" data-aos="zoom-in" data-aos-duration="2500"
+        src="assets/images/employer_page_icons/hexa_01.png">
+        <div class="text-center font_robotoregular">
+        <p class="f-size16 color_grey">End-to-End </p>
+        <p class="f-size16 color_grey margintop-8">Integrated Platform </p>   
+        <img class="integrated_text" style="cursor:pointer" id="col2" data-aos="fade-up" data-aos-duration="2500" src="assets/images/employer_page_icons/arrow_2.png"> 
+        <div class="col2"></div>
+    </div>
+    </div>
+    <div class="col-lg-4 col-sm-4 col-xs-4 m-top20 top1">
+        <img  class="center-block img-responsive weConnect_img" data-aos="zoom-in" data-aos-duration="2500"
+        src="assets/images/employer_page_icons/hexa_03.png">
+        <div class="text-center font_robotoregular">
+        <p class="f-size16 color_grey">A Sea of  </p>
+        <p class="f-size16 color_grey margintop-8">Credible Talent</p>    
+        <div class="third cursor-pointer">
+            <img style="height:70px" data-aos="fade-up" id="EndtoEnd" data-aos-duration="2500" src="assets/images/employer_page_icons/arrow_1.png">
+        </div>
+        </div>
+    </div>
+      </div>
+      
+    </div>
+    <!-- we connect you ends -->
+    
+    
+    <!-- end-to-end integrated platform starts -->
+    <div class="row background_fff">
+      <div >
+      <div class="col-lg-12 end-to-end_topPatch"  id="integrated_platform"></div>
+      <div class="col-lg-12 end-to-end_MiddleLayer"  id="integrated_platform_background">
+      <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
+    <div class="col-lg-5 col-md-5 col-xs-12">
+        <img  class="center-block img-responsive end_img"  src="assets/images/employer_page_icons/img_01.png">  
+    </div>
+    <div class="col-lg-7 col-md-7 col-xs-12">
+      <div class="margin-top70" data-aos="fade-up" data-aos-duration="2500">
+          <h2 class="textColor_fff font_robotobold">End-to-end integrated platform</h2>
+          <p class="font_robotoregular pclass" style="line-height: 28px; font-size: 16px; word-spacing: 4px;">ScoraXchange takes the entire recruitment process, and organises, automates and closely integrates it to 
+            the thousands of institutes, hence making it exponentially efficient. 
+          </p>
+      </div>
+    </div>
+      </div>   
+      <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 padding0">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+      <img class="perfectMatch_img" src="assets/images/employer_page_icons/01.png">
+      <h3 class="end-to-end-textHeading font_robotomedium  textColor_fff">Perfect Match Just a Click Away</h3>
+      <p class="end-to-end-text font_robotoregular" data-aos="fade-up" data-aos-duration="2500">
+        Advanced filtering takes a few seconds to match the company’s needs to students’ profiles,
+         hence narrowing down to candidates matching the need. 
+      </p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <img class="wider_search"  src="assets/images/employer_page_icons/02.png">
+        <h3 class="end-to-end-textHeading font_robotomedium  textColor_fff">Wider Reach</h3>
+        <p class="end-to-end-text font_robotoregular" data-aos="fade-up" data-aos-duration="2500">
+          Thousands of Institutes and millions of students on one platform. Announce vacancies, send and receive 
+          invites for recruitment, events and more.
+        </p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <img class="real_time"  src="assets/images/employer_page_icons/03.png">
+        <h3 class="end-to-end-textHeading font_robotomedium  textColor_fff">Real-time Analytics and Updates</h3>
+        <p class="end-to-end-text font_robotoregular" data-aos="fade-up" data-aos-duration="2500">
+          360° view of ongoing recruitment process through analytical dashboards. 
+          Real time notifications and student’s availability status. 
+        </p>
+    </div>
+      </div>   
+      </div> 
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="float:left" id="integrated_platform_bottompatch"></div>
+    </div>
+    
+    <div style="text-align: center;">
+    <img class="downpatch_Arrow" style="cursor:pointer" id="col3" src="assets/images/employer_page_icons/arrow_1.png">
+    <div class="col3"></div>
+    </div>
+    
+    </div>
+    <!-- end-to-end integrated platform ends -->
+    
+    <div class="muchMore"></div>
+    <!-- much more than recurtment starts -->
+    <div class="row background_fff">
+        <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 padding0">
+    <div class="col-lg-7 col-sm-7 col-xs-12">
+      
+    
+        <div>
+          <h3 class="font_robotobold">Much more than recruitment</h3>
+          <div class="right-arrow m-top15 font_robotoregular width95_mobileView" data-aos="fade-up" data-aos-duration="2500">
+            <p >Through ScoraXchange, carrying out efficient recruitment process, that ends in hiring of candidates 
+              that are perfectly suited for the job, is just one of the aspects. </p>
+          </div>
+          <!-- <div class=" dispaly123 display_inline_block">
+              <img class="circle_01_768"   src="assets/images/employer_page_icons/circle_01.png">        
+          </div> -->
+          </div>
+    
+    
+    
+          <div>
+              <!-- <div class="visible-xs dispaly1" style="display: inline-block !important;">
+                  <img class="circle_02_768" src="assets/images/employer_page_icons/circle_02.png">
+                      </div> -->
+          <div  class="muchMore_text1 muchMore m-top5 font_robotoregular width95_mobileView" data-aos="fade-up" data-aos-duration="2500">
+              <p>The technologically empowered platforms opens up communication with millions of students 
+                surpassing geographical constraints, that allow for so much more, like carrying out 
+                branding events, workshops, training the students starting in their first year of college, 
+                getting interns and summer trainees, and more.   </p>
+            </div>
+    </div>
+    
+    <div>
+          <div class="right-arrow m-top5 font_robotoregular width95_mobileView" data-aos="fade-up" data-aos-duration="2500">
+             <p>Just like how a lot of students miss out on opportunities due to lack of accessibility, 
+               the companies miss out on the talent too. ScoraXchange ensures that no talented, 
+               young mind out there goes un-noticed by a company.  </p>
+          </div>
+          <!-- <div class="dispaly1 display_inline_block">
+              <img class="circle_03_768"   src="assets/images/employer_page_icons/circle_03.png">        
+          </div> -->
+    
+          </div>
+      
+    </div>
+    <div class="col-lg-1 col-sm-1 hidden-xs" >
+      <br>
+      <div class="right_icons">
+        <img class="circle1" src="assets/images/employer_page_icons/circle_01.png">
+        <img class="circle2" src="assets/images/employer_page_icons/circle_02.png">
+    
+        <img class="circle3" src="assets/images/employer_page_icons/circle_03.png">
+        
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-4 hidden-xs">
+      <div data-aos="fade-up" data-aos-duration="2500">
+        <img  class="pull-left img-responsive muchMore_img" src="assets/images/employer_page_icons/img_02.png"> 
+        </div> 
+    </div>
+        </div>  
+    </div>
+    <!-- much more than recurtment ends -->
+    
+    
+    
+    <div class="fourth"></div>
+    <!-- a sea of credible tablent starts -->
+    <div class="row background_fff">
+        <div style="margin-top: -20px;">
+        <div class="col-lg-12" style="float:left" id="credible_talent_toppatch"></div>
+        <div class="col-lg-12" style="float:left" id="credible_talent_background">
+            <img id="col4" style="cursor:pointer" class=" img-responsive center-block muchmore_arrow" data-aos="zoom-in" data-aos-duration="2500" src="assets/images/employer_page_icons/arrow_3.png">
+            <div class="col4"></div>
+        
+            <div class=" col-lg-12  col-md-12 col-sm-12 col-xs-12 padding0" >
+      <div class="col-lg-5 col-sm-5 col-xs-12">
+          <img  class="center-block img-responsive sea_img" data-aos="zoom-in-right" data-aos-duration="2500"  src="assets/images/employer_page_icons/img_03.png">  
+      </div>
+      <div class="col-lg-7 col-sm-7 col-xs-12">
+        <div class="margin-top50" >
+            <h2 class="textColor_fff font_robotobold">A sea of credible talent</h2>
+        </div>
+      </div>
+        </div>   
+    
+    
+        <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-offset-1 col-sm-10 col-sm-offset-1  col-xs-12 padding0" style="margin-top:-5px">
+      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <img class="sea_icon01"  src="assets/images/employer_page_icons/01.png">
+        <p class="end-to-end-text1 font_robotoregular" data-aos="fade-up" data-aos-duration="2500">
+            Accessibility and lack of skill set are two major problems that lead to unemployment.
+             While the loss to students is evident, the companies too miss out on the kind of talent
+              that is essential to them. 
+        </p>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <img class="sea_icon02"  src="assets/images/employer_page_icons/02.png">
+          <p class="end-to-end-text1 font_robotoregular" data-aos="fade-up" data-aos-duration="2500">
+              ScoraXchange hosts an ocean of students with their digital profile, skills, interests,
+               hobbies, verified academic scores and achievements, certificates, awards, projects,
+                resumes, social profiles - all in one place.
+          </p>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <img class="sea_icon02" src="assets/images/employer_page_icons/03.png">
+          <p class="end-to-end-text1 font_robotoregular" data-aos="fade-up" data-aos-duration="2500">
+              ScoraXchange provides an edge to students as the service providers on the platform can train them 
+              in essential skills and companies can mentor them starting in their first year.   
+          </p>
+      </div>
+        </div>   
+        </div> 
+        <div class="col-lg-12 credible_talent_bottompatch" style="float:left" id="credible_talent_bottompatch"></div>
+      </div>
+      <div class="col-lg-12 " style="margin-top:-121px;float:left"  id="footer_topPatch"></div>
+      </div>
+      <!-- a sea of credible tablent ends -->
+    </div>
+    <div class="clearfix"></div>
+    <a  class="scrollToTop cursor-pointer"> </a>
+    <div >
+            <app-footer></app-footer>
+    </div>
+    

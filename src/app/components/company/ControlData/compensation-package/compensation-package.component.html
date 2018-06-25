@@ -1,0 +1,302 @@
+<div class="container-fluid mbtm-60">
+  <div class="row" >
+
+      <div class="col-lg-12 ">
+          <div class="pull-right searchbox" id="compensationAddDiv">
+            <img class="width35 m-btm5p cursor-pointer" id="addCompensationID" src="assets/images/add__plus_icon.png"
+             *ngIf="!showAddPackage"  (click)="addCompensation(compensationPackageForm)">
+            <!-- <img class="width35 m-right15" src="assets/images/add disable.png" *ngIf="!showAddImagDisable"> -->
+            <i class="fa fa-times width35 mbtm-23 backgroundColor_transperent
+                   color-theme f-size16 cursor-pointer" aria-hidden="true" title="Cancel" id="cancelid" *ngIf="cancelAddPackage" style="margin-right:-14px" (click)="cancelPckg()"></i>
+
+                   <input class="pull-left filter-input" [(ngModel)]="filterQuery" *ngIf="!showEditDetails" id="compensationSearch" placeholder="Search by Package Name"/>
+          </div>
+          </div>
+
+
+  <form #compensationPackageForm="ngForm">
+  <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 padding0 mtop20">
+    <div class="">
+      <div class="box-border">
+          <div *ngIf="!showEditDetails">
+            <div class="flexcroll table-scroll">
+                                <!-- {{data |json}} -->
+
+                                <table class="table table-striped" id="myProgram"
+                                 [mfData]="data | compensationTable : filterQuery"
+                                  #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+                                  [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+
+                                  <!-- <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5"> -->
+                                  <thead>
+                                    <tr>
+                                      <th >
+                                        <mfDefaultSorter by="compPackageName">Compensation Package Name</mfDefaultSorter>
+                                      </th>
+                                      <!-- <th >
+                                        <mfDefaultSorter by="compensationPackageApprovalStatus">Status</mfDefaultSorter>
+                                      </th> -->
+                                      <th >
+                                          <mfDefaultSorter by="totalCompPkgValue">Total Package </mfDefaultSorter>
+                                        </th>
+                                      <th >
+                                        <mfDefaultSorter by="description">{{labelData.description}}</mfDefaultSorter>
+                                      </th>
+
+
+                                    </tr>
+                                    <tr>
+
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                      <!-- {{data|json}} -->
+                                    <tr *ngFor="let cmpPckgs of mf.data"
+                                      class="notfirst cursor-pointer" (click)="viewPckg(cmpPckgs)">
+
+                                      <td >
+                                          {{cmpPckgs.compPackageName}}
+                                     </td>
+                                      <!-- <td >
+                                          {{cmpPckgs.compensationPackageApprovalStatus}}
+
+                                      </td> -->
+                                      <td >
+                                          {{cmpPckgs.totalCompPkgValue}} </td>
+                                      <td *ngIf="cmpPckgs.description">
+                                        {{cmpPckgs.description | limitTo:[20]}} </td>
+
+                                        <td *ngIf="!cmpPckgs.description">
+                                          {{cmpPckgs.description}} </td>
+
+
+                                    </tr>
+                                    <tr *ngIf="mf.data === []">
+                                      <td colspan="5" class="text-center">
+                                        <span >
+                                       {{labelData.noDataFound}}
+                                      </span>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                  <tfoot>
+                                    <tr>
+                                      <td colspan="6">
+                                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                                      </td>
+                                    </tr>
+                                  </tfoot>
+                                </table>
+                              </div>
+          </div>
+
+        <!-- <div *ngFor="let compensation of compensationPkg"> -->
+          <div *ngIf="showTotalPckg" >
+              <div class="pull-right">
+                  <img class="width35 cursor-pointer" id="editCompensationID" src="assets/images/adress_edit_lighter icon (1).png"
+                  onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+                    onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'"
+                     title="Edit" *ngIf="btnreadonly" (click)="editCompensation()">
+                </div>
+          <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12   m-top10">
+            <mat-form-field style="width:100%">
+          <input matInput placeholder={{labelData.compensationPckgName}}
+           name="compPackageName" id="compPackageName"
+           [disabled]="!enableStatus"
+            [(ngModel)]="compensationPackage.compPackageName"
+                    #compPackageName="ngModel" ngModel required>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 ">
+              <mat-form-field style="width:100%">
+                <input matInput placeholder={{labelData.totCompensationPckgVal}}
+                  name="totalCompPkgValue" id="totalCompPkgValue"
+                  [disabled]="disableStatus"
+                  [(ngModel)]="compensationPackage.totalCompPkgValue"
+                  (ngModelChange)="changePkagView(compensationPackage.totalCompPkgValue);"
+                  #totalCompPkgValue="ngModel" required>
+              </mat-form-field>
+            </div>
+
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <label>{{labelData.description}}</label>
+              <textarea placeholder={{labelData.description}} name="description"
+              [disabled]="!enableStatus"
+               id="description"
+                maxlength="2000"
+                 class="flexcroll textarea_boxes width100"
+                  [(ngModel)]="compensationPackage.description"
+                #description="ngModel"></textarea>
+            </div>
+          <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12">
+            <!-- <p>Compensation Breakup</p>             -->
+            <p>{{labelData.compensationPckgValue}}</p>
+            <a class=" pull-right" *ngIf="cancelItemPackage" id="cancelItemPackageID" (click)="cancelPackageItem()">
+              <i class="fa fa-times" aria-hidden="true"></i>&nbsp;</a>
+            <div class="col-lg-2 m-top10" *ngFor="let cmpPkg of compensationPkgItem ;let i= index">
+                <div style="border:1px solid #ea9215;height: 80px;width: 100%;border-radius: 4px;" class="text-center">
+                  <i *ngIf="enableStatus"
+                   class="fa fa-times pull-right cursor-pointer crossBtn12"
+                  aria-hidden="true"
+                  (click)="deleteComp(cmpPkg, i)">
+                </i>
+                  <div>
+                    <br>
+                      <button class="cursor-pointer" [disabled] = "!enableStatus" (click)="editItem(i)" style="color: #ea9215 !important; background:transparent; border:transparent;">
+                        {{cmpPkg.compPackageItemName}} - {{cmpPkg.amount}}
+                      </button>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-2 m-top10" *ngFor="let cmpPkg of PackageItem ;let i= index">
+              <div style="border:1px solid #ea9215;height: 80px;width: 100%;border-radius: 4px;" class="text-center">
+                <i class="fa fa-times pull-right cursor-pointer crossBtn12" aria-hidden="true"></i>
+                <div>
+                  <br>
+                    <button class="cursor-pointer" (click)="editItem(i)" [disabled] = "!enableStatus" style="color: #ea9215 !important; background:transparent; border:transparent;">
+                      {{cmpPkg.compPackageItemName}}  - {{cmpPkg.amount}}
+
+                    </button>
+                  </div>
+                </div>
+          </div>
+            <div class="col-lg-2 m-top10" *ngIf="enableStatus && enableShow">
+            <div *ngIf="!showPckg" style="border:1px solid #d3d3d3;height: 80px;width: 100%;border-radius: 4px;" class="text-center">
+              <div>
+
+                <img
+                 (click)="addPackage(packageItemForm)" id="addPackageID" class="cursor-pointer" src="assets/images/add disable.png" style="width: 35px;
+                margin-top: 20px;">
+                <!-- <button  > <i class="fa fa-plus-circle" aria-hidden="true"></i></button> -->
+                <p>{{labelData.add}}</p>
+              </div>
+            </div>
+            </div>
+          </div>
+          <!-- package item starts -->
+          <form #packageItemForm="ngForm">
+          <div *ngIf="showCompPckg">
+            <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1" style="margin-top: 10px;">
+              <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12   m-top10">
+                <mat-form-field style="width:80%">
+                  <input matInput placeholder={{labelData.pckgItemName}}
+                   name="compPackageItemName"
+                  id="compPackageItemName" [(ngModel)]="compensationPackageItem.compPackageItemName"
+                    #compPackageItemName="ngModel" required>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 mtop10">
+              <mat-form-field style="width:80%" id="compenPackageType">
+                <mat-select  placeholder={{labelData.pckgType}}
+                  name="compPackageTypeValueId"
+                  id="compPackageTypeValueId"
+                  [(ngModel)]="compensationPackageItem.compPackageTypeValueId"
+                  #compPackageTypeValueId="ngModel" (change) = "checkForPackage($event.value)">
+                  <mat-option value="">Select Package Type</mat-option>
+                  <mat-option *ngFor="let CmpPckgs of CmpPckgLookups" [value]="CmpPckgs.lookupValueId">{{CmpPckgs.lookupValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              </div>
+              <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 ">
+              <mat-form-field style="width:80%" id="compenCurrency">
+
+                <mat-select placeholder={{placeCurrency}} [disabled]="readonly" name="currencyCode" id="currencyCode" [(ngModel)]="compensationPackageItem.currencyCode"
+                  #currencyCode="ngModel" required>
+                  <mat-option value="">Select Currency</mat-option>
+                  <mat-option *ngFor="let currency of currencyData" [value]="currency.currencyCode">
+                    {{ currency.currencyCode }}
+                  </mat-option>
+
+                </mat-select>
+
+              </mat-form-field>
+            </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top10 ">
+                <mat-form-field style="width:80%">
+                  <input matInput placeholder={{labelData.amount}}  type="number"
+                   name="amount" id="amount"  [(ngModel)]="compensationPackageItem.amount"
+                    #amount="ngModel" required>
+                </mat-form-field>
+
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                  <label style="display:block">{{labelData.description}}</label>
+                <textarea placeholder={{labelData.description}}  [readonly]="readonly"
+                 name="descriptionData" id="descriptionData"
+                  style="width:80%" maxlength="2000"
+                   class="flexcroll textarea_boxes" [(ngModel)]="compensationPackageItem.description"
+                  #descriptionData="ngModel"></textarea>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="width:80%">
+                <div class="pull-right">
+                <button type="submit" id="additemsubmitid" *ngIf="!addItems"
+                 (click)="addItem()"
+                 [disabled]="!compPackageItemName.valid || !amount.valid ||!currencyCode.valid"
+                  class="btn submit-btn ">{{labelData.btnAdd}}</button>
+                  <button type="submit" id="updateitemsubmitid" *ngIf="updateItem"
+                  [disabled]="!compPackageItemName.valid || !amount.valid || !currencyCode.valid"
+                   (click)="updatePckgItem()" class="btn submit-btn">{{labelData.btnUpdate}}</button>
+                  <button type="submit" id="cancelPackItemId" (click)="cancelPackageItem()" class="btn submit-btn ">{{labelData.btnCancel}}</button>
+                </div>
+              </div>
+            </div>
+          <!-- </div> -->
+        </div>
+      </form>
+          <!-- package item ends -->
+
+
+          <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 m-top20">
+            <!-- <mat-form-field class="width100">
+            <mat-select  placeholder={{labelData.compensationApprStatus}} name="compApprovalStatusValueId" id="compApprovalStatusValueId"
+            [(ngModel)]="compensationPackage.compApprovalStatusValueId"
+              #compApprovalStatusValueId="ngModel">
+              <mat-option *ngFor="let CmpApprvl of CmpApprovalLookups" [value]="CmpApprvl.lookupValueId">{{CmpApprvl.lookupValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>   -->
+            <!-- <mat-form-field style="width:100%">
+              <input matInput placeholder="Compensation Approval Status" value="Approved" name="compApprovalStatusValueId" id="compApprovalStatusValueId"
+                [(ngModel)]="compensationPackage.compApprovalStatusValueId"  #compApprovalStatusValueId="ngModel">
+            </mat-form-field> -->
+
+          </div>
+
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="pull-right m-top10">
+            <button type="submit" id="compenstionSubmitShowID" *ngIf="!compenstionSubmitShow"
+             class="btn submit-btn" value="Submit"
+             [disabled]="!compensationPackageForm.form.valid"
+             (click)="compensationSubmit($event)"
+              class="btn submit-btn ">{{labelData.btnSave}}</button>
+           <button type="reset" id="compenstionSubmitID"  *ngIf="!compenstionSubmitShow" class="btn submit-btn" (click)="clearCompensationPckg(compensationPackageForm)">Clear</button>
+            <button type="submit" id="compenstionUpdateID" *ngIf="compenstionUpdateShow" class="btn submit-btn"
+            value="Update" [disabled]="!compensationPackageForm.form.valid" (click)="compensationUpdate()" class="btn submit-btn">{{labelData.btnUpdate}}</button>
+            <button type="reset" id="compenstionResetID" *ngIf="compenstionUpdateShow" class="btn submit-btn" (click)="cancelPckg()">Cancel</button>
+            <!-- <button type="submit"  class="btn submit-btn" value="Cancel" (click)="cancelPckg()" class="btn submit-btn ">{{labelData.btnCancel}}</button> -->
+          </div>
+          </div>
+
+          <div class="clearfix"></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+  <!--compensation package empty box ends-->
+
+
+
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: none">
+    Create Compensation Package
+  </div>
+
+
+
+</div>
+</div>

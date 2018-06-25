@@ -1,0 +1,774 @@
+<div class="row mbtm-30 m-top20">
+    
+  <!-- It is for preview start -->
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="font_robotomedium" class="preview_hover" style="float:right;margin-top:-25px">
+       <p style="margin-top:-50px">
+          <button class="btn preview-btn">
+              <a  routerLink="/campusListProfile/{{loginData.campusId}}"
+              target="_blank" style="font-size:14px;padding:10px;color: #000000;"> Preview Profile </a>
+           </button>
+       </p>
+       </div>
+     </div>
+    <!-- It is for preview end-->
+  
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+          <div class="">
+            <div class="">
+              <div class="border_css flexcroll">
+                <form #campusform="ngForm">  
+  
+                  
+                  <!--Campus details starts-->
+      
+      
+                  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 padding0">
+                    <h4 class="font_roboto"><b>{{labelData.instituteHead}}</b></h4>
+                  </div>
+                  <div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+                    <a *ngIf="btnedit" class=" pull-right cursor-pointer" (click)="editCampusSubmit()" title="Edit">                     
+                              <img class="width35" src="assets/images/adress_edit_lighter icon (1).png" *ngIf="showImagDisable"
+                              onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+                              onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'">                       
+                            </a>
+                    <!-- <a *ngIf="btnedit"  class=" pull-right" (click)="editCampusSubmit()">
+                       <i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a> -->
+                  </div>
+      
+      
+                
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <mat-form-field class="width100">
+                        <input matInput [readonly]="readonly"  placeholder={{labelData.campusName}} id="campusname" name="campusname"
+                           required="required" [(ngModel)]="campus.name" #name="ngModel" minlength="3" maxlength="100"
+                           >
+                      </mat-form-field>
+                      <div *ngIf="name.errors && (name.dirty || name.touched)" class="color-red m-btm5" >
+                        <div [hidden]="!name.errors.minlength"> Campus name must be at least 3 characters long.</div>
+                        <!-- <div [hidden]="!name.errors.maxlength">{{labelData.campusName}} cannot be more than 60 characters long.</div> -->
+                        <!-- <div [hidden]="!name.hasError('pattern')">Special characters not allowed</div> -->
+                      </div>
+      
+                    </div>
+      
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-5">
+                      <mat-form-field class="width100">
+                        <input matInput [readonly]="readonly" placeholder={{labelData.campusShortName}} id="shortName" name="shortname" [(ngModel)]="campus.shortName"
+                          #shortName="ngModel"  maxlength="50" >
+                      </mat-form-field>
+                      <!-- <div *ngIf="shortName.errors && (shortName.dirty || shortName.touched)" class="color-red m-btm5" >
+                        <div [hidden]="!shortName.errors.minlength">{{labelData.campusShortName}} Must be at least 3 characters long.</div>
+                        <div [hidden]="!shortName.errors.maxlength">{{labelData.campusShortName}} be more than 100 characters long.</div>
+                        <div [hidden]="!shortName.hasError('pattern')">Special characters not allowed</div>
+                      </div> -->
+                    </div>
+                 
+      
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-5">
+  
+                    <mat-form-field class="width100">
+                      <mat-select placeholder={{labelData.universityName}} [(ngModel)]="campus.universityId" name="universityId" id="universityId" [disabled]="readonly" required>
+                        <mat-option [value]="">Select {{labelData.universityName}}</mat-option>
+                        <mat-option *ngFor="let uList of univList" [value]="uList.universityId">{{ uList.name }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+  
+                    <!-- <mat-form-field class="width100">
+                      <input matInput type="text" [readonly]="readonly" name="universityId" [(ngModel)]="campus.universityId"
+                        list="universities" placeholder={{labelData.universityName}} id="university" #universityId="ngModel"
+                        required="required" >
+                    </mat-form-field>
+                    <datalist id="universities">
+                      <option *ngFor="let uList of univList" [value]="uList.universityId">{{uList.name}}</option>
+                    </datalist> -->
+  
+                  </div>
+      
+                  <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 m-top-5">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  ">    
+                                        
+                      <mat-form-field class="width100 ">
+                        <input matInput [matDatepicker]="picker" placeholder={{labelData.estDate}} [readonly]="true" 
+                        name="establishedDate" [max]="maxDate" [min]="minDate"
+                        [(ngModel)]="campus.establishedDate" id="establishedDate" #establishedDate='ngModel'>
+                        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                        <mat-datepicker touchUi="true" [disabled]="disableDate" #picker></mat-datepicker>
+                      </mat-form-field>
+                      <div *ngIf="establishedDate.errors && (establishedDate.dirty || establishedDate.touched)" class="color-red m-btm5" >
+                          <div>Date Format Should be MM/DD/YYYY</div>
+                        </div>
+                    </div>
+      
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                      <mat-form-field class="width100">
+                        <input matInput [disabled]="readonly" placeholder={{labelData.noOfStudents}}
+                         id="Nstudents" name="numberOfStudents"
+                          [(ngModel)]="campus.numberOfStudents" #numberOfStudents="ngModel"
+                           maxlength="10" required="required" pattern = "^(0|[1-9][0-9]*)$">
+                      </mat-form-field>
+      
+                      <div *ngIf="numberOfStudents.errors && (numberOfStudents.dirty || numberOfStudents.touched)" class="color-red m-btm5" >
+                         <div [hidden]="!numberOfStudents.errors.maxlength">
+                          No. of Students cannot be more than 10 numbers long.
+                        </div>
+                        <div [hidden]="!numberOfStudents.errors.pattern">
+                          Allow only Numbers
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top-5">
+                    <mat-form-field class="width100">
+                      <input matInput [disabled]="readonly" placeholder={{labelData.website}} maxlength="200" name="website" [(ngModel)]="campus.website" id="website" #website="ngModel"
+                        required="required" >
+                    </mat-form-field>
+                    <!-- pattern="^[a-zA-Z0-9\-\.\/\:]+\.(com||in|org|net|mil|edu|COM|IN|ORG|NET|MIL|EDU)$" -->
+                    <!-- <div *ngIf="website.errors && (website.dirty || website.touched)" class="color-red m-btm5"  style="margin-bottom:15px">
+                      <div [hidden]="!website.hasError('pattern')">Must be a valid URL</div>
+                      <div [hidden]="!website.errors.maxlength">
+                        website cannot be more than 200 letters long.
+                      </div>
+                    </div> -->
+                  </div>
+      
+      
+                  <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-5 ">
+                    <label>{{labelData.missionStmt}}</label>
+                    <textarea id="mstatement" [readonly]="readonly" placeholder={{labelData.missionStmt}} name="missionStatement" minlength="4" maxlength="2000"
+                      [(ngModel)]="campus.missionStatement" #missionStatement="ngModel" minlength="4" maxlength="2000" class="flexcroll textarea_boxes1 width100"></textarea>
+                    <div *ngIf="missionStatement.errors && (missionStatement.dirty || missionStatement.touched)" class="color-red m-btm5" >
+                      <div [hidden]="!missionStatement.errors.minlength">{{labelData.missionStmt}} must be at least 4 characters long.</div>
+                      <div [hidden]="!missionStatement.errors.maxlength">{{labelData.missionStmt}} cannot be more than 2000 characters long.</div>
+                    </div>
+                  </div>
+      
+                  <div class="  col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top5">
+                    <label>Description</label>
+                    <!-- {{labelData.about}} -->
+                    <textarea placeholder={{labelData.about}} [readonly]="readonly" name="desc" id="desc" minlength="4" maxlength="100" [(ngModel)]="campus.description"
+                      #description="ngModel" minlength="4" maxlength="2000" class="flexcroll textarea_boxes1 width100"></textarea>
+                    <div *ngIf="description.errors && (description.dirty || description.touched)" class="color-red m-btm5" >
+                      <div [hidden]="!description.errors.minlength">description must be at least 4 characters long.</div>
+                      <div [hidden]="!description.errors.maxlength">description cannot be more than 2000 characters long.</div>
+                    </div>
+                  </div>
+      
+      
+      
+                  <!--Campus details ends-->
+      
+                  <!--social media starts-->
+      
+      
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
+                    <label class="m-top15 ">{{labelData.socialMediaHead}}</label>
+                  </div>
+      
+                  <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 ">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                      <mat-form-field class="width100">
+                        <input matInput [readonly]="readonly"  placeholder={{labelData.facebook}} name="campusfacebook" 
+                        [(ngModel)]="campus.facebook" id="campusfacebook" #campusfacebook="ngModel">
+                      </mat-form-field>
+                    </div>
+  
+  
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <mat-form-field class="width100">
+                        <input matInput [readonly]="readonly" 
+                        placeholder={{labelData.twitter}} name="campustwitter" id="campustwitter" [(ngModel)]="campus.twitter" #campustwitter="ngModel">
+                      </mat-form-field>
+                    </div>
+                  </div>
+      
+      
+                  <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 m-top-5">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12   ">
+                      <mat-form-field class="width100">
+                        <input matInput  [readonly]="readonly"  placeholder={{labelData.youtube}} 
+                        name="youtube" [(ngModel)]="campus.youtube" id="youtube" #youtube="ngModel">
+                      </mat-form-field>
+                    </div>
+      
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                      <mat-form-field class="width100">
+                        <input matInput [readonly]="readonly" placeholder={{labelData.linkedIn}} name="campuslinkedin" id="campuslinkedin" [(ngModel)]="campus.linkedin" #campuslinkedin="ngModel">
+                      </mat-form-field>
+                    </div>
+                  </div>
+      
+                  <!-- upload section starts -->
+                  <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-5 height240" >
+                    <!-- <div class="row"> -->
+                            <div class=" border_css clearfix">
+                              <h4><b>{{labelData.uploadImgHead}}</b></h4>
+                              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 company_logo_inst">
+                  
+                                <!-- <div class="fileUpload btn padding0" >
+                                    <span *ngIf="!readonly">
+                                      <img style="width:40%" src="assets/images/upload_side icon.png">
+                                      <p class="f-size12"> {{labelData.uploadCmpLogoText}}</p></span>
+                                     <input type="file" class="upload" [disabled]="readonly" [(ngModel)]="campus.logo" (change)="uploadDatasource($event.target.files)" name="logo"
+                                     id="logo" accept=".jpeg,.jpg,.png,.pdf" />
+                                   </div> 
+                                   <img style="width:40%" src="{{apiEndPoint}}Attachments/campus-logo/download/{{campus.logo}}"> -->
+                                   <div class="fileUpload btn padding0 mtop-20">
+                                      <span *ngIf="!readonly" >
+                                        <img style="width:40px" src="assets/images/upload_side icon.png">
+                                          <!-- <p class="f-size14">{{labelData.uploadCmpLogoText}}</p> -->
+                                          <p class="f-size14">Upload Logo</p>
+                                      </span>
+                                      <input type="file" class="upload" [disabled]="readonly"  (change)="uploadDatasource($event)" name="logo" id="logo"
+                                       accept=".jpeg,.jpg,.png,.pdf" />
+                                  </div>
+                                  <div *ngIf="campus.logo == '' || campus.logo == null && readonly " >
+                                    <b>Logo</b>
+                                  </div>
+                                  <div *ngIf="campus.logo">
+                                    <img class="uplodimg_css" src="{{campus.logo}}"><br>
+                                    <b style="padding:5px;">Logo</b>
+                                    <p class="logo_recomendation">Recommended Image Resolution: 245x150</p>                                  
+                                  </div>
+                  
+                              </div>            
+                              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 branding_logo_inst">
+                  
+                                <!-- <div class="fileUpload btn padding0">
+                                    <span *ngIf="!readonly"><img style="width:40%" src="assets/images/upload_side icon.png"><p class="f-size12">{{labelData.uploadBrdLogoText}}</p></span>
+                                     <input type="file" class="upload" [disabled]="readonly" [(ngModel)]="campus.brandingImage" (change)="uploadBrandLogo($event.target.files)" name="campusBrandImg"
+                                id="brandingImage" accept=".jpeg,.jpg,.png,.pdf" />
+                                   </div>
+                                   <img style="width:40%" src="{{apiEndPoint}}Attachments/campus-branding-image/download/{{campus.brandingImage}}">
+                                    -->
+                                    <div class="fileUpload btn padding0 mtop-20">
+                                        <span *ngIf="!readonly"><img style="width:40px" src="assets/images/upload_side icon.png">
+                                          <p class="f-size14">{{labelData.uploadBrdLogoText}}</p></span>
+                                         <input type="file" class="upload" [disabled]="readonly"  (change)="uploadBrandLogo($event)" name="brandingImage"
+                                         id="brandingImage" accept=".jpeg,.jpg,.png,.pdf" />
+                                      </div>
+                                      <div *ngIf="campus.brandingImage == '' || campus.brandingImage == null && readonly " >
+                                        <b>Branding Image</b>
+                                      </div>
+                                    <div *ngIf="campus.brandingImage">
+                                        <img class="uplodimg_css" src="{{campus.brandingImage}}"><br>
+                                      <b style="padding:5px;">Branding Image</b>
+                                      <p class="logo_recomendation">Recommended Image Resolution: 1366x275</p>                                                                          
+                                    </div>
+                              </div>
+                      
+                            </div>     
+                          <!-- </div> -->
+                  </div>
+  
+                  <!-- upload images ends -->
+          <!-- <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-5">
+              <div class="row">
+                      <div style="margin-top:15px;" class="flexcroll clearfix border_css box_shadow">
+                        <h4><b>Uploaded Images</b></h4>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 company_logo_inst">
+                          <h5>Campus logo</h5>
+                          <img style="width:40%" src="{{apiEndPoint}}Attachments/campus-logo/download/{{campus.logo}}">
+                        </div>           
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 branding_logo_inst">
+                          <img style="width:40%" src="assets/images/upload_side icon.png">
+                        </div>
+                
+                      </div>     
+              </div>
+            </div> -->
+            <!-- upload images ends -->
+  
+  
+                  <div class="  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="pull-right">
+                      <!-- <button type="submit" *ngIf="!btnreadonly" [disabled]="!campusform.form.valid || readonly" class="btn submit-btn m-top10"
+                        (click)="CampusSubmit()" id="CampusSubmit">{{labelData.btnSave}}</button> -->
+                      <button type="submit" *ngIf="btnupdate" [disabled]="!campusform.form.valid" class="btn submit-btn m-top10 color-fff" id="updateCampusSubmit" (click)="updateCampusSubmit()"> {{labelData.btnUpdate}}</button>
+                      <button type="submit" *ngIf="btncancel" class="btn submit-btn m-top10 color-fff" id="cancelSubmit" (click)="cancelSubmit()"> {{labelData.btnCancel}}</button>
+                    </div>
+                  </div>
+      
+      
+                  <div class="clearfix"></div>
+                  <!--social media ends-->
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+      
+      
+          <!-- contact information starts-->
+      
+          <div class="row">
+            <div class="">
+      
+              <div  class="flexcroll border_css box_shadow col-lg-12" style="height:334px">
+                <div class="m-top5">
+      
+                  <h4 style="display: inline" class="text-capitalize f-size16"><b>{{labelData.contactInfoHead}}</b></h4>
+      
+                  <div class="pull-right ">
+      
+                    <button type="submit" class="btn backgroundColor_transperent color-theme f-size16" [disabled]="adBtncontact" 
+                    (click)="addNewContact()" id="addNewContact">
+                     <!-- <img class="width35 m-tr20" src="assets/images/add disable.png" *ngIf="!showAddImagDisable"> -->
+                     <img class="width35 m-tr20" src="assets/images/add__plus_icon.png" *ngIf="showContactImagDisable" title="Add">
+                     </button>
+                  </div>
+                  <br>
+                  <br>
+                  <div>
+                    <div class="text-center" *ngIf=" contact ==''  && !showContactForm">
+                      <br>
+                      <br>
+                      <br> <img class="width45" src="assets/images/add contact_icon.png"> {{labelData.noContactInfo}}
+      
+                    </div>
+      
+      
+                    <div *ngIf="!showContactForm  && contact " class="col-lg-12 padding0 col-md-12 col-xs-12 col-sm-12 flexcroll" style="clear: both;
+                    overflow: auto;
+                    overflow-x: hidden;
+                    height: 266px;">
+      
+                      <div class="col-lg-12  ull-striped" *ngFor="let dataCon1 of contact ;let i = index">
+                        <div class="row" style="padding:0px 0px;margin-bottom:5px " [ngClass]="{'color': i%2==0, 'three':i%2==1}">
+      
+                          <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12" style="padding-top:4px">
+                            <ul style="list-style:none;margin-left:-45px">
+                              <li style="float:left;width:30px" *ngIf="dataCon1.campusContact.contactTypeValueId == '13'">
+                                  <i class="fa fa-envelope f-size1em color_btn" aria-hidden="true"></i> 
+                                  </li>
+                              <li style="float:left;width:30px" *ngIf="dataCon1.campusContact.contactTypeValueId == '14'">
+                                      <i class="fa fa-mobile f-size1em color_btn" aria-hidden="true"></i> 
+                              </li>
+                              <li style="float:left;width:30px" *ngIf="dataCon1.campusContact.contactTypeValueId == '15'">
+                                      <i class="fa fa-phone f-size1em color_btn" aria-hidden="true"></i>
+                              </li>
+                              <li style="float:left;width:30px" *ngIf="dataCon1.campusContact.contactTypeValueId == '16'">
+                                      <i class="fa fa-fax f-size1em color_btn" aria-hidden="true"></i>                  
+                              </li>
+                              <li style="float:left"> {{dataCon1.campusContact.contactInfo}}</li>
+                              
+                            </ul>                                                                   
+                          </div>
+      
+      
+                          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <a (click)="editCampusContact(dataCon1,i)" id="editCampusContact" class="color_btn pull-right cursor-pointer">
+                            
+                              <img class="width35" title="Edit"  style="margin-right: -16px" src="assets/images/adress_edit_lighter icon (1).png"
+                              onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+                              onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'">
+                          </a>
+                          </div>
+                        </div>
+      
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="showContactForm" style="clear: both;
+                  overflow: auto;
+                  overflow-x: hidden;
+                 ">
+                    <form #campuscontact="ngForm">
+                      <div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top10">
+    
+                             <mat-form-field class="width100">
+                              <mat-select placeholder="Contact Type" [disabled]="disabled" (change)="onSelect(campusCont.contactTypeValueId)"
+                              [(ngModel)]="campusCont.contactTypeValueId" (ngModelChange)="campusCont.contactInfo=''"
+                               name="contactTypeValueId" id="contactTypeValueId" #contactTypeValueId="ngModel" required="required">
+                              <mat-option [value]="">Select Contact Type</mat-option> 
+                              <mat-option *ngFor="let cntLookup of contactLookupArray"  
+                              [value]="cntLookup.lookupValueId">{{cntLookup.lookupValue}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+  
+  
+  <!--     
+                          <select class="input1 width100 key-numeric" [disabled]="disabled" (change)="onSelect($event.target.value)"
+                           [(ngModel)]="campusCont.contactTypeValueId" (ngModelChange)="campusCont.contactInfo=''"
+                            name="contactTypeValueId" id="contactTypeValueId" #contactTypeValueId="ngModel">                    
+      
+                                    <option value="" selected disabled>{{labelData.contactType}}</option>
+                                    <option *ngFor="let cntLookup of ContactLookups"  
+                                     [value]="cntLookup.lookupValueId" >{{cntLookup.lookupValue}}</option>
+                                  </select><br><br> -->
+  
+  
+  
+                          <!-- <div *ngIf="option == 'Contact Type'">
+      
+      
+                            <mat-form-field class="width100">
+                              <input matInput [disabled]="disabled"  [(ngModel)]="campusCont.contactInfo" name="contactInfo"  placeholder={{labelData.contactInfo}}
+                                id="contactInfo" #contactInfo="ngModel" maxlength="100" required="required">
+                            </mat-form-field>
+                            <div *ngIf="contactInfo.errors && (contactInfo.dirty || contactInfo.touched)" class="color-red m-btm5" >
+                              <div [hidden]="!contactInfo.hasError('maxlength')">Contact Info cannot be more than 100 characters long.</div>
+                            </div>
+                        
+                          </div> -->
+      
+                          <div *ngIf="option == '13'">
+                            <mat-form-field class="width100 mtop10">
+      
+                              <input matInput type="text" email [(ngModel)]="campusCont.contactInfo" name="contactInfo" #contactInfo="ngModel" 
+                               placeholder={{labelData.email}}
+                                id="contactInfo" pattern="^\w+([.-]\w+)*@\w+([.-]\w+)*(\.\w{2,3})+$" required/>
+                            </mat-form-field>
+                            <div *ngIf="contactInfo.errors && (contactInfo.dirty || contactInfo.touched)" class="color-red m-btm5" >
+                              <!-- <div [hidden]="!contactInfo.hasError('required')">Email is required</div> -->
+                              <div [hidden]="!contactInfo.errors.pattern" class="color-red m-btm5" >Email format should be 
+                                <small><b>abcd@abc.com</b></small></div>                
+                            </div>
+                          </div>
+      
+                          <div *ngIf="option == '14'">
+                            <mat-form-field class="width100 mtop10">
+                              <input matInput class="key-numeric" [(ngModel)]="campusCont.contactInfo" name="contactInfo" placeholder={{labelData.mobile}} 
+                              #contactInfo="ngModel"
+                                id="contactInfo" nme="contactInfo" pattern="^[6789]\d{9}$" minlength="10" maxlength="10" required/>
+                            </mat-form-field>
+                           <div *ngIf="contactInfo.errors && (contactInfo.dirty || contactInfo.touched)" class="color-red m-btm5 f-size12" >
+                              <div [hidden]="!contactInfo.hasError('pattern') && !contactInfo.hasError('minlength') && !contactInfo.hasError('maxlength')">Please Enter Valid Mobile Number</div>                                                   
+                            </div>
+                          </div>
+      
+                          <div *ngIf="option == '15'">
+                            <mat-form-field class="width100 mtop10">
+                              <input matInput   [(ngModel)]="campusCont.contactInfo" name="campusPhone" placeholder={{labelData.phone}}                          
+                                id="campusPhone" #campusPhone="ngModel" pattern="[0-9]+" minlength="6" maxlength="11" required/>
+                            </mat-form-field>
+                            <div *ngIf="campusPhone.errors && (campusPhone.dirty || campusPhone.touched)" class="color-red m-btm5 f-size12" >
+                              <div [hidden]="!campusPhone.hasError('pattern') && !campusPhone.hasError('minlength')">Please Enter Valid Phone Number</div>                            
+                            </div> 
+                          </div>
+      
+                          <!-- <div *ngIf="option == '16'">
+                            <mat-form-field class="width100 mtop10">
+                              <input matInput type="text" class="key-numeric" name="faxnumber" placeholder={{labelData.fax}} 
+                              [(ngModel)]="campusCont.contactInfo"
+                                id="faxnumber" #faxnumber="ngModel" minlength="10"  pattern="[0-9\+\-]+" required/>
+                            </mat-form-field>
+                             <div *ngIf="faxnumber.errors && (faxnumber.dirty || faxnumber.touched)" class="color-red m-btm5" >
+                              <div [hidden]="!faxnumber.hasError('minlength') && !faxnumber.hasError('pattern')">Enter Valid Fax Number</div>                           
+                            </div>
+                          </div> -->
+                        </div>
+      
+                      </div>
+      
+                      <!-- buttons for contact information starts -->
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:10px">
+                        <div class="pull-right">
+                          <button type="submit" *ngIf="!btnContactreadonly" class="btn submit-btn" [disabled]="!campuscontact.form.valid" id="CampusContactSubmit" (click)="CampusContactSubmit($event)">{{labelData.btnSave}}</button>
+                          <button type="submit" *ngIf="btnContactreadonly" [disabled]="!campuscontact.form.valid" class="btn submit-btn" 
+                          (click)="updateCampusContactSubmit1()" id="updateCampusContactSubmit1"> {{labelData.btnUpdate}}</button>
+                          <a class="btn submit-btn" id="cancelCampsContact" (click)="cancelCampsContact()"> {{labelData.btnCancel}}</a>
+                        </div>
+      
+      
+                        <!-- buttons for contact information ends -->
+                      </div>
+                    </form>
+      
+      
+                  </div>
+      
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--contact information ends-->
+      
+      
+      
+      
+      
+      
+      <div class="clearfix"></div>    
+          <!-- address information starts -->    
+          <div class="row">
+            <div class="m-top15">
+              <form #addressform="ngForm">
+                <div class="col-lg-12 border_css1 flexcroll box_shadow" style="height:687px !important">
+      
+                  <div class="m-top10">
+                    <h4 class="display-inline text-capitalize f-size16"><b>{{labelData.addressInfoHead}}</b></h4>
+      
+      
+                    <div class="pull-right">
+                      <button class="btn backgroundColor_transperent color-theme f-size16" *ngIf="showAddImagDisable" (click)="addNewCampus(addressform)">
+                         <!-- <img class="width35 m-right15" src="assets/images/add disable.png" *ngIf="!showAddImagDisable"> -->
+                         <img class="width35 mtop-20 m-right15" src="assets/images/add__plus_icon.png"  title="Add">
+                          
+                        </button>
+      
+      
+                    </div>
+      
+                    <div>
+   
+                      <div class="text-center f-bold" *ngIf="address =='' && !showEditAddress">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br> <img class="width45" src="assets/images/add address_icon.png"> {{labelData.noAddressInfo}}
+                      </div>
+    
+                      <div *ngIf="!showEditAddress && address" class="col-lg-12  col-md-12 col-xs-12 col-sm-12 flexcroll" 
+                      style="height:585px;
+                         overflow: auto;
+                         overflow-x: hidden;">
+                        <div class="col-lg-12 padding0 ull-striped" *ngFor="let cmpData of address ;let k = index">
+                          <div class="row" style="padding:0px 0px;margin-bottom:5px " [ngClass]="{'color': k%2==0, 'three':k%2==1}">
+                            <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10 ">
+                              <!-- {{cmpData | json}} -->
+                              <ul class="ul_style">
+                                  <!-- <li *ngFor="let addresstype of AddressLookup">
+                                    <span *ngIf="addresstype.lookupValueId == cmpData.addressTypeValueId">
+                                      {{addresstype.lookupValue}}
+                                    </span>
+                                  </li> -->
+                                  <li *ngIf="cmpData.addressTypeValueId"><b>{{AddressLookup[cmpData.addressTypeValueId].lookupValue}}:</b></li>
+                                  
+                                  <!-- {{cmpData.addressTypeValueId}}: -->
+                                <li class="pull-left wordBreak">{{cmpData.addressLine1}}</li>
+                                <li class="pull-left wordBreak" *ngIf="cmpData.addressLine2">,{{cmpData.addressLine2}}</li>    
+                                <li class="wordBreak" *ngIf="cmpData.addressLine3"> ,{{cmpData.addressLine3}}</li>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                                    <li class="pull-left" *ngIf="cmpData.cityDetails"> {{cmpData.cityDetails.cityName}}</li>    
+                                    <!-- <li class="pull-left" *ngIf="cmpData.cityDetails">{{cmpData.cityDetails.stateCode}}, </li> -->
+                                    <li class="pull-left" *ngFor="let state of stateList">
+                                        <span *ngIf="state.stateCode == cmpData.stateCode">
+                                         ,{{state.stateName}}
+                                        </span>
+                                    </li>
+                                    <li class="pull-left" *ngFor="let country of countryCacheList">
+                                        <span *ngIf="country.countryCode == cmpData.countryCode">
+                                          ,{{country.countryName}}
+                                        </span>
+                                    </li>
+      
+                                    <!-- <li class="pull-left" *ngIf="cmpData.cityDetails">{{cmpData.cityDetails.countryCode}},</li> -->
+                                    <li class="pull-left"  *ngIf="cmpData.postalId && cmpData.postalId!=0">,{{cmpData.postalId}}</li>
+                                </div>
+                                
+      
+                                <!-- <li><input type="radio" (click)="primary(cmpData, k)"
+                                     [checked]="cmpData.primaryInd == 'Y'" 
+                                      name="primaryInd"></li> -->
+                              </ul>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-xs-1 col-sm-1">
+                              <input type="radio" id="primaryindicator" title="Mark Address as Primary" (click)="primary(cmpData, k)" [checked]="cmpData.primaryInd == 'Y'" name="primaryInd" style="margin-top:12px">
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-xs-1 col-sm-1">
+                              <a (click)="editAddress(cmpData,k)" id="editAddressCampus" class="color_btn pull-right cursor-pointer"> 
+                                  <img class="width35" src="assets/images/adress_edit_lighter icon (1).png" style="margin-right: -16px"
+                                  onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+                                  onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'" title="Edit"></a>
+                            </div>
+      
+      
+      
+                          </div>
+                        </div>
+      
+                        <!-- </div> -->
+      
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-lg-12 flexcroll" *ngIf="showEditAddress" style="height:600px;overflow-y:scroll;overflow-x:hidden;">
+                    <div class="row" *ngFor="let campusAdd of campusAddNew">
+      
+                      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                          <mat-form-field class="width100">
+                        <mat-select  placeholder={{labelData.addressType}} name="address_Dropdown" [disabled]="readonlyAdd" [(ngModel)]="campusAdd.addressTypeValueId"
+                          #selectAddr="ngModel" id="selectAddr" required="required">
+                          <mat-option [value]="">Select Address Type</mat-option>
+                          <mat-option *ngFor="let AddLookup of addressLookupArray" [value]="AddLookup.lookupValueId">{{AddLookup.lookupValue}}
+                          </mat-option>
+                        </mat-select>
+                        </mat-form-field>
+                        <div *ngIf="selectAddr.errors && (selectAddr.dirty || selectAddr.touched)" class="color-red m-btm5" >
+                          <!-- <div [hidden]="!selectAddr.errors.required">
+                            Please Select Address
+                          </div> -->
+                        </div>
+      
+                      </div>
+      
+      
+      
+      
+      
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <mat-form-field class="width100" style="margin-top:-10px">
+                          <input matInput placeholder={{labelData.addLine1}} [(ngModel)]="campusAdd.addressLine1" name="address1" #addressLine1="ngModel"
+                            required="required" maxlength="100">
+                        </mat-form-field>
+                        <div *ngIf="addressLine1.errors && (addressLine1.dirty || addressLine1.touched)" class="color-red m-btm5" >
+                         
+                        </div>
+                      </div>
+      
+      
+      
+      
+      
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-15">
+                        <mat-form-field class="width100">
+                          <input matInput placeholder={{labelData.addLine2}}  maxlength="100" [(ngModel)]="campusAdd.addressLine2" name="address2">
+                        </mat-form-field>
+                      </div>
+      
+                      <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 m-top-15 ">    
+                        <mat-form-field class="width100">
+                          <input matInput [(ngModel)]="campusAdd.addressLine3"  maxlength="100" id="address3" #address3="ngModel" name="address3" placeholder={{labelData.addLine3}}>
+                        </mat-form-field>
+                      </div>
+      
+      
+      
+      
+      
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  padding0 m-top-15">  
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">  
+                          <mat-form-field class="width100">
+                            <mat-select [disabled]="countryReadonly" placeholder="Select Country" name="country" (ngModelChange)="getStateDet($event)" [(ngModel)]="campusAdd.countryCode" list="countries"
+                            placeholder={{labelData.country}} [(ngModel)]="campus.country" id="countryCode" #countryCode="ngModel" required="required">
+                            <mat-option [value]="">Select Country</mat-option>   
+                            <mat-option *ngFor=" let s of countryList" [value]="s.countryCode">{{s.countryName}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <div *ngIf="countryCode.errors && (countryCode.dirty || countryCode.touched)" class="color-red m-btm5" >
+                          </div><!-- 
+                          <mat-form-field class="width100">
+                            <input matInput name="country" (ngModelChange)="getStateDet($event)" [(ngModel)]="campusAdd.countryCode" list="countries"
+                            placeholder={{labelData.country}} [(ngModel)]="campus.country" id="countryCode" #countryCode="ngModel" required="required">
+                          </mat-form-field>
+                          <datalist id="countries">
+                            <option *ngFor=" let s of countryList" [value]="s.countryCode">{{s.countryName}}</option>
+                          </datalist>
+                          <div *ngIf="countryCode.errors && (countryCode.dirty || countryCode.touched)" class="color-red m-btm5" >
+                          </div> -->
+  
+                        </div>   
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">    
+                          <mat-form-field class="width100">
+                            <mat-select placeholder="Select State" name="state" list="states" (ngModelChange)="getCityDet($event);campusAdd.cityId=''" [(ngModel)]="campusAdd.stateCode" placeholder={{labelData.state}}
+                            [(ngModel)]="campus.state" id="state" #stateCode="ngModel" required="required">
+                            <mat-option [value]="">Select State</mat-option>   
+                            <mat-option *ngFor=" let s of stateList" [value]="s.stateCode">{{s.stateName}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <div *ngIf="stateCode.errors && (stateCode.dirty || stateCode.touched)" class="color-red m-btm5" >
+                          </div>
+  
+  
+                          <!-- <mat-form-field class="width100">
+                            <input matInput name="state" list="states" (ngModelChange)="getCityDet($event)" [(ngModel)]="campusAdd.stateCode" placeholder={{labelData.state}}
+                              [(ngModel)]="campus.state" id="state" #stateCode="ngModel" required="required">
+                          </mat-form-field>
+                          <datalist id="states">
+                            <option *ngFor=" let s of stateList" [value]="s.stateCode">{{s.stateName}}</option>
+                          </datalist>
+                          <div *ngIf="stateCode.errors && (stateCode.dirty || stateCode.touched)" class="color-red m-btm5" >
+                          </div> -->
+                        </div>
+                      </div>   
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 m-top-15">    
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  ">
+                        
+                            <mat-form-field class="width100">
+                                <mat-select placeholder="Select City" name="city"
+                                  [(ngModel)]="campusAdd.cityId" placeholder={{labelData.city}} 
+                                id="city" #cityId="ngModel" required>
+                                <mat-option [value]="">Select City</mat-option>  
+                                <mat-option  *ngFor=" let s of cityList " [value]="s.cityId">{{s.cityName}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                              <div *ngIf="cityId.errors && (cityId.dirty || cityId.touched)" class="color-red m-btm5" >
+                               </div>
+  
+                          <!-- <mat-form-field class="width100">
+                            <input matInput name="city" list="cities" (ngModelChange)="getPostalDet($event)" [(ngModel)]="campusAdd.cityId" placeholder={{labelData.city}}
+                              id="city" #cityId="ngModel" required="required">
+                          </mat-form-field>
+                          <datalist id="cities">
+                            <option *ngFor=" let s of cityList" [value]="s.cityId">{{s.cityName}}</option>
+                          </datalist> -->                    
+                        </div>
+  
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">                  
+                            <!-- <mat-form-field class="width100">
+                                <mat-select placeholder="Select Postal Code" name="postalCode" 
+                                [(ngModel)]="campusAdd.postalId" list="postals" placeholder={{labelData.postal}}
+                                  id="postalCode" #postalCode="ngModel">
+                                  <mat-option [value]="">Select Postal Code</mat-option> 
+                                  <mat-option  *ngFor=" let s of postalList" [value]="s.postalId">{{s.postalCode}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field> -->
+                              <mat-form-field class="width100">
+                                <input matInput  name="postalCode" 
+                                [(ngModel)]="campusAdd.postalId" placeholder={{labelData.postal}}
+                                  id="postalCode" #postalCode="ngModel" pattern="^[0-9]*$" minlength="6" maxlength="6" >
+                              </mat-form-field>
+                              <div *ngIf="postalCode.errors && (postalCode.dirty || postalCode.touched)" class="color-red m-btm5 f-size12" >
+                                <div [hidden]="!postalCode.hasError('pattern') && !postalCode.hasError('minlength') && !postalCode.hasError('maxlength')">Please Enter Valid Postal Code</div>                                                   
+                              </div>
+  
+                          <!-- <mat-form-field class="width100">
+                            <input matInput  name="postalCode" 
+                            [(ngModel)]="campusAdd.postalId" list="postals" placeholder={{labelData.postal}}
+                              id="postalCode" #postalCode="ngModel">
+                          </mat-form-field>
+                          <datalist id="postals">
+                            <option *ngFor=" let s of postalList" [value]="s.postalId">{{s.postalCode}}</option>
+                          </datalist> -->
+                          
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>   
+      
+                      <!-- buttons for Address information starts -->
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-5 mbtm-20">
+                        <div class="pull-right">
+                          <button type="submit" *ngIf="!btnaddressreadonly" id="CampusAddressSubmit" (click)="CampusAddressSubmit($event)" [disabled]="!addressform.form.valid" class="btn  submit-btn"> {{labelData.btnSave}}</button>
+                          <button type="submit" *ngIf="btnaddressreadonly" id="updateCampusAddressSubmit" class="btn submit-btn " (click)="updateCampusAddressSubmit(campusAdd)" [disabled]="!addressform.form.valid"> {{labelData.btnUpdate}}</button>
+                          <a class="btn submit-btn " id="cancelCampsAddress" (click)="cancelCampsAddress()"> {{labelData.btnCancel}}</a>
+                        </div>
+                      </div>
+                      <!-- buttons for Address information ends -->
+                      <div class="clearfix"></div>
+                    </div>
+      
+      
+                  </div>
+      
+                </div>
+      
+              </form>
+            </div>
+          </div>
+          <!-- address information ends -->
+      
+        </div>
+      </div>

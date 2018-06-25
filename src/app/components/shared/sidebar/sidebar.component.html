@@ -1,0 +1,33 @@
+<div class="row font_robotoregular sidebarmenu flexcroll sidebar_scroll_css sidebar sidebar-nav-fixed affix">
+  <ul class="nav padding0 text-center " style="list-style: none;">
+    <li class=" padding-15 sidebar_css"
+    *ngFor="let list of sideValues;let i = index"
+    id="{{list.urlLink}}"
+     (click)="sideMenuActiveFun(list.urlLink,list,i)"
+     [ngClass]="{'active123': selectedMenuActive==list.urlLink}">
+      <a   class="textdecoration-none active-#ffffff"  routerLink={{list.urlLink}}   >
+              <img class="oneEnabled center-block" style="width:40px;margin-bottom:5px" src="{{list.img_icon}}">{{list.urlName}}
+      </a>
+    </li>
+  </ul>
+<hr class="hr_sidebar">
+
+
+
+<h4 class="quickview"> Quick Links </h4>
+<ul class="nav padding0 text-center " style="list-style: none;">
+  <li class=" padding-15 sidebar_css" style="border-bottom:1px solid #eee"
+  *ngFor="let list of quickLink;let i = index" (click)="sideMenuActiveFun(list.urlLink,list,i)"
+  [ngClass]="{'active123': selectedMenuActive==list.urlLink}"  routerLinkActive="active" >
+    <a class="textdecoration-none active-#ffffff"  routerLink={{list.urlLink}}   >
+            <!-- <img class=" oneEnabled center-block" src="assets/images/institute_disable.png"> -->
+    {{list.urlName}}</a></li>
+</ul>
+
+<ul class="nav padding0 text-center " style="list-style: none;">
+  <li class=" padding-15 sidebar_css" style="border-bottom:1px solid #eee">
+    <a class="textdecoration-none" href="mailto:support@scoraxchange.com?subject=Issue reported by user - {{loginData.email}}">Report An Issue</a>
+  </li>
+</ul>
+</div>
+

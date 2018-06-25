@@ -1,0 +1,18 @@
+.master a.active123{
+    background:#ea9215;
+    color: #ffffff !important; 
+    border : #ea9215;
+}
+/* .sidebar ul li.active{
+    background:#ea9215;
+    color: #ffffff !important; 
+} */
+
+.sidebar ul li a.active{
+    color: #ffffff !important; 
+}
+.sidebar_css{
+    max-width: 115px;
+    word-wrap: break-word;
+}
+

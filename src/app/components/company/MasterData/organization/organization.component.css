@@ -1,0 +1,27 @@
+.fileUpload{
+    border:none !important;
+}
+.company_logo_inst{
+    padding: 0px;
+    text-align: center;
+    border-right: 1px solid #ccc;
+    height : 165px;
+}
+.branding_logo_inst{
+    padding: 0px;
+    text-align: center;
+}
+/* .searchbox{
+    margin-top: -35px;
+}
+.mtop20{
+    margin-top:20px;
+}
+.mbtm-23{
+    margin-bottom:23px;
+} */
+
+
+.logo_recomendation{
+    font-size:12px;color:#ea9215;margin-top:10px;
+}

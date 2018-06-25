@@ -1,0 +1,362 @@
+<div class="container-fluid font_robotoregular" style="background: #fff;">
+  <div class="row search-box companySearch_bg">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px;margin-top: -13px;">
+      <h3 class="text-center font_robotomedium">Institute Search</h3>
+    </div>
+    <form [formGroup]="campusListSearch">
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 padding0" >
+        <div class="">
+
+          <div class="col-lg-8 col-md-8 col-xs-12 col-sm-12 padding0 ">
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 padding0">
+              <div class="col-lg-3 col-md-3 col-xs-3 col-sm-12 ">
+                <mat-form-field class="width100">
+                  <input matInput type="text" placeholder="Campus Name" name="searchName" formControlName="searchName">
+                </mat-form-field>
+              </div>
+              <div class="col-lg-3 col-md-3 col-xs-3 col-sm-12 ">
+                <mat-form-field class="width100">
+                  <mat-select placeholder="University Name" id="universityId" formControlName="universityId">
+                      <mat-option [value]="null">Select University Name</mat-option>
+                    <mat-option *ngFor="let uList of univList" [value]="uList.universityId">{{uList.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-lg-3 col-md-3 col-xs-3 col-sm-12 ">
+                <!-- <mat-form-field class="width100">
+                  <input matInput type="text" placeholder="Tier" name="tierValueId" formControlName="tierValueId">
+                </mat-form-field> -->
+                <mat-form-field class="width100">
+                  <mat-select placeholder="Tier" id="tierValueId" name="tierValueId" formControlName="tierValueId">
+                      <mat-option [value]="null">Select Tier</mat-option>
+                    <mat-option *ngFor="let tierList of instituteTierLookupArray" [value]="tierList.lookupValueId">{{tierList.lookupValue}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <!-- <div class="col-lg-3 col-md-3 col-xs-3 col-sm-12 ">
+                <mat-form-field class="width100">
+                    <mat-option [value]="">Select Tier</mat-option>
+                  <input matInput type="text" placeholder="Tier" formControlName="tierValueId">
+                </mat-form-field>
+              </div> -->
+              <div class="col-lg-3 col-md-3 col-xs-3 col-sm-12 ">
+                <mat-form-field class="width100">
+                  <mat-select placeholder="Region" id="regionFlag" formControlName="regionFlag" (change)="loadSelectedRegionStates($event.value)">
+                    <mat-option [value]="null">Select Region</mat-option>
+                    <mat-option *ngFor=" let s of region" [value]="s.value">{{s.viewValue}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 padding0">
+
+            <div class="col-lg-6 col-md-6 col-xs-4 col-sm-12 ">
+              <mat-form-field class="width100">
+                <mat-select placeholder="State" id="state" formControlName="state" (change)="loadSelectedStateCities($event.value)">
+                    <mat-option [value]="null">Select State</mat-option>
+                  <mat-option *ngFor="let s of stateList" [value]="s.stateCode">{{s.stateName}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-6 col-md-6 col-xs-4 col-sm-12 padding0">
+              <mat-form-field class="width100">
+                <mat-select placeholder="City" id="City" formControlName="cityId">
+                    <mat-option [value]="null">Select City</mat-option>
+                  <mat-option *ngFor=" let s of cityList" [value]="s.cityId">{{s.cityName}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 padding0" style="margin-bottom:20px">
+        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-12 ">
+          <mat-form-field class="width100">
+            <mat-select class="width100" placeholder="Program Type" formControlName="programTypeValueId" id="programTypeValueId" name="programTypeValueId">
+                <mat-option [value]="null">Select Program Type</mat-option>
+              <mat-option *ngFor="let type of programLoopup" [value]="type.lookupValueId">{{type.lookupValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-12 ">
+          <mat-form-field class="width100">
+            <mat-select class="width100" placeholder="Program Major" formControlName="programMajorValueId" id="programMajorValueId" name="programMajorValueId">
+                <mat-option [value]="null">Select Program Major</mat-option>
+              <mat-option *ngFor="let major of programMajLoopup" [value]="major.lookupValueId">{{major.lookupValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="pull-right">
+          <input type="submit" class="btn submit-btn m-top10" value="Search" (click)='search(undefined, undefined,undefined, undefined)'>
+          <button class="btn submit-btn m-top10" (click)='reset()'>Reset</button>
+        </div>
+
+      </div>
+    </form>
+
+  </div>
+
+
+
+    <br>
+    <br>
+    <div class="row">
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 padding0" *ngIf='searchFilter'>
+      <div class="col-lg-3 col-md-2 col-xs-2 col-sm-12 flexcroll search-box" style="height: 280px;overflow:auto;background:#fff; overflow-y:scroll">
+
+
+        <form [formGroup]="campusListFilter" class="row">
+          <!-- accordion with arrows -->
+          <accordion [showArrows]="true" class="programstyle">
+            <!-- <accordion-group heading="PROGRAM" [isOpened]="true">
+              <div class="">
+                <mat-form-field class="width100">
+                  <mat-select class="width100" placeholder="Type" formControlName="programTypeValueId" id="programTypeValueId" name="programTypeValueId">
+                      <mat-option [value]="">Select Type</mat-option>
+                    <mat-option *ngFor="let type of programLoopup" [value]="type.lookupValueId">{{type.lookupValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="">
+                <mat-form-field class="width100">
+                  <mat-select class="width100" placeholder="Classification" formControlName="programClassValueId" id="programClassValueId"
+                    name="programClassValueId">
+                    <mat-option [value]="">Select Classification</mat-option>
+                    <mat-option *ngFor="let class of programClassLoopup" [value]="class.lookupValueId">{{class.lookupValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="">
+                <mat-form-field class="width100">
+                  <mat-select class="width100" placeholder="Category" formControlName="programCatValueId" id="programCatValueId" name="programCatValueId">
+                    <mat-option [value]="">Select Category</mat-option>
+                    <mat-option *ngFor="let cat of programCatLoopup" [value]="cat.lookupValueId">{{cat.lookupValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="">
+                <mat-form-field class="width100">
+                  <mat-select class="width100" placeholder="Major" formControlName="programMajorValueId" id="programMajorValueId" name="programMajorValueId">
+                      <mat-option [value]="">Select Major</mat-option>
+                    <mat-option *ngFor="let major of programMajLoopup" [value]="major.lookupValueId">{{major.lookupValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </accordion-group> -->
+            <accordion-group heading="Skills" [isOpened]="true">
+              <div class="">
+                <mat-form-field class="width100">
+                  <mat-select multiple class="width100" placeholder="Skill" formControlName="skillTypeValueId" id="skillTypeValueId" name="skillTypeValueId">
+                    <mat-option disabled>Select Skills</mat-option>
+                    <mat-option *ngFor="let skill of skillTypeLookup" [value]="skill.lookupValueId">{{skill.lookupValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </accordion-group>
+            <accordion-group heading="Intrests">
+              <div class="">
+                <mat-form-field class="width100">
+                  <mat-select multiple class="width100" placeholder="Interest " formControlName="interestTypeValueId" id="interestTypeValueId"
+                    name="interestTypeValueId">
+                    <mat-option disabled>Select Interests</mat-option>
+                    <mat-option *ngFor="let intrest of intrestTypeLookup" [value]="intrest.lookupValueId">{{intrest.lookupValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </accordion-group>
+            <accordion-group heading="Average Compensation Range">
+              <div class="">
+                <mat-form-field class="width100">
+                    <input matInput tabindex="5" placeholder="Min"
+                    minlength="1" id="minSalary" formControlName="minSalary"
+                     class="input1 width95" required="required"
+                    type="number">
+                </mat-form-field>
+
+                <div *ngIf="campusListFilter.get('minSalary').value <= 0 && campusListFilter.get('minSalary').dirty" class="color-red m-btm5">Min salary should be greater than 0</div>
+
+
+
+                <mat-form-field class="width100">
+                <input matInput tabindex="5" placeholder="Max" id="maxSalary" formControlName="maxSalary"
+                 class="input1 width95" required="required"
+                    type="number">
+                    </mat-form-field>
+              </div>
+            </accordion-group>
+          </accordion>
+          <div class="btn-group" class="divCenter">
+            <input type="submit" class="btn submit-btn "
+            (click)="search(campusListFilter.get('skillTypeValueId').value, campusListFilter.get('interestTypeValueId').value, campusListFilter.get('minSalary').value, campusListFilter.get('maxSalary').value)" value="Apply Filter" style="margin-right: 10px;">
+            <button type="reset" class="btn submit-btn" (click)='this.filterReset()'>Reset</button>
+          </div>
+        </form>
+        <!-- accordon ends -->
+
+      </div>
+
+
+      <div class="col-lg-9 col-md-10 col-xs-10 col-sm-12">
+
+        <div class="row margin0">
+          <!-- <div *ngIf="data" class="col-md-2 col-lg-2 col-xs-6 col-sm-3 padding0" style="margin-right:10px;">
+            <div class="data-count">
+                Total Count: <span class="data-number">{{data.length}}</span>
+            </div>
+            <div class="data-count col-md-2 col-lg-2 col-xs-6 col-sm-3 padding0" *ngIf="this.filterFlag">
+              Filtered Count: <span class="data-number">{{this.filterCount}}</span>
+          </div>
+          </div> -->
+          <div class="data-count col-md-2 col-sm-4 col-xs-4" *ngIf="data">
+              Total Count: <span class="data-number">{{this.totalCount}}</span>
+        </div>
+        <div class="data-count col-md-2 col-sm-4 col-xs-4" *ngIf="this.filterFlag">
+            Filtered Count: <span class="data-number">{{this.filterCount}}</span>
+        </div>
+
+          <div *ngIf="campusListFilter.get('skillTypeValueId').value || campusListFilter.get('interestTypeValueId').value" style="padding:10px 0px;">
+            <b *ngIf="campusListFilter.get('skillTypeValueId').value">Skills: </b>
+            <span *ngFor="let skillId of campusListFilter.get('skillTypeValueId').value" style="width:auto;">
+                &nbsp;{{skillTypeLookupTypes[skillId].lookupValue}} &nbsp; |
+            </span>
+            <b *ngIf="campusListFilter.get('interestTypeValueId').value">Interests: </b>
+            <span *ngFor="let interestId of campusListFilter.get('interestTypeValueId').value" style="width:auto;">
+                &nbsp;{{intrestTypeLookupType[interestId].lookupValue}} &nbsp; |
+            </span>
+          </div>
+
+          <!-- <span *ngIf="campusListFilter.get('interestTypeValueId').value" style="padding:10px 0px;">
+            <span *ngFor="let interestId of campusListFilter.get('interestTypeValueId').value" style="width:auto;">
+                &nbsp;{{intrestTypeLookupType[interestId].lookupValue}},&nbsp;
+            </span>
+          </span> -->
+
+        </div>
+        <div class="search-box flexcroll" style="height: 470px; overflow-y:scroll;background:#fff">
+          <!-- {{data |json}} -->
+          <!-- <input class="pull-left filter-input" [(ngModel)]="filterQuery" placeholder='By Name' /> -->
+          <table class="table table-striped" id="myProgram" [mfData]="data | campusListSearch : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+            [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+
+            <thead>
+              <tr>
+                <th *ngIf="showCampusCheckBox" style="color:#ea9215;">
+                  <input type="checkbox" [(ngModel)]="selectedAll" (change)="selectAll($event)">
+                  <span *ngIf="selectedAll">Un-</span>Select All
+                </th>
+                <th>
+                  <mfDefaultSorter by="campusName">Campus Name</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="universityName">University Name</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="stateCode">State</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="cityName">City</mfDefaultSorter>
+                </th>
+                <!-- <th>
+                  <mfDefaultSorter by="regionFlag">Region</mfDefaultSorter>
+                </th> -->
+                <th>
+                    <mfDefaultSorter by="campusStatus">Campus Status</mfDefaultSorter>
+                  </th>
+                <th>
+                  <mfDefaultSorter by="tiier">Tier</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="averageSalary">AverageSalary</mfDefaultSorter>
+                </th>
+
+              </tr>
+              <tr>
+
+              </tr>
+            </thead>
+            <tbody>
+              <!-- (click)="viewPckg(searchList)"
+                |campusSearchFilter:this.campusListFilter.get('skillTypeValueId').value:this.campusListFilter.get('interestTypeValueId').value -->
+              <tr *ngFor="let searchList of mf.data" class="notfirst cursor-pointer">
+                <td *ngIf="showCampusCheckBox">
+                  <input type="checkbox" [(ngModel)]="searchList.selected" (change)="selectCampus($event,searchList)" id="list" name="list">
+                </td>
+                <td>
+                  <span *ngIf="searchList.campusStatusValueId == 369;else displayNameWithLink">
+                      {{searchList.campusName}}
+                  </span>
+                  <ng-template #displayNameWithLink>
+                      <a routerLink="/campusListProfile/{{searchList.campusId}}" target="_blank" class="color-blue">
+                        {{searchList.campusName}}
+                      </a>
+                  </ng-template>
+                </td>
+                <td>
+                  {{searchList.universityName}}
+                </td>
+                <td>
+                  <!-- {{searchList.stateCode}}  -->
+                  <span *ngFor="let state of stateList2">
+                    <span *ngIf="state.stateCode == searchList.stateCode">
+                      {{state.stateName}}
+                     </span>
+                  </span>
+                </td>
+                <td>
+                  {{searchList.cityName}} </td>
+                <td>
+                  {{searchList.campusStatus}}
+                </td>
+                <td>
+                  <span *ngIf="searchList.tierValueId">
+                      {{instituteLookUpTier[searchList.tierValueId].lookupValue}}
+                  </span>
+                  <!-- {{searchList.tierValueId}}  -->
+                </td>
+                <td>
+                  <span *ngIf="searchList.averageSalary">
+                      {{searchList.averageSalary}}
+                  </span>
+                  <!-- {{searchList.tierValueId}}  -->
+                </td>
+
+
+              </tr>
+              <tr *ngIf="mf.data == ''">
+                <td colspan="6" class="text-center">
+                  <span>
+                    No Data Found
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="6">
+                  <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

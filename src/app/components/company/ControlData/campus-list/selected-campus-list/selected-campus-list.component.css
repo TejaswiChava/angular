@@ -1,0 +1,11 @@
+.data-count {
+    padding: 10px 0px;
+    /* border:1px solid red; */
+    background: #ea9215;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 3px;
+    margin-right: 2%;
+    border-radius: 4px;
+    width: 10%;
+}

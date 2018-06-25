@@ -1,0 +1,11 @@
+.disabled {
+    cursor: not-allowed;
+}
+
+.disable-whole-div__cover {
+    background-color: #ddd;
+    opacity: 0.3;
+}
+.cursor-pointer:focus{
+    outline:none;
+}

@@ -1,0 +1,313 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+  <div class="pull-right" >
+      <img class="width35 cursor-pointer" style="margin-right:-10px" src="assets/images/adress_edit_lighter icon (1).png" onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+        onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'" title="Edit" *ngIf="eventListEnable && eventStatusNeedToChange && editBtnStatus" (click)="editList()">
+      <!-- <button type="button" class="btn submit-btn" *ngIf="driveList" (click)="cancelDrive(false)"> Cancel </button> -->
+    </div>
+    <div *ngIf='actionRead && readonly'>
+      <button type="submit" class="btn submit-btn pull-right" style="margin-right:20px" *ngIf="!actBtn" [disabled]="actionBtnDisable" (click)="actions()">{{actionButton}}</button>
+    </div>
+</div>
+
+
+
+<form [formGroup]="employerEventForm" [class.toggled]="getEventStatus">
+  <div style="margin-bottom:10px;margin-top:20px">
+
+    <div class="col-lg-12 padding0">
+      <!-- <div class="col-lg-6">
+ 
+             <img class="width35 m-btm5p cursor-pointer" src="assets/images/add__plus_icon.png" title="drives" title="Add">
+             <span class="f-size16">Event</span>
+ 
+           </div> -->
+      <div class="col-lg-6">
+        <div class="pull-right">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
+
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  ">
+
+        <mat-form-field class="width100">
+          <input matInput [readonly]="readonly" placeholder="Event Name" id="name" name="eventName" class="input1 width95 m-top8" formControlName="eventName"
+           maxlength="50" tabindex="1"  pattern="^[a-zA-Z0-9 &_ &-]+$" required>
+        </mat-form-field>
+        <div class="color-red m-btm5" [hidden]="!employerEventForm.get('eventName').hasError('pattern')">Special characters not allowed except _ and -</div>
+        <mat-form-field class="width100">
+          <mat-select placeholder="Event Type" [disabled]="fieldreadonly1" tabindex="3" (ngModelChange)="getEvent($event)" formControlName="eventTypeValueId"
+            required class="width100" name="eventTypeValueId" id="eventTypeValueId">
+            <mat-option [value]="">Select Event Type</mat-option>
+            <mat-option *ngFor="let type of eventType" [value]="type.lookupValueId">
+              {{type.lookupValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+<!--         
+        <mat-form-field class="width100">
+          <input matInput [readonly]="readonly" tabindex="5" placeholder="CGPA" id="cgpa" name="cgpa" class="input1 width95" required="required"
+           type="number" formControlName="cgpa" pattern="^[0-9\.]*$" required>
+        </mat-form-field> -->
+        
+
+        <div *ngIf="times" id="pickerID"> 
+          <mat-form-field class="width100 ">
+            <input matInput [matDatepicker]="picker" placeholder='Scheduled Date' [readonly]="schedulereadonly"
+            name="establishedDate" [max]="maxdate"
+            formControlName="scheduledDate" id="establishedDate">
+            <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="schedulereadonly"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field> 
+        </div>
+
+          
+        <mat-form-field class="width100">
+          <input matInput [readonly]="readonly" tabindex="5" (input)="appendCgpaValueToPreference()" placeholder="CGPA/Score" id="cgpa" name="cgpa" minlength="1"  maxlength="4" required="required"
+          pattern="[0-9\.]+" formControlName="cgpa"   required>
+        </mat-form-field>       
+        <div *ngIf="employerEventForm.get('cgpa').invalid
+        &&  employerEventForm.get('cgpa').dirty" class="color-red m-btm5">
+        <div [hidden]="!(employerEventForm.get('cgpa')).hasError('pattern')">Only Numbers allowed</div>
+        <!-- <div *ngIf="employerEventForm.get('pattern').dirty">Only Numbers allowed</div> -->
+      </div>
+
+
+        <!-- <div *ngIf="employerEventForm.get('cgpa').value > 10" class="color-red m-btm5">
+           CGPA cannot exceed more than 10           
+
+       </div> -->
+      
+        <!-- <mat-form-field class="width100 ">
+            <input matInput [matDatepicker]="picker" tabindex="5" placeholder="Scheduled Date"
+             name="scheduledDate" formControlName="scheduledDate"
+              id="scheduledDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <div *ngIf="employerEventForm.get('scheduledDate').invalid
+          &&  employerEventForm.get('scheduledDate').dirty" class="color-red m-btm5">
+           <div>Date Format Should be MM/DD/YYYY</div>             
+  
+         </div> -->
+
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  ">
+        <mat-form-field class="width100">
+          <mat-select placeholder="Select Drive" [disabled]="fieldreadonly" tabindex="2" formControlName="empDriveId" class="width100"
+            name="empDriveId" id="empDriveId" required>
+            <mat-option [value]="">Select Drive </mat-option>
+            <mat-option *ngFor="let list of driveList" (click)="driveId(list)" [value]="list.empDriveId">
+              {{list.driveName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- <mat-form-field class="width100">
+          <input matInput [readonly]="readonly" placeholder="No. of Colleges" tabindex="4"  id="noofcol" name="cgnoofcolpa" class="input1 width95"
+            required="required" required>
+          formControlName="noOfColleges"
+        </mat-form-field> -->
+
+        <mat-form-field class="width100">
+          <mat-select placeholder="Event Status" [disabled]="statusReadOnly" tabindex="6" formControlName="eventStatusValueId" class="width100"
+            name="eventStatusValueId" id="eventStatusValueId">
+            <mat-option *ngFor="let status of eventStatus" [value]="status.lookupValueId">
+              {{status.lookupValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div *ngIf="selectedEvent">
+        </div>
+        
+        <div  *ngIf="times">
+          <mat-form-field class="width100">
+            <input matInput [readonly]="true" placeholder="Scheduled Start Time" class="inputTime1"
+             tabindex="6" id="scheduledStartTime" name="scheduledStartTime"
+               formControlName="scheduledStartTime">
+            <button atp-time-picker class="inputTime2" [disabled]="readonly" (click)="open()"></button> 
+          </mat-form-field>
+          </div>
+        <!-- <mat-form-field class="width100">
+           <input matInput [readonly]="readonly" placeholder="Schedule Start Time"
+             id="scheduledStartTime" name="scheduledStartTime"
+            formControlName="scheduledStartTime">       
+         </mat-form-field> -->
+         
+      </div>
+      <div class="col-lg-12">
+        <label>Event Preference</label>
+        <textarea placeholder="event Preference" [readonly]="readonly" tabindex="8" formControlName="eventRequirement" name="event"
+          id="event" minlength="4" maxlength="2000" class="flexcroll textarea_boxes width100"></textarea>
+    
+        <!-- <div class="pull-right">
+          <button type="submit" class="btn submit-btn" *ngIf="!driveList" (click)="employeeEventSubmit()"> Add </button>
+        </div> -->
+      </div>
+    </div>
+
+
+    <br>
+    <div class="">
+      <div class="m-top20" *ngIf="campusList && showCList">
+        <div class="col-lg-12">
+          <div class="">
+            <app-get-campus-list-view [campusListFromEvent]='campusListData' [eventType]='eventTypeOption' [(sendDataList)]="checkListData"></app-get-campus-list-view>
+            <br>
+            <br>
+          </div>
+        </div>
+      </div>
+      <!-- Trigger the modal with a button -->
+    </div>
+  </div>
+  <div class="" *ngIf='hosts && showHostDetails'>
+    <br>
+    <br>
+    <div class="clearfix"></div>
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12" style="margin-top:20px;border:2px solid #ccc; border-left:none;border-right:none">
+      <h3 class="font_robotomedium ">Host Details</h3>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  ">
+        <mat-form-field class="width100">
+          <input matInput [readonly]="readonly" placeholder="Host Name" id="hostName" name="hostName" class="input1 width95 m-top8"
+            formControlName="hostName" minlength="3" maxlength="60" pattern="[a-zA-Z][a-zA-Z ]+">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  ">
+        <mat-form-field class="width100">
+          <input matInput [readonly]="readonly" placeholder="Host Contact" id="hostContact" name="hostContact" class="input1 width95 m-top8"
+            formControlName="hostContact" minlength="10" maxlength="10" pattern="^[789]\d{9}$">
+        </mat-form-field>
+        <!-- <div *ngIf="employerDriveForm.get('driveName').invalid
+        &&  employerDriveForm.get('driveName').dirty" class="color-red m-btm5">
+           <div *ngIf="employerDriveForm.get('driveName').dirty">Drive Name must be at least 3 characters long.</div> -->
+           
+           <!-- <div  *ngIf="employerDriveForm.get('driveName').pattern">Only alphabets allowed</div> -->
+
+       <!-- </div> -->
+        <!-- <mat-form-field>
+             <mat-select placeholder="Event Type" formControlName="type" class="width100" name="type" id="type">
+               <mat-option *ngFor="let driveType of driveType" [value]="driveType.lookupValueId">
+                 {{driveType.lookupValue}}
+               </mat-option>
+             </mat-select>
+           </mat-form-field> -->
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 padding0">
+        <div class="col-lg-6">
+          <div class="form-group ">
+            <mat-form-field class="width100">
+              <input matInput [readonly]="readonly" placeholder={{labelData.addLine1}} formControlName="addressLine1" name="address1">
+            </mat-form-field>
+          </div>
+          <div class="form-group ">
+            <mat-form-field class="width100">
+              <input matInput [readonly]="readonly" placeholder={{labelData.addLine2}} formControlName="addressLine2" name="address2">
+            </mat-form-field>
+          </div>
+          <div class="form-group ">
+            <mat-form-field class="width100">
+              <input matInput [readonly]="readonly" formControlName="addressLine3" id="address3" name="address3" placeholder={{labelData.addLine3}}>
+            </mat-form-field>
+          </div>
+          <div class="form-group ">
+            <!-- <mat-form-field class="width100">
+              <input matInput name="country" [readonly]="readonly" list="countries" placeholder={{labelData.country}} formControlName="countryCode"
+                id="countryCode" required="required">
+            </mat-form-field>
+            <datalist id="countries">
+              <option *ngFor=" let s of countryList" [value]="s.countryCode">{{s.countryName}}</option>
+            </datalist> -->
+            <mat-form-field class="width100">
+              <input matInput class="key-numeric" [readonly]="readonly" maxlength="6" minlength="6" pattern="[0-9]+" name="postalCode"
+                formControlName="postalCode" list="postals" placeholder={{labelData.postal}} id="postalCode">
+            </mat-form-field>
+            <datalist id="postals">
+              <option *ngFor=" let s of postalList" [value]="s.postalId">{{s.postalCode}}</option>
+            </datalist>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group ">
+            <!-- <mat-form-field class="width100">
+              <input matInput name="country" [readonly]="readonly" list="countries" placeholder={{labelData.country}} formControlName="countryCode"
+                id="countryCode" required="required">
+            </mat-form-field>
+            <datalist id="countries">
+              <option *ngFor=" let s of countryList" [value]="s.countryCode">{{s.countryName}}</option>
+            </datalist> -->
+
+            <mat-form-field class="width100">
+              <mat-select [disabled]="readonly1" placeholder="Select Country" name="country" (ngModelChange)="getStateDet($event)" formControlName="countryCode"
+                list="countries" placeholder={{labelData.country}} id="countryCode">
+                <mat-option [value]="">Select Country</mat-option>
+                <mat-option *ngFor=" let s of countryList" [value]="s.countryCode">{{s.countryName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-group ">
+
+            <mat-form-field class="width100">
+              <mat-select name="state"  (ngModelChange)="getCityDet($event)" formControlName="stateCode"
+                placeholder={{labelData.state}} id="stateCode">
+                <mat-option [value]="">Select State</mat-option>
+                <mat-option *ngFor=" let s of stateList" [value]="s.stateCode">{{s.stateName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+            <!-- <mat-form-field class="width100">
+              <input matInput name="state" [readonly]="readonly" (ngModelChange)="getCityDet($event)" list="state" placeholder={{labelData.state}}
+                formControlName="stateCode" id="stateCode" required="required">
+            </mat-form-field>
+            <datalist id="state">
+              <option *ngFor=" let s of stateList" [value]="s.stateCode">{{s.stateName}}</option>
+            </datalist> -->
+          </div>
+
+          <div class="form-group ">
+
+            <mat-form-field class="width100">
+              <mat-select placeholder="Select City" name="city" formControlName="cityId"
+                placeholder={{labelData.city}} id="city">
+                <!-- <mat-option [value]="">Select City</mat-option> -->
+                <mat-option *ngFor=" let s of cityList " [value]="s.cityId">{{s.cityName}}
+                </mat-option> 
+              </mat-select>
+            </mat-form-field>
+
+            <!-- <mat-form-field class="width100">
+              <input matInput name="city" list="cities" [readonly]="readonly" (ngModelChange)="getPostalDet($event)" formControlName="cityId"
+                placeholder={{labelData.city}} id="city" required="required">
+            </mat-form-field>
+            <datalist id="cities">
+              <option *ngFor=" let s of cityList" [value]="s.cityId">{{s.cityName}}</option>
+            </datalist> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="pull-right" style="margin-right:18px">
+
+  <button type="submit" class="btn submit-btn m-top10 " [disabled]="!employerEventForm.valid || checkListData.length == 0" (click)="eventSubmit($event)" style="margin-bottom:10px;margin-right:10px;" *ngIf='saveBtn'>{{labelData.btnSave}}</button>
+  <button type="submit" class="btn submit-btn m-top10 " (click)="eventUpdate()" style="margin-bottom:10px;margin-right:10px;" *ngIf='!saveBtn && !readonly'>{{labelData.btnUpdate}}</button>
+ <button type="button" class="btn submit-btn m-top10" style="margin-bottom:10px;" *ngIf="!readonly && saveBtn && !cancelBtn" (click)="clearForm()"> Clear </button>
+ <button class="btn submit-btn m-top10" style="margin-bottom:10px;" *ngIf="!readonly && cancelBtn" (click)="cancelEvent(false)"> cancel </button>
+ </div>
+  <div class="clearfix"></div>
+
+</form>
+<div *ngIf='chList'>
+  <!-- <app-checked-campus-list [checkData]='checkListData'></app-checked-campus-list> -->
+  <app-checked-campus-list [eventData]='selectedEvent'></app-checked-campus-list>
+  <app-event-student-list *ngIf="this.selectedEvent.eventStatusValueId > 316" [empEvent]='selectedEvent'></app-event-student-list>
+</div>

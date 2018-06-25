@@ -1,0 +1,18 @@
+.privacy-page {
+    font-family: 'Times New Roman', Times, serif;
+}
+.privacy-page h4,.privacy-page h3{
+    font-weight: bold;
+}
+.privacy-page P{
+    font-size: 16px;
+    text-align: justify;
+} 
+.container_padding{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.font-italic {
+    font-style: italic;
+}

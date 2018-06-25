@@ -1,0 +1,189 @@
+<div class="container-fluid ">
+    <div class="row" >
+
+      <div class="col-lg-12">
+      <div class="pull-right searchbox">
+
+           <img class="width35 m-btm5p cursor-pointer" id="addJobRoleBtnId" src="assets/images/add__plus_icon.png"
+           (click)="addJobRoleBtn(jobForm)" *ngIf="!addJobBtn" title="Add">
+
+
+           <!-- <img class="width35 m-right15" src="assets/images/add disable.png" *ngIf="!showAddImagDisable"> -->
+            <i class="fa fa-times width35 mbtm-23 backgroundColor_transperent cursor-pointer
+             color-theme f-size16 m-right14" aria-hidden="true"  *ngIf="addJobBtn" id="jobRoleCancelId" (click)="jobRoleCancel()" title="Cancel" ></i>
+
+             <input class="pull-left filter-input" id="jobRoleSearchId" [(ngModel)]="filterQuery"
+             *ngIf="!showJobEdit" placeholder="Search by Job Role Name"/>
+          </div>
+        </div>
+    <div class=" col-lg-12  col-md-12 col-sm-12 col-xs-12 padding0 mtop-18">
+      <div class="box-border">
+          <div *ngIf="!showJobEdit">
+
+            <div class="">
+                 <table class="table table-striped table-fixed" id="myProgram"
+                 [mfData]="data | jobDatafilter : filterQuery"  #mf="mfDataTable"
+                        [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy"
+                         [(mfSortOrder)]="sortOrder">
+
+             <!-- <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5"> -->
+                 <thead>
+                 <tr>
+                     <th>
+                         <mfDefaultSorter by="jobRoleName">{{labelData.jobRoleName}}</mfDefaultSorter>
+                     </th>
+                     <th >
+                         <mfDefaultSorter by="jobRoleLookupValue.lookupValue"> {{labelData.jobRoleType}}</mfDefaultSorter>
+                     </th>
+                     <th>
+                         <mfDefaultSorter by="skillSet"> {{labelData.skillSet}}</mfDefaultSorter>
+                     </th>
+                     <th>
+                         <mfDefaultSorter by="summary"> Summary</mfDefaultSorter>
+                     </th>
+                 </tr>
+                 <tr>
+
+                 </tr>
+                 </thead>
+                 <tbody>
+
+                 <tr *ngFor="let jobRoleData of mf.data" class = "notfirst cursor-pointer"
+                 (click)=editJobRole(jobRoleData)>
+                     <td>
+                       {{jobRoleData.jobRoleName}}
+                      </td>
+                     <td>
+                       <span *ngIf="jobRoleData.jobRoleLookupValue">
+                          {{jobRoleData.jobRoleLookupValue.lookupValue}}
+                       </span>
+                      </td>
+                     <td *ngIf="jobRoleData.skillSet">
+                       {{jobRoleData.skillSet | limitTo:[20]}}
+                      </td>
+                      <td *ngIf="!jobRoleData.skillSet">
+                          {{jobRoleData.skillSet }}
+                         </td>
+                     <td *ngIf="jobRoleData.summary">
+                       {{jobRoleData.summary | limitTo:[20]}}
+                      </td>
+                      <td *ngIf="!jobRoleData.summary">
+                        {{jobRoleData.summary}}
+                       </td>
+
+                     <!--
+                         <td>
+                         <a (click)=programmeEdit(programList) class="cursor-pointer">
+                       {{programList.programCatValueId}} </a> </td> <td><a (click)=programmeEdit(programList) class="cursor-pointer">edit</a> </td> -->
+                 </tr>
+                 <tr *ngIf="mf.data == ''">
+                  <td colspan="6" class="text-center">
+                    <span >
+                 {{labelData.noDataFound}}
+                  </span>
+                  </td>
+                </tr>
+                 </tbody>
+                 <tfoot>
+                 <tr>
+                     <td colspan="6">
+                         <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                     </td>
+                 </tr>
+                 </tfoot>
+             </table>
+            </div>
+           </div>
+            <form name="form"  #jobForm="ngForm">
+        <!--job role starts-->
+        <div *ngIf="showJobEdit">
+            <div class="pull-right">
+              <a id="editJobroleSubmit" (click)="editList()">
+                  <img class="width35 cursor-pointer" *ngIf="showImagDisable"  id="showImagDisableId" src="assets/images/adress_edit_lighter icon (1).png" onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+                  onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'" title="Edit"  >
+              </a>
+               
+              </div>
+            <div *ngFor="let companyJobrole of jobRoleDetails">
+        <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 padding0  " id="jobRoleNameDiv">
+          <mat-form-field class="width100" >
+            <input matInput placeholder={{labelData.jobRoleName}}  pattern="^([a-zA-Z]+).{2,}$"
+            name="jobRoleName" id="jobRoleName" [readonly]="fieldreadonly"
+             [(ngModel)]="companyJobrole.jobRoleName" #jobRoleName="ngModel" minlength="3" maxlength="60" required>
+          </mat-form-field>
+          <div *ngIf="jobRoleName.errors && (jobRoleName.dirty || jobRoleName.touched)" class="color-red m-btm5">
+             <div [hidden]="!jobRoleName.errors.pattern">
+
+               Job Role Name must be at least 3 characters long
+              </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 padding0 " id="jobRoleTypeDiv">
+          <!-- Job role type starts -->
+          <mat-form-field class="width100" id="jobRole">
+          <mat-select placeholder={{labelData.jobRoleType}} id="jobRoleTypeId" class="width100"
+          name = "jobRoleTypeValueId" id="jobRoleTypeValueId" [disabled]="fieldreadonly"
+           [(ngModel)]="companyJobrole.jobRoleTypeValueId"  #jobRoleTypeValueId="ngModel" required>
+           <mat-option [value]="null">Select Job Role Type</mat-option>
+            <mat-option *ngFor="let food of jobTypeList" [value]="food.lookupValueId" >
+              {{ food.lookupValue}}
+            </mat-option>
+
+          </mat-select>
+          </mat-form-field>
+          <!-- Job role type ends -->
+        </div>
+
+        <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 padding0  " id="SkillSetDiv">
+          <mat-form-field class="width100" >
+            <input matInput placeholder="Skill Set" name="skillSet" [readonly]="fieldreadonly" pattern="^(?=.*?[a-zA-Z]).{1,}$"
+             id="skillSet"  [(ngModel)]="companyJobrole.skillSet" maxlength="2000"
+              #skillSet="ngModel">
+          </mat-form-field>
+          <div *ngIf="skillSet.errors && (skillSet.dirty || skillSet.touched)" class="color-red m-btm5">
+            <div [hidden]="!skillSet.errors.pattern"> Skill Set should contain atleast one character </div>
+         </div>
+        </div>
+
+        <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 padding0 " id="SummaryDiv">
+          <label style="display:block">Summary</label>
+        <textarea id="SummaryId" placeholder={{labelData.summary}}
+          style="width:100%" maxlength="2000"
+          name="summary" id="summary" [(ngModel)]="companyJobrole.summary"
+          #Summary="ngModel" [readOnly]="fieldreadonly"
+           class="flexcroll textarea_boxes"></textarea>
+      </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 m-top10">
+          <div class="pull-right">
+            <button type="submit" *ngIf="!btnreadonly" [disabled]="!jobForm.form.valid"
+             class="btn submit-btn" id="jobRoleSubmit"
+              (click)="jobRoleSubmit($event)">Save</button>
+
+            <button *ngIf="btnreadonly && !fieldreadonly" class="btn submit-btn"  [disabled]="!jobForm.form.valid"
+            (click)="updateJobRoleSubmit()" id="updateJobRoleSubmit"> Update</button>
+
+            <button *ngIf="btnreadonly && !fieldreadonly" class="btn submit-btn"  [disabled]="!jobForm.form.valid"
+            (click)="jobRoleCancel()" id="jobRoleCancel"> Cancel</button>
+
+            
+
+             <a *ngIf="!btnreadonly" class="btn submit-btn" id="clearJobrole" (click)="cancelJobrole(jobForm)">Clear</a>
+
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+        <!--job role ends-->
+
+        </div>
+   </form>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+  </div>

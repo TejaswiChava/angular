@@ -1,0 +1,43 @@
+<h2>Basic Profil</h2>
+<h3><i>A Student Profile Form</i></h3>
+<form [formGroup]="AdditionalInfoForm" novalidate>
+  <table class="basic-profile-width" cellspacing="3">
+    <tr>
+      <td>
+        <div>
+          <mat-form-field class="width100">
+            <input matInput placeholder="Firstname" formControlName="programName">
+          </mat-form-field>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div>
+          <mat-form-field class="width100">
+            <input matInput placeholder="Middlename" formControlName="instituteName">
+          </mat-form-field>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div>
+          <mat-form-field class="width100">
+            <input matInput placeholder="Lastname" formControlName="Duration">
+          </mat-form-field>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div>
+          <mat-form-field class="width100">
+            <input matInput placeholder="Lastname" formControlName="comment">
+          </mat-form-field>
+        </div>
+      </td>
+    </tr>
+
+  </table>
+</form>

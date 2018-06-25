@@ -1,0 +1,129 @@
+<div style="background:white;">
+  <div class="row  margin0">
+    <div class="mbtm-60 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 educationPerson">
+
+        <!--Education person info starts-->
+        <form [formGroup]="educationPersonForm">
+          <div class="">
+            <div class="">
+              <div style="padding: 10px;border:1px solid #ccc;margin-top:20px;background:white;">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    <h4> BASIC INFO</h4>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 padding0">
+                    <a *ngIf="btnreadonly" class=" pull-right" (click)="editSubmit()">  
+                      <img class="width35 cursor-pointer" src="assets/images/adress_edit_lighter icon (1).png" title="Edit" 
+                          onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+                          onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'"></a>
+                  </div>
+                </div>
+
+
+
+
+                <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 profile text-center">
+                  <div>
+                    <img class="profile_css" src="assets/images/profile_img.jpg">
+                  </div>
+                </div>
+
+                <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12 profile text-center">
+                  <div class="fileUpload btn padding0">
+                    <span><img style="width:20%" src="assets/images/upload_side icon.png">Upload Your Picture</span>
+                    <input type="file" class="upload" />
+                  </div>
+                </div>
+
+
+
+                <div class="col-lg-6  col-md-12 col-sm-12 col-xs-12  text-center m-top10">
+                  <mat-form-field class="width100">
+                    <input matInput placeholder="First Name" formControlName="firstName" [readonly]="readonly" name="firstName" id="firstName">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-6  col-md-12 col-sm-12 col-xs-12  text-center m-top-15">
+                  <mat-form-field class="width100">
+                    <input matInput placeholder="Middle Name" formControlName="middleName" [readonly]="readonly" name="middleName" id="middleName">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12  text-center m-top-15">
+                  <mat-form-field class="width100">
+                    <input matInput placeholder="Last Name" formControlName="lastName" [readonly]="readonly" name="lastName" id="lastName">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1  col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 ">
+                  <div class="cc-selector">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
+                      <input id="visa" type="radio" formControlName="genderValueId"  name="genderValueId" value="1" [checked]="eduPer.genderValueId==1"/>
+                      <label class="drinkcard-cc visa " for="visa"></label><br> Male
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
+                      <input id="mastercard" type="radio" formControlName="genderValueId" name="genderValueId" value="2"
+                        [checked]="eduPer.genderValueId==2" />
+                      <label class="drinkcard-cc mastercard" for="mastercard"></label> <br>Female
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
+                      <input id="master" type="radio" formControlName="genderValueId" name="genderValueId" value="3" [checked]="eduPer.genderValueId==3"
+                      />
+                      <label class="drinkcard-cc master" for="master"></label><br> Unclassified
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12  m-top10">
+                  <mat-select placeholder=" Select Person Type" class="width100" formControlName="personTypeValueId" name="personTypeValueId">
+                    <mat-option *ngFor="let pType of personType" [value]="pType.lookupValueId">
+                      {{ pType.lookupValue }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+
+
+                <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12  text-center m-top10 ">
+                  <mat-form-field class="width100">
+                    <input matInput placeholder="Designation" formControlName="designation" [readonly]="readonly" name="designation" id="designation">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                  <a *ngIf="!btnreadonly" class="btn submit-btn m-top10 pull-right" (click)="eduPersonSubmit()"> Update</a>
+                </div>
+
+                <div class="clearfix"></div>
+
+              </div>
+            </div>
+          </div>
+        </form>
+        <!--Education person info ends-->
+
+      </div>
+
+
+      <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+        <input type="radio" value="10" id="size10" name="size" required="required"/>
+        <label for="size10" class="item">
+            <img src="assets/images/female_disable.png" class="cursor-pointer">
+            <img src="assets/images/female_enable.png" class="cursor-pointer">
+        </label>
+        <input type="radio" value="15" id="size15" name="size" required="required"/>
+        <label for="size15" class="item">
+            <img src="assets/images/male_disable.png" class="cursor-pointer">
+            <img src="assets/images/male_enable.png" class="cursor-pointer">
+        </label>
+        <input type="radio" value="16" id="size16" name="size" required="required"/>
+        <label for="size16" class="item">
+            <img src="assets/images/unclassified_disable.png" class="cursor-pointer">
+            <img src="assets/images/unclassified_enable.png" class="cursor-pointer">
+        </label>
+    
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+
+<div class="container-fluid">
+    <div class="row" style="margin-bottom:10px;">
+
+        <div class="col-lg-12 padding0">
+            <div class="col-lg-6">
+                <!-- <img class="width35 m-btm5p " src="assets/images/drive_icon_heading.png" title="drives" title="Add">
+                <span class="f-size16">Drives</span> -->
+               
+            </div>
+            <div class="col-lg-6">
+                <div class="pull-right searchbox">
+                        <!-- <input class="pull-left filter-input" [(ngModel)]="filterQuery" placeholder="Filter by Drive Name"/> -->
+                        <span *ngIf="!hideSearchAdd && showFilter">
+                            <input class="pull-left filter-input" [(ngModel)]="filterQuery" placeholder="Search by Drive Name" />
+                            <img class="width35 m-btm5p cursor-pointer" src="assets/images/add__plus_icon.png"
+                             title="Add"  (click)="addDrive()" title="Add">
+                        </span>   
+                    <!-- <img class="width35 m-right15" src="assets/images/add disable.png" *ngIf="!showAddImagDisable"> -->
+                    <span *ngIf="hideSearchAdd || !showFilter">
+                        <i class="fa fa-times width35 mbtm-23 backgroundColor_transperent cursor-pointer 
+                        color-theme f-size16 m-right18" aria-hidden="true" title="Cancel"  
+                        (click)="cancelDrive()"></i>
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    
+        <div class=" box-border col-lg-12 col-md-12 col-sm-12 col-xs-12 mtop20">
+            <div class="" *ngIf="!hideSearchAdd">
+                <app-campus-drive-list-view [(showFilter)]="showFilter" [filterQuery]="filterQuery"></app-campus-drive-list-view>
+            </div>
+
+            <div class="" *ngIf="hideSearchAdd">
+               
+                <app-create-campus-drive [(getSearchStatus)]="hideSearchAdd" [driveList1]=(this.driveList1)></app-create-campus-drive>
+            </div>
+        </div>
+    </div>
+</div>

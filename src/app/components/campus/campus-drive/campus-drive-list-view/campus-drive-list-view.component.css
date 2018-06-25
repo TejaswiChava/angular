@@ -1,0 +1,30 @@
+.btn{
+    width:55%;
+    color:#fff;
+    padding: 2px 12px !important; 
+  
+}
+.color_green .In Progress {
+    background:green !important;
+}
+.color_green .Initial {
+    background:grey;
+}
+.color_green .Rejected {
+    background:red;
+}
+.color_green .Closed{
+    background:red !important;
+}
+.In active{
+    background:#2F4F4F !important;
+}
+#btn234 {
+    background: red !important;
+}
+#btn233 {
+    background:grey !important;
+}
+#btn231 {
+    background:grey !important;
+}

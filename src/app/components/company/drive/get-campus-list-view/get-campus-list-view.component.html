@@ -1,0 +1,131 @@
+<div *ngIf="data.length > 0;else displayNodata">
+  <div class="col-lg-12" style="padding-left:0px;">
+    <div class="col-lg-6" style="padding-left:0px;margin-bottom:20px;">
+      <h4 class="font_robotomedium">
+        <span *ngIf="TotalData || campusListFromEvent">Selected </span>Campus List Details
+      </h4>
+    </div>
+    <div class="col-lg-6">
+      <input class="pull-right filter-input" *ngIf="data" [(ngModel)]="filterQuery" placeholder="Search by Campus Name" />
+    </div>
+  </div>
+  <div>
+    <table class="table table-striped" id="myProgram" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+      [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+      <thead>
+        <tr>
+          <th *ngIf="campusListDetails || !eventHide" style="color:#ea9215;">
+            <span *ngIf="eveCheck">
+                <input type="checkbox" [(ngModel)]="selectedAll" (change)="selectAll($event)">
+                <span *ngIf="selectedAll">Un-</span>Select All
+            </span>
+            <span *ngIf="!eveCheck">
+              Action
+            </span>
+            
+          </th>
+
+          <th>
+            <mfDefaultSorter by="campusLists.campusName">Campus Name</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="campusLists.listName"> List Name </mfDefaultSorter>
+          </th>
+          <th>
+
+            <mfDefaultSorter by="campusLists.universityName">University Name</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="cityName"> City </mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="stateCode"> State </mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="campusStatus"> Campus Status </mfDefaultSorter>
+          </th>
+          <!-- <th>
+            <mfDefaultSorter by="listDetails.compApprovalStatusValueId"> Status </mfDefaultSorter>
+          </th> -->
+        </tr>
+      </thead>
+      <tbody>
+        
+              <tr *ngFor="let campusLists of data | getCollegeList : filterQuery" class="notfirst cursor-pointer">
+              
+                  <td *ngIf="campusListDetails || !eventHide">
+                    <input *ngIf='eveCheck' type="checkbox" [(ngModel)]="campusLists.selected" (change)="toggleEditable($event,campusLists)" id="list" name="list">
+                    <input *ngIf='!eveCheck' type="radio" (change)="toggleEditableRadio($event,campusLists)" id="list" name="list">
+                  </td>
+                  <td *ngIf="campusLists">
+                    {{campusLists.campusName}}
+                  </td>
+                  <td>
+  
+                    {{campusLists.listName}}
+                  </td>
+                  <td *ngIf="campusLists">
+  
+                    {{campusLists.universityName}} </td>
+                    <td *ngIf="campusLists">
+  
+                    {{campusLists.cityName}} </td>
+  
+                    <td *ngIf="campusLists.stateCode">
+                      <span *ngFor="let state of stateDetails">
+                        <p *ngIf="state.stateCode == campusLists.stateCode">
+                            {{state.stateName}}
+                        </p>
+                      </span>
+                     </td>
+                     <td *ngIf="campusLists">
+                        {{campusLists.campusStatus}} 
+                      </td>
+
+                      <!-- <td>
+                          {{studentStatus[campusList.listDetails.compApprovalStatusValueId].lookupValue}}
+                      </td> -->
+                    
+                </tr>
+              
+  
+              
+              <!-- <tr *ngIf="mf.data == ''">
+                <td colspan="8" class="text-center">
+                  <span>
+                    No Data Found
+                  </span>
+                </td>
+              </tr> -->
+            </tbody>
+
+      
+      <tfoot>
+        <tr>
+          <td colspan="6">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+
+
+  <div class="pull-right">
+
+
+  </div>
+  <router-outlet></router-outlet>
+
+
+</div>
+<ng-template #displayNodata>
+  <div class="row margin0">
+    <div class="col-md-12 col-lg-12 noDataStyle">
+      <h3 class="noDataHead">
+          No Data Found
+      </h3>
+    </div>
+  </div>
+  </ng-template>

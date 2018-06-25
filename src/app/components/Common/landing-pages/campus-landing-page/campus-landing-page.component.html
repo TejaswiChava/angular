@@ -1,0 +1,321 @@
+<div class="container-fluid container_padding" style="background-color:white; max-width:1366px !important; margin:auto;">
+    <div class="row "  style="background-color:white">
+        <div class="bgimg header-wrapper">
+        <div class="zoominheader">
+            <div class="zoomoutheader">
+
+
+        <div id="Institute_BG" class="row">
+        </div>
+    </div>
+        </div>
+        </div>
+        <div class="container1">
+                <!-- <div class="col-lg-1"></div> -->
+                <div class="col-lg-7 col-xs-12 bnrText_Inner">
+                    <h1 class="bnrMsg2" data-aos="fade-down"><span class="yellowColor bnrMsg1">Bringing</span><br/>THOUSANDS OF COMPANIES<br/><span class="yellowColor">TO YOUR DOORSTEP</span></h1>
+                </div>
+                <!-- <div class="col-sm-1"></div> -->
+        <div class="col-lg-3 col-md-3 col-sm-3 loginDiv">
+  
+             
+                <div class="LoginClass" id="loginBox" *ngIf="!showLoginDetails && !showForgotDetails">
+                   <app-sign-in  [(showSignup)]="showLoginDetails"  [(showForgotPassword)]="showForgotDetails"></app-sign-in>
+                </div>
+
+                 <div class="LoginClass" id="loginBox" *ngIf="showLoginDetails">
+                     <app-request-for-demo  [(showSignup)]="showLoginDetails"  [(showForgotPassword)]="showForgotDetails"></app-request-for-demo>                        
+                 </div>
+
+
+                 <div class="LoginClass" id="loginBox" *ngIf="showForgotDetails">
+                   <div  data-aos="flip-left">
+                       <form #campusForgotPasswordform="ngForm">
+                     <h2>Forgot Password</h2>
+
+                     <div class="classlogin_Inner">
+
+                         <mat-form-field class="width100">
+                             <input matInput type="text" email name="email" #email="ngModel" [(ngModel)]="forgotObj.email" placeholder=" Email ID" id="email"
+                             pattern="^\w+([.-]\w+)*@\w+([.-]\w+)*(\.\w{2,3})+$" required/>
+                           </mat-form-field>
+                           <div *ngIf="email.errors && (email.dirty || email.touched)" class="color-red m-btm5 f-size12">
+                               <div [hidden]="!email.hasError('pattern')">Email format should be 
+                                   <small><b>abcd@abc.com</b></small></div>
+                             </div>
+
+                             <button type="submit" id="campusSignup" [disabled]="!campusForgotPasswordform.form.valid" 
+                             class="btn student_login" (click)="forgotPasswordSubmit(campusForgotPasswordform)">
+                               SUBMIT</button>
+                          
+                             <!-- <input type="button" value="Request for demo" class="btn student_login"> -->
+                             <div class="clear"></div>
+                     </div>
+                               <!-- <div style="border-bottom:1px solid #FFCA3C; margin-top:50px"> -->
+                         <span class="in1">Already have an account ?</span>
+                         <span class="in2 cursor-pointer"  (click)="Signin()">SIGN IN</span>
+                 </form>
+                       </div>
+             </div>
+
+
+         </div>
+        </div>
+
+
+        <div class="col-lg-12 scrolldiv1" style="width:50px;">
+                  <img style="margin-top: -69px;width: 4%;" class="cursor-pointer first img-responsive center-block"  src="../../../../../assets/images/Scora_HomePage/scroll-down3.gif">
+      </div>
+      <div class="col8"></div>
+        <div class="col-lg-12 shadowdiv1">
+            <div class="container connectMsg">
+                  <div class="second"></div>
+                    <h2 class="font_robotobold">WE CONNECT YOU</h2>
+                    <p class="font_robotoregular" style="color:#929292">to the business across the country and position your students right in the middle of the job market</p>
+                    <div class="indexsection" style="width:80%; margin-left:10%; margin-right:10%;">
+                    <div class="colDivider" data-aos="zoom-in-up">
+                        <span class="shortmsg font_robotoregular">Transforming the idea of placements</span>
+                        <img id="col1" class="arrowImgBlocks col" src="../../../../../assets/images/InstituteLandingPage/down_arrow.png" alt="">  
+                    </div>
+                    <div class="colDivider" data-aos="zoom-in-up">
+                        <span class="shortmsg font_robotoregular">Add an edge to academics</span> 
+                        <img id="col2" class="arrowImgBlocks col" src="../../../../../assets/images/InstituteLandingPage/down_arrow.png" alt="">  
+                    </div>
+                    <div class="colDivider" data-aos="zoom-in-up">
+                        <span class="shortmsg font_robotoregular">Bringing efficiency to placement management</span>
+                        <img id="col3"  class="arrowImgBlocks col" src="../../../../../assets/images/InstituteLandingPage/down_arrow.png" alt="">
+                    </div>
+                    <div class="colDivider" data-aos="zoom-in-up">
+                        <span class="shortmsg font_robotoregular">Organised and easily accessible records</span>
+                        <img id="col4" class="arrowImgBlocks col" src="../../../../../assets/images/InstituteLandingPage/down_arrow.png" alt="">  
+                    </div>
+                    </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+            <div class="col1"></div>
+            <div class="block1">
+                <div class="container">
+                    <div class="col-lg-5 col-sm-5 col-xm-12">
+                        <h2 class="font_robotobold">TRANSFORMING THE IDEA <br> OF PLACEMENTS</h2>
+                    </div>
+                    <div class="col-lg-7 col-sm-7 col-xm-12 transimg">
+                            <div class="block1_Img1"></div>
+                            <div class="block1_Img2" id="Ideas"></div>
+                    </div>
+                    <div class="col-lg-5 col-sm-5 col-xm-12 InnerBox_1">
+                        <span class="block1Txt font_robotoregular" data-aos="zoom-in-up" style="color:#fff !important;">
+                            Increase placement percentage</span>
+                            <ul  data-aos="zoom-in-up">
+                                <li>Create your brand</li>
+                                <li>Cloud platform for wider visibility</li>
+                                <li>Single platform for interaction with Students and Companies</li>
+                                <li>No more geographical location constraint</li>
+                            </ul>
+                        <img src="../../../../../assets/images/InstituteLandingPage/img_01.jpg" class="img1" alt="">
+                        <img src="../../../../../assets/images/InstituteLandingPage/circle.png" class="tickCircleIcon" alt="">
+                        <!-- <p class="col5"></p> -->
+  
+                    </div>
+  
+                    <div class="col-lg-3 col-sm-3 col-xm-12 InnerBox_2">
+                        <span class="block1Txt font_robotoregular block1col2" data-aos="zoom-in-up">Connect with thousands of companies</span>
+                        <img src="../../../../../assets/images/InstituteLandingPage/img_07.png"  width="110%" alt="">
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-xm-12 InnerBox_3">
+                        <img src="../../../../../assets/images/InstituteLandingPage/img_06.png"  width="95%" alt="">
+                        <span class="block1Txt font_robotoregular " data-aos="zoom-in-up">Intelligent, data-driven efficient and automated placement process</span>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="col2"></div>
+            <div class="block2">
+                  <div class="container">
+                    <div class="col-lg-12 block2Headline">
+                          <img alt="ScoraXchange" class="arrow2_1 cursor" id="col5" src="assets/images/Scora_HomePage/icon_04.png">
+                          <span class="col5 block2spanLink"></span>
+                          <h2 data-aos="fade-up" class="font_robotobold">ADD AN EDGE<br/>TO ACADEMICS</h2>
+                          <div class="col-lg-6 col-sm-6 col-xm-12">
+                            <h3>Engage With Industry Professionals</h3>
+                            <p class="font_robotoregular" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+                                    Invite industry professionals to engage with students by conducting workshops,
+                                    providing training, internship, apprenticeship, tech talks and even mentoring them,
+                                    from their first year of college</p>
+                            <h3>Enrich Student’s Profile</h3>
+                            <p class="font_robotoregular" data-aos="fade-up" data-aos-anchor-placement="center-bottom">Utilize service providers to train students to equip them with industry skill sets.</p>
+                            <h3>Empower Students</h3>
+                            <p class="font_robotoregular" data-aos="fade-up" data-aos-anchor-placement="center-bottom" style="margin-top:20px;">
+                                Provides an edge to the student by facilitating them in building their digital profile
+                                over time</p>
+                        </div>
+                        <div class="col-lg-6 col-sm-6 col-xm-12" style="margin-right:0px !important;">
+                            <img class="block2RightImg" src="../../../../../assets/images/InstituteLandingPage/img_02.jpg" width="100%;" alt="">
+                            <img data-aos="fade-up" class="block2RightImg2" src="../../../../../assets/images/InstituteLandingPage/arrow_1.png" width="15%;" alt="" style="margin-top:-45px; margin-left:35px; ">
+                        </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col3"></div>
+            <div class="block3">
+                <div class="container">
+                    <div class="col-lg-12 block3Headline">
+                          <img alt="ScoraXchange" class="arrow2_1 cursor" id="col6" src="assets/images/Scora_HomePage/icon_04.png">
+                          <span class="col6"></span>
+                          <h2 data-aos="fade-up" class="font_robotobold">BRINGING EFFICIENCY<br>TO PLACEMENT MANAGEMENT</h2>
+                    </div>
+                    <!-- <div class="col-lg-6 col-sm-6 col-xm-12">
+                            <img class="block3LeftImg" src="../../../../../assets/images/InstituteLandingPage/img_03.jpg" style="z-index: -1;" width="100%;" alt="">
+                            <img class="block3RightImg2" data-aos="fade-up" src="../../../../../assets/images/InstituteLandingPage/arrow_2.png" width="15%;" alt="" style="margin-top:-45px; margin-left:350px;">
+                    </div> -->
+                    <div class="col-lg-12 col-sm-12 col-xm-12">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <img class="block3LeftImg" style="margin-top:30px;" src="../../../../../assets/images/InstituteLandingPage/img_08.png">
+                        </div>
+                        <div class="col-lg-6 col-md-8 col-sm-8 col-xs-9">
+                            <p class="font_robotoregular" data-aos="fade-up" data-aos-anchor-placement="center-bottom" >
+                                Thousands of companies, from international brands to thriving startups, across the nation,
+                                just a click away</p>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="col-sm-3 col-md-1 col-sm-1 col-xs-1 "></div>
+                        <div class="col-lg-9 col-md-8 col-sm-8 col-xs-9 block3_row2">
+                            <p class="font_robotoregular" data-aos="fade-up" data-aos-anchor-placement="center-bottom" >
+                                Simple, efficient, quick and automated placement procedure meticulously tends to every
+                                tedious aspect of placement</p>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <img class="block3LeftImg" src="../../../../../assets/images/InstituteLandingPage/img_09.png">
+                        </div>
+                        <div class="clear"></div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <img class="block3LeftImg" style="margin-top:30px;" src="../../../../../assets/images/InstituteLandingPage/img_10.png">
+                        </div>
+                        <div class="col-lg-6 col-md-8 col-sm-8 col-xs-9">
+                            <p class="font_robotoregular" data-aos="fade-up" data-aos-anchor-placement="center-bottom" >
+                                Student’s digital profile with extensive data for the companies to search and filter to pick
+                                right candidate</p>
+                        </div>
+                            <!-- <p class="font_robotoregular" data-aos="fade-up" data-aos-anchor-placement="center-bottom">With ScoraScoraXchange, meeting millions of companies, ranging from international brands to thriving start-ups, across the nation, happens with just a click. The platform meticulously tends to every tedious aspect of placement procedure and makes it simpler, quicker and more efficient.</p>
+                        <ul class="nav nav-tabs ultabsystem"  data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+                            <li class="active"><a data-toggle="tab" class="zero1  font_robotoregular" href="#zero1">01</a></li>
+                            <li><a data-toggle="tab" href="#zero2" class="zero2  font_robotoregular">02</a></li>
+                            <li><a data-toggle="tab" href="#zero3" class="zero3  font_robotoregular">03</a></li>
+                        </ul>        
+                        <div class="tab-content tabsystem" data-aos="fade-up" data-aos-anchor-placement="center-bottom" style="margin-top:20px;">
+                        <div id="zero1" class="tab-pane fade in active">
+                            <p class=" font_robotoregular">The students can update all their digital profiles, through a student mobile app and all of this extensive data is for the companies to search and filter from, to pick the right candidates. Not only this, you can invite companies by consulting with students, to conduct workshops, trainings, branding events, and also carry out interviews in person and on webcam.</p>
+                            <input type="button" value="READ NEXT" data-toggle="tab" href="#zero2" class="readBtn">
+    
+                        </div>
+                        <div id="zero2" class="tab-pane fade">
+                            <p class=" font_robotoregular">The process is as simple as engaging with the right companies among the sea of options available, using the platform’s intelligent filtering. Coordinating with students and companies, updating each one’s profile and fixing a time and venue, event details, feedback, results and other such details can then be updated on the platform in just a few seconds.</p>
+                            <input type="button" value="READ NEXT" data-toggle="tab" href="#zero3" class="readBtn">
+    
+                        </div>
+                        <div id="zero3" class="tab-pane fade">
+                            <p class=" font_robotoregular">The institutes’ and companies’ profiles are closely integrated to track the entire process of placement and performance through their dashboard, record the data and communicate effortlessly given instant notifications and messages.</p>
+    
+                        </div>
+                        </div> -->
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="block3a">
+                <div class="container">
+                <div class="tab-content" style="margin-top:20px;">
+                <div id="zero1" class="tab-pane fade in active">
+                    <ul class="nav nav-tabs bottomNav">
+                        <li><a data-toggle="tab" class="zero1  font_robotoregular activeNav" href="#zero1">01</a></li>
+                        <li><a data-toggle="tab" href="#zero2" class="zero2  font_robotoregular">02</a></li>
+                        <li><a data-toggle="tab" href="#zero3" class="zero3  font_robotoregular">03</a></li>
+                        <li><a data-toggle="tab" href="#zero4" class="zero3  font_robotoregular">04</a></li>
+                    </ul>        
+                    <p class=" font_robotoregular">Engage right companies among the sear of options by consulting student</p>   
+                    <span class="clickarrow"><a data-toggle="tab" href="#zero2" ><img data-aos="fade-up" class="block2RightImg2" src="../../../../../assets/images/InstituteLandingPage/right_arrow.png" alt=""></a></span>
+                    <span class="clickarrow"><img data-aos="fade-up" src="../../../../../assets/images/InstituteLandingPage/left_arrow.png" alt=""></span>
+                </div>
+                <div id="zero2" class="tab-pane fade">
+                    <ul class="nav nav-tabs bottomNav">
+                        <li><a data-toggle="tab" class="zero1  font_robotoregular" href="#zero1">01</a></li>
+                        <li><a data-toggle="tab" href="#zero2" class="zero2  font_robotoregular activeNav">02</a></li>
+                        <li><a data-toggle="tab" href="#zero3" class="zero3  font_robotoregular">03</a></li>
+                        <li><a data-toggle="tab" href="#zero4" class="zero4  font_robotoregular">04</a></li>
+                    </ul>        
+                    <p class="font_robotoregular">Conduct workshops, training, branding event</p>
+                    <span class="clickarrow"><a data-toggle="tab" href="#zero3" ><img src="../../../../../assets/images/InstituteLandingPage/right_arrow.png" alt=""></a></span>
+                    <span class="clickarrow"><a data-toggle="tab" href="#zero1" ><img style="transform: rotate(180deg);" src="../../../../../assets/images/InstituteLandingPage/right_arrow.png" alt=""></a></span>
+                </div>
+                <div id="zero3" class="tab-pane fade">
+                    <ul class="nav nav-tabs bottomNav">
+                        <li><a data-toggle="tab" class="zero1  font_robotoregular" href="#zero1">01</a></li>
+                        <li><a data-toggle="tab" href="#zero2" class="zero2  font_robotoregular">02</a></li>
+                        <li><a data-toggle="tab" href="#zero3" class="zero3  font_robotoregular activeNav">03</a></li>
+                        <li><a data-toggle="tab" href="#zero4" class="zero4  font_robotoregular">04</a></li>
+                    </ul>        
+                    <p class="font_robotoregular">Current view and updates on students screening, shortlisting and placement</p>
+                    <span class="clickarrow"><a data-toggle="tab" href="#zero4" ><img src="../../../../../assets/images/InstituteLandingPage/right_arrow.png" alt=""></a></span>
+                    <span class="clickarrow"><a data-toggle="tab" href="#zero2" ><img style="transform: rotate(180deg);" src="../../../../../assets/images/InstituteLandingPage/right_arrow.png" alt=""></a></span>
+                </div>
+                <div id="zero4" class="tab-pane fade">
+                    <ul class="nav nav-tabs bottomNav">
+                        <li><a data-toggle="tab" class="zero1  font_robotoregular" href="#zero1">01</a></li>
+                        <li><a data-toggle="tab" href="#zero2" class="zero2  font_robotoregular">02</a></li>
+                        <li><a data-toggle="tab" href="#zero3" class="zero3  font_robotoregular">03</a></li>
+                        <li><a data-toggle="tab" href="#zero4" class="zero4  font_robotoregular activeNav">04</a></li>
+                    </ul>        
+                    <p class="font_robotoregular">Dashboard with 360° view of ongoing placement process</p>
+                    <span class="clickarrow"><img style="transform: rotate(180deg);" src="../../../../../assets/images/InstituteLandingPage/left_arrow.png" alt=""></span>
+                    <span class="clickarrow"><a data-toggle="tab" href="#zero3" ><img style="transform: rotate(180deg);" src="../../../../../assets/images/InstituteLandingPage/right_arrow.png" alt=""></a></span>
+                </div>
+                </div>
+        
+                </div>
+                <img alt="ScoraXchange" class="arrow2_2 cursor col7" id="col7" src="assets/images/Scora_HomePage/icon_04_2.png">
+                      
+                </div>
+            <div class="col4"></div>
+            <div class="block4">
+                <div class="block4_Inner">
+  
+                    <div class="container">
+                      <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12 block4paddBottm">
+                        <h2 class="font_robotobold mobileHeading" data-aos="fade-up">ORGANISED AND EASILY<br> ACCESSIBLE RECORDS</h2>
+                        <p class="font_robotoregular" data-aos-anchor-placement="center-bottom" class="p1">
+                            <b>Efficient, Intelligent and Fast Access</b><br/>
+                            An institute’s profile on ScoraXchange provides clearly and smartly segregated data sections, with
+                            which, holding and reviewing students’ data with respect to academics, placements and more,
+                            becomes a task of a few clicks.</p>
+                            <p class="p2"><b>Easy access to Student’s Engagement Data</b><br/>
+                            These student profiles are detailed, tracking their progress through their time at college, to
+                            updating information of the courses they’ve taken from various service providers on
+                            ScoraXchange, right down to their final placements. Not only this, the institute can easily record,
+                            track and review history of companies that interacted with their students, in terms of providing
+                            training, conducting workshops, holding events and placements.</p>
+                        <img data-aos="fade-up" src="../../../../../assets/images/InstituteLandingPage/img_05.png" class="arr_001" width="50%" alt="" style="margin-top:40px;">
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-5 col-xs-12">
+                            <img class="col7 block4Img1" src="../../../../../assets/images/InstituteLandingPage/arrow_3.png" width="100%;" alt="" style="z-index:-1;">
+                            <h2 class="Block4H2Right font_robotobold" data-aos="fade-up">ORGANISED AND EASILY<br> ACCESSIBLE RECORDS</h2>
+                            <div class="box1" style="height:190px;"></div>
+                                <div class="box1" style="height:90px;"></div>
+                                <img class="arrw4" src="../../../../../assets/images/InstituteLandingPage/arrow_4.png" alt="" style="margin-top: 133px; margin-left: 127px; width: 50px;">
+                                <div class="clear"></div>
+                                <p class="dataDriven" style="color:#555 !important; margin-left:-200px;"><b style="font-size: 20px;">Data Driven Processes</b><br/>
+                                    Massive data, Spinning years of an insitute's history, has never been recorded more efficiently and reviewed more easily.</p>
+                    
+                    </div>
+                    </div>
+                </div>
+            </div>
+    
+    </div>
+    
+    
+    </div>
+    <div class="clearfix"></div>
+    <a  class="scrollToTop cursor-pointer"> </a>
+       
+    <app-footer></app-footer>
+    

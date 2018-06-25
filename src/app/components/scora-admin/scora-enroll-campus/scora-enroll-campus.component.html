@@ -1,0 +1,146 @@
+<div class="row mbtm-60 m-top20">
+
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <div class="">
+      <div class="">
+        <div class="border_css flexcroll">
+            <div class="clearfix"></div>
+          <form #enrollForm="ngForm">
+
+
+            <!--Campus details starts-->
+
+
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 padding0">
+              <h4 class="font_roboto"><b>Enroll </b></h4>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 m-top-5">
+
+              <mat-form-field class="width100">
+                <input matInput placeholder='First Name' id="firstName"
+                  name="firstName" required="required" [(ngModel)]="campus.firstName" pattern="[a-zA-Z0-9_]+.*$" #firstName="ngModel" minlength="3" maxlength="50">
+              </mat-form-field>
+              <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched)" class="color-red m-btm5">
+                <div [hidden]="!firstName.errors.minlength">First Name Must be at least 3 characters long.</div>
+                <div [hidden]="!firstName.errors.pattern">Name Should not start with a blank space or Special characters</div>
+                <!-- <div [hidden]="!name.errors.maxlength">{{labelData.campusName}} cannot be more than 60 characters long.</div> -->
+              </div>
+
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 m-top-5">
+
+              <mat-form-field class="width100">
+                <input matInput placeholder='Last Name' id="lastName" name="lastName" pattern="[a-zA-Z0-9]+.*$" [(ngModel)]="campus.lastName"
+                  #lastName="ngModel" minlength="3" maxlength="50">
+              </mat-form-field>
+              <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)" class="color-red m-btm5">
+                <div [hidden]="!lastName.errors.minlength">Last Name Must be at least 3 characters long.</div>
+                <div [hidden]="!lastName.errors.pattern">Name Should not start with a blank space or Special characters</div>
+                <!-- <div [hidden]="!shortName.errors.maxlength">{{labelData.campusShortName}} be more than 100 characters long.</div> -->
+                <!-- <div [hidden]="!lastName.hasError('pattern')">Numbers not allowed</div> -->
+              </div>
+
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-5">
+
+              <mat-form-field class="width100 ">
+                <input matInput type="text" email [(ngModel)]="campus.email" name="email" #email="ngModel" placeholder="Email" id="email"
+                  pattern="^\w+([.-]\w+)*@\w+([.-]\w+)*(\.\w{2,3})+$" required/>
+              </mat-form-field>
+              <div *ngIf="email.errors && (email.dirty || email.touched)" class="color-red m-btm5">
+                <!-- <div [hidden]="!contactInfo.hasError('required')">Email is required</div> -->
+                <div [hidden]="!email.errors.pattern" class="color-red m-btm5">Email format should be
+                  <small>abcd@abc.com</small></div>
+              </div>
+
+            </div>
+
+            <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top-5">
+                <mat-form-field class="width100">
+                    <mat-select placeholder="Select Indicator" (change)="onSelect(campus.indicator)" [(ngModel)]="campus.indicator"
+                     class="width100" name="indicator" id="indicator" style="margin-top:-17px">
+                      <mat-option *ngFor="let indiType of indicators" [value]="indiType.value">
+                        {{indiType.indName}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div> -->
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top-5">
+              <mat-form-field class="width100" id="enrollRoleType">
+                <mat-select placeholder="Select Role Type" (change)="onSelect(campus.roleTypeValueId)" [(ngModel)]="campus.roleTypeValueId" class="width100"
+                  name="roleTypeValueId" id="roleTypeValueId" style="margin-top:-17px" required>
+                  <mat-option [value]="null">Select Role Type</mat-option>                                          
+                  <mat-option *ngFor="let indiType of indicators" [value]="indiType.lookupValueId">
+                    {{indiType.lookupValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf='option == 26'>
+              <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 m-top-5">
+                <mat-form-field class="width100">
+                  <input matInput placeholder='Employer Name' id="entityName"
+                    name="entityName" required="required" [(ngModel)]="campus.entityName" pattern="[a-zA-Z0-9]+.*$" #entityName="ngModel" minlength="3"
+                    maxlength="100">
+                </mat-form-field>
+                <div *ngIf="entityName.errors && (entityName.dirty || entityName.touched)" class="color-red m-btm5">
+                  <div [hidden]="!entityName.errors.minlength">Employer Name Must be at least 3 characters long.</div>
+                  <div [hidden]="!entityName.errors.pattern">Name Should not start with a blank space or Special characters</div>
+                  <!-- <div [hidden]="!name.errors.maxlength">{{labelData.campusName}} cannot be more than 60 characters long.</div> -->
+                  <!-- <div [hidden]="!entityName.hasError('pattern')">Special charecters not allowed</div> -->
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf='option == 27'>
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 m-top-5">
+                    <mat-form-field class="width100">
+                      <input matInput placeholder='Institute Name' id="entityName"
+                        name="entityName" required="required" [(ngModel)]="campus.entityName" pattern="[a-zA-Z0-9]+.*$" #entityName="ngModel" minlength="3"
+                        maxlength="100">
+                    </mat-form-field>
+                    <div *ngIf="entityName.errors && (entityName.dirty || entityName.touched)" class="color-red m-btm5">
+                      <div [hidden]="!entityName.errors.minlength">Institute Name Must be at least 3 characters long.</div>
+                      <div [hidden]="!entityName.errors.pattern">Name Should not start with a blank space or Special characters</div>
+                      <!-- <div [hidden]="!name.errors.maxlength">{{labelData.campusName}} cannot be more than 60 characters long.</div> -->
+                      <!-- <div [hidden]="!entityName.hasError('pattern')">Special charecters not allowed</div> -->
+                    </div>
+                  </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top-5">
+
+                  <mat-form-field class="width100" id="enrollUniversityId">
+                      <mat-select placeholder="Select University"  [(ngModel)]="campus.universityId" class="width100"
+                        name="universityId" id="universityId" style="margin-top:-17px" required>
+                        <mat-option [value]="null">Select University</mat-option>                        
+                        <mat-option *ngFor="let university of campusUniversityList" [value]="university.universityId">
+                          {{university.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- buttons for Address information starts -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-5 mbtm-20">
+                <div class="pull-right">
+                  <button type="submit" id="enrollSubmit" [disabled]="!enrollForm.form.valid" (click)="enrollSubmit(enrollForm,$event)" class="btn  submit-btn"> Save</button>
+                  <a class="btn submit-btn " id="clearEnroll" (click)="camcelEnroll(enrollForm)"> Clear</a>
+                </div>
+              </div>
+              <!-- buttons for Address information ends -->
+
+            <!--Campus details ends-->
+
+          </form>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

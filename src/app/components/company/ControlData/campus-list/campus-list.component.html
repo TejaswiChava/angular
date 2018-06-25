@@ -1,0 +1,61 @@
+<div class="container-fluid">
+  <div class="row" style="margin-bottom:10px;margin-top:-7px">
+    <div class="">
+      <div class="row">
+        <div class="col-lg-12 padding0">
+          <div class="col-lg-6">
+            <!-- <img class="width35 m-btm5p cursor-pointer" src="assets/images/add__plus_icon.png" title="drives" title="Add">
+            <span class="f-size16">Campus List</span> -->
+
+          </div>
+          <div class="col-lg-6">
+            <div class="pull-right searchboxCampuslist">
+              <!-- {{list}}
+              {{showFilter}} -->
+              <span *ngIf="!showFilter">
+                <input class="pull-left filter-input" [(ngModel)]="filterQuery" placeholder="Search by List Name"/>
+                <img class="width35 m-btm5p cursor-pointer"
+                  src="assets/images/add__plus_icon.png" id="addCampusList" title="Add"
+                   (click)="addCList()"
+                  title="Add">
+              </span>
+              <span *ngIf="showFilter">
+                  <i class="fa fa-times mbtm-23 width35 m-right10  cursor-pointer
+                  color-theme f-size16" id="cancelCampuslist"  aria-hidden="true" title="Cancel"
+                   (click)="cancelClist()"></i>
+              </span>
+
+              <!-- <img class="width35 m-right15" src="assets/images/add disable.png" *ngIf="!showAddImagDisable"> -->
+
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+      </div>
+    </div>
+    <router-outlet>
+    <div class="box-border col-lg-12 mtop20 ">
+      <div *ngIf="list">
+          <!--   [(ClistStatus)]='addClist' -->
+        <!-- <app-event-list [(sendList)]='clickData' [(listStatus)]='list'></app-event-list> -->
+
+        <app-campus-list-list [filterQuery]="filterQuery" [(showFilter)]="showFilter"></app-campus-list-list>
+      </div>
+      <!-- [(aftersave)] = 'list1'  -->
+      <div class="row" *ngIf="!list">
+        <app-create-campus-list  [(getCListStatus)]='list' ></app-create-campus-list>
+      </div>
+    </div>
+  </router-outlet>
+  </div>
+</div>
+<!-- <div class=" drive-box col-lg-12 ">
+  <div *ngIf="!list">
+    <app-campus-list-list></app-campus-list-list>
+  </div>
+  <div *ngIf="list">
+    <app-create-campus-list  [(getCListStatus)]='list'></app-create-campus-list>
+  </div>
+</div> -->
+

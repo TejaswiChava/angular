@@ -1,0 +1,33 @@
+<div  data-aos="flip-left" data-aos-duration="2500">
+    <form #requestForDemoform="ngForm">
+  <h2 class="text-center font_robotobold themeColor">REACH US</h2>
+  <div class="classlogin_Inner">
+          <mat-form-field  class="width100">
+          <input matInput placeholder="Name" id="Name" name="firstName" 
+          [(ngModel)]="request.name" #firstName="ngModel"  maxlength="40"  required>
+          </mat-form-field>
+          <mat-form-field  class="width100" >
+          <input matInput placeholder="Phone Number" [(ngModel)]="request.phone" #mobile="ngModel"
+          name="mobile" id="mobile" pattern="^[6789]\d{9}$" minlength="10" maxlength="10" required>
+          </mat-form-field>
+          <div *ngIf="mobile.errors && (mobile.dirty || mobile.touched)" class="color-red m-btm5 f-size12">
+            <div [hidden]="!mobile.hasError('pattern')">Please Enter Valid Mobile Number</div>
+    </div>
+          <mat-form-field  class="width100">
+          <input matInput type="text" email name="email" #email="ngModel" [(ngModel)]="request.emailId" placeholder=" Email ID" id="email"
+          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required/>
+          </mat-form-field>
+          <div *ngIf="email.errors && (email.dirty || email.touched)" class="color-red m-btm5 f-size12">
+            <div [hidden]="!email.hasError('pattern')">Email format should be 
+                <small><b>abcd@abc.com</b></small></div>
+          </div>
+          <button type="submit" id="companySignup"
+          [disabled]="!requestForDemoform.form.valid" (click)="requestForDemo(requestForDemoform)" class="btn student_login"> Request for demo</button>
+          <!-- <input type="button" value="Request for demo" class="btn student_login"> -->
+          <div class="clear"></div>
+  </div>
+            <!-- <div style="border-bottom:1px solid #FFCA3C; margin-top:50px"> -->
+      <span class="in1">Already have an account ?</span>
+      <span class="in2 cursor-pointer"  (click)="setSignUpStatus(false)">SIGN IN</span>
+      </form>
+      </div>

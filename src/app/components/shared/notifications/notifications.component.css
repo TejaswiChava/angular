@@ -1,0 +1,40 @@
+.notification-card {
+    /* border-bottom:1px solid grey; */
+    
+}
+.noti-head{
+    color: #565c63;
+}
+.noti-subtext{
+    color: #a7aab2;
+}
+
+.noti-date{
+    font-size: 16px;
+    color: #727376;
+    /* margin-top: 20px; */
+    padding: 15px;
+}
+.noti-sender-info{
+    color: #76787a;
+    font-size: 16px;
+    margin-top: 5px;
+}
+.sender-content{
+    color: #cfd1d4;
+    margin-top: -5px;
+}
+.noti-bootom-hr{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.dismiss-btn,
+.dismiss-btn:hover {
+    background: transparent !important;
+    background-repeat: repeat-x;
+    border-color: #b5b3b5;
+    color: #000 !important;
+    padding: 10px 30px;
+    margin-top: 12px;
+    border-radius: 2px !important;
+}

@@ -1,0 +1,114 @@
+<!-- {{isSearchActive }}--drive=== -->
+<div class="" *ngIf="!selectedDrive || !isSearchActive">
+
+  <div class="table-scroll flexcroll">
+  
+
+
+
+  <table class="table table-striped" id="myProgram" [mfData]="data | drive : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+    [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+
+    <thead>
+        <input type="checkbox" (change)="showInactiveDrives($event)"> <b> Include Inactive Drives</b><br>
+        <br>
+      <tr>
+        <th>
+          <mfDefaultSorter by="driveName">Drive Name</mfDefaultSorter>
+        </th>
+        <th>
+          <mfDefaultSorter by="organizationId">Organization</mfDefaultSorter>
+        </th>
+        <th>
+          <mfDefaultSorter by="driveTypeValueId"> Drive Type </mfDefaultSorter>
+        </th>
+        <th>
+          <mfDefaultSorter by="jobRoleId"> Job Role </mfDefaultSorter>
+        </th>
+        <th>
+          <mfDefaultSorter by="noOfPositions"> No. of Positions </mfDefaultSorter>
+        </th>
+        <th>
+          <mfDefaultSorter by="employerDriveLookupValue.lookupValue"> Drive Status </mfDefaultSorter>
+        </th>
+        <th>
+          <mfDefaultSorter by="budget"> Budget </mfDefaultSorter>
+        </th>
+        <th>
+            <mfDefaultSorter by="createDatetime"> Creation Date </mfDefaultSorter>
+          </th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <ng-container *ngFor="let employerDriveList of mf.data">
+      <tr class="notfirst cursor-pointer" (click)=onSelect(employerDriveList)>
+        <td>
+          <div>
+            {{employerDriveList.driveName| limitTo:[30]}}
+          </div>
+        </td>
+          
+        <td >
+          <div *ngIf="employerDriveList.organizationId">
+            {{employerDriveList.employerDriveIbfk2rel.name}}
+          </div>
+        </td>
+        
+        <td>
+          <div>
+          {{driveDetails[employerDriveList.driveTypeValueId].lookupValue}}
+          </div>
+        </td>
+        
+        <td >
+          <div *ngIf="employerDriveList.jobRoleId">
+          {{employerDriveList.employerDriveIbfk3rel.jobRoleName}}
+        </div>
+        </td>
+       
+        <td>
+          <div>
+          {{employerDriveList.noOfPositions}}
+          </div>
+        </td>
+       
+        <td id="drives">
+          <div>
+          <button type="button" class="btn {{employerDriveList.employerDriveLookupValue.lookupValue}}">{{employerDriveList.employerDriveLookupValue.lookupValue}}</button>
+        </div>
+        </td>
+        <td>
+          <div>
+          {{employerDriveList.budget}}
+        </div>
+        </td>
+        <td>
+            <div>
+            {{employerDriveList.createDatetime | date}}
+          </div>
+          </td>
+      </tr>
+      </ng-container>
+      <tr *ngIf="mf.data === []">
+        <td colspan="8" class="text-center">
+          <span>
+            No Data Found
+          </span>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="6">
+          <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+</div>
+<div *ngIf="isSearchActive">
+  <app-create-drive [driveList]="selectedDrive"  [(listobj)]="listobj" [(getSearchStatus)]="isSearchActive"></app-create-drive>
+</div>
+<router-outlet></router-outlet>

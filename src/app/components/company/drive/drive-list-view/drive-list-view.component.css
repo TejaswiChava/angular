@@ -1,0 +1,16 @@
+.btn{
+    width:75% !important;
+    color:#fff;
+}
+.Approved {
+    background:green !important;
+}
+.btn .In Progress {
+    background:green !important;
+}
+.Initial {
+    background:grey !important;
+}
+.Rejected {
+    background:red !important;
+}

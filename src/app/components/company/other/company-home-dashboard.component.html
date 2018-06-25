@@ -1,0 +1,90 @@
+<div class="conatiner-fluid">
+  <!-- Dashboard row starts -->
+  <div class="row">
+     <app-company-dashboard-summary
+        [eventsInProgress]= "this.getInProgress()"
+        [activeDrives]="this.getActiveDrives()"
+        [eventsSchedules]="this.getScheduled()"
+        [eventsClosed]="this.getEventClosed()"
+        [openPosition]="this.getOpenPosition()"
+        [positionFilled]="this.getPositionFilled()"
+     ></app-company-dashboard-summary>
+  </div>
+
+<div class="row">
+      <hr class="margin-top0">
+</div>
+  <!-- Dashboard row ends -->
+  <!-- 1st row starts -->
+  <div class="row font_robotoregular">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:20px">
+         
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngIf = "this.getVacancyStatus()">
+          <h4 class="f-size16 color-orange font_robotomedium"> Vacancy Status </h4>
+          <span *ngIf="this.sampleVacancyFlag" class="sampleData">&nbsp;&nbsp;(Sample Data)</span>
+          <app-effectiveness-graph [multi]="this.getVacancyStatus()"></app-effectiveness-graph>
+      </div>
+
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngIf = "this.getEffectivenessGraph()">
+              <h4 class="f-size16 color-orange font_robotomedium"> Effectiveness Statistics</h4>
+              <span *ngIf="this.sampleEffectivenessFlag" class="sampleData">&nbsp;&nbsp;(Sample Data)</span>
+              <app-effectiveness-graph [multi]="this.getEffectivenessGraph()"></app-effectiveness-graph>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngIf = "this.getAverageOffer()">
+              <h4 class="f-size16 color-orange font_robotomedium">Average Salary Per Job Role</h4>
+              <span *ngIf="this.sampleAverageOffer" class="sampleData">&nbsp;&nbsp;(Sample Data)</span>
+              <app-jobrole-graph [data]="this.getAverageOffer()"></app-jobrole-graph>
+          </div>
+      </div>
+  </div>
+  <!-- 1st row ends -->
+  <div class="row">
+          <hr>
+  </div>
+      <!-- 2nd row starts -->
+      <div class="row" style="margin-bottom:20px">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" *ngIf="this.getRecentRecruitmentRow()"> 
+                <div>
+                    <h4 style="display:inline-block" class="f-size16 color-orange font_robotomedium"> Recent Recruitment</h4>
+                    <span *ngIf="this.sampleRecentPlacementFlag" class="sampleData">&nbsp;&nbsp;(Sample Data)</span>
+                </div>
+                <app-com-recent-placements [rows] = "this.getRecentRecruitmentRow()" [columns]="this.getRecentRecruitmentColumn()"></app-com-recent-placements>               
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" *ngIf="this.getDriveDetailsRow()">
+                <div>
+                    <h4 style="display:inline-block" class="f-size16 color-orange font_robotomedium"> Drives</h4>
+                    <span *ngIf="this.sampleDrives" class="sampleData">&nbsp;&nbsp;(Sample Data)</span>
+                </div>
+                <app-com-drive  [rows] = "this.getDriveDetailsRow()" [columns]="this.getDriveDetailsColumn()" ></app-com-drive>
+            </div>
+            <!-- <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <h4 style="display:inline-block" class="f-size14 color-orange"> Event Calendar</h4>
+                
+                <app-event-calender></app-event-calender>
+            </div> -->
+        </div>
+    </div>
+    <!-- 2nd row ends -->
+    <div class="row">
+            <hr>
+    </div>
+     <!-- 3rd row starts -->
+     <div class="row" style="margin-bottom:20px">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" *ngIf = "this.getCampusHiringGraph()">
+                  <h4 style="display:inline-block" class="f-size16 color-orange font_robotomedium">  Campus Hiring Graph</h4>
+                  <span *ngIf="this.sampleHiringGraphFlag" class="sampleData">&nbsp;&nbsp;(Sample Data)</span>
+                  <app-company-hiring [data]= "this.getCampusHiringGraph()" [companyOrgDetails]="orgDetail" (selectedOrgId)="selectedOrgId($event)"></app-company-hiring>
+          </div> 
+   
+          <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12" *ngIf = "this.getUpcomingEventsRow()">
+                  <h4 style="display:inline-block" class="f-size16 color-orange font_robotomedium"> Upcoming Events</h4>
+                  <span *ngIf="this.sampleUpcomingEventFlag" class="sampleData">&nbsp;&nbsp;(Sample Data)</span>
+             <app-com-upcoming-events [rows]= "this.getUpcomingEventsRow()" [columns]="this.getUpcomingEventsColumn()"></app-com-upcoming-events>
+          </div>
+      </div>
+  </div>
+  <!-- 3rd row ends -->
+  
+</div>

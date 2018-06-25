@@ -1,0 +1,77 @@
+
+  
+  
+  /* .cc-selector input{
+    margin:0;padding:0;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+  }
+  .visa{background-image:url(http://webmaster-freelance.cm/wp-content/uploads/2016/05/avatar-boy.png);}
+  .mastercard{background-image:url(https://cdn3.iconfinder.com/data/icons/rcons-user-profession/32/student-girl-512.png);}
+  .master{background-image:url(https://cdn3.iconfinder.com/data/icons/glypho-signs/64/male-female-sign-512.png);}
+  
+  .cc-selector input:active +.drinkcard-cc{opacity: .9;}
+  .cc-selector input:checked +.drinkcard-cc{
+    -webkit-filter: none;
+    -moz-filter: none;
+    filter: none;
+  }
+  .drinkcard-cc{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+    -webkit-transition: all 100ms ease-in;
+    -moz-transition: all 100ms ease-in;
+    transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+    -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+    filter: brightness(1.8) grayscale(1) opacity(.7);
+  }
+  .drinkcard-cc:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+    -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+    filter: brightness(1.2) grayscale(.5) opacity(.9);
+  }
+   */
+
+   /* input[type='radio'] {display:none;} */
+
+   label.item > img:nth-child(2) {display:none;}
+  
+   .example-radio-button:checked + label.item > img:nth-child(1) {display:none;}
+   /* input[type='radio']:checked + label.item > img:nth-child(2) {display:inline-block;} */
+ 
+
+
+@media ( max-width: 991px ){
+  .educationPerson {
+    padding : 0px !important;
+  }
+}
+
+
+
+
+/* Hiding radio button */
+/* input[type='radio'] {display:none;} */
+/* Hiding second image in label tags */
+label.item > img:nth-child(2) {display:none;}
+/* When radio-button is checked, display second image in the following label tag */
+.example-radio-button:checked + label.item > img:nth-child(1) {display:none;}
+.example-radio-button:checked + label.item > img:nth-child(2) {display:inline-block;}
+
+.example-radio-group {
+  display: inline-flex;
+  /* flex-direction: column; */
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.example-selected-value {
+  margin: 15px 0;
+}

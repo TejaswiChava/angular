@@ -1,0 +1,551 @@
+<div class="container-fluid ">
+  <div class="row" style="margin-bottom:20px;">
+
+      <div class="col-lg-12">
+    <div class="pull-right searchbox m-right3">
+      <img class="width35 m-btm5p cursor-pointer" title="Add" src="assets/images/add__plus_icon.png" (click)="addProgramme()" id="addProgramme"
+        *ngIf="!showcancelbtn">
+      <!-- <img class="width35 m-right15" src="assets/images/add disable.png" *ngIf="!showAddImagDisable"> -->
+      <i class="fa fa-times width35 mbtm-23  cursor-pointer
+           color-theme f-size16 m-right18" aria-hidden="true" *ngIf="showcancelbtn" title="Cancel" id="cancelbtn" (click)="cancelbtn()"></i>
+
+      <input class="pull-left filter-input" [(ngModel)]="filterQuery" *ngIf="!showEditDetails" placeholder="Search by Programme Name"/>
+    </div>
+    </div>
+
+
+
+
+    <div class=" col-lg-12  col-md-12 col-sm-12 col-xs-12 padding0 mtop20">
+      <div>
+        <div *ngIf="!showEditDetails" class="box-border">
+          <div>
+            <div class="">
+                <div class="flexcroll table-scroll">
+                    
+
+                <table class="table table-striped" id="myProgram" [mfData]="data | programPipe : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+                  [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+
+                  <!-- <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5"> -->
+                  <thead>
+
+                    <tr>
+                      <th>
+                        <mfDefaultSorter by="programName">{{labelData.programmeName}}</mfDefaultSorter>
+                      </th>
+                      <th>
+                        <mfDefaultSorter by="name">Department Name</mfDefaultSorter>
+                      </th>
+                      <th>
+                        <mfDefaultSorter by="numberOfStudents">{{labelData.noOfStudents}}</mfDefaultSorter>
+                      </th>
+                      <th>
+                        <mfDefaultSorter by="programTypeValueLookupValue.lookupValue"> {{labelData.progType}}</mfDefaultSorter>
+                      </th>
+                      <th>
+                        <mfDefaultSorter by="programClassValueId"> {{labelData.progClassification}}</mfDefaultSorter>
+                      </th>
+                      <th>
+                        <mfDefaultSorter by="programCatValueId"> {{labelData.progCategory}}</mfDefaultSorter>
+                      </th>
+                      <th>
+
+                        <mfDefaultSorter by="programMajorValueId"> {{labelData.progMajor}}</mfDefaultSorter>
+                      </th>
+
+                    </tr>
+                    <tr>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr *ngFor="let programList of mf.data" class="notfirst cursor-pointer" 
+                    (click)=programmeEdit(programList)>
+                      <td>
+                        {{programList.programName | limitTo:[30]}}
+                      </td>
+                      <td>
+                        {{programList.departmentDetails.name | limitTo:[30]}}
+                      </td>
+                      <td>
+
+                        {{programList.numberOfStudents}} </td>
+                      <td>
+
+                        {{programList.programTypeValueLookupValue.lookupValue}} </td>
+                      <td>
+
+                        {{programList.programClassValueLookupValue.lookupValue}} </td>
+                      <td>
+
+                        {{programList.programCatValueLookupValue.lookupValue}} </td>
+                      <td>
+
+                        {{programList.programMajorValueLookupValue.lookupValue}} </td>
+                      <!--
+                            <td>
+                            <a (click)=programmeEdit(programList) class="cursor-pointer">
+                          {{programList.programCatValueId}} </a> </td> <td><a (click)=programmeEdit(programList) class="cursor-pointer">edit</a> </td> -->
+                    </tr>
+                    <tr *ngIf="mf.data == ''">
+                      <td colspan="8" class="text-center">
+                        <span>
+                          {{labelData.noDataFound}}
+                      </span>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="6">
+                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngFor="let programme of programmeData">
+
+          <div class="col-lg-8 col-md-8 ">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="backgroundColor_fff m-btm20 box_shadow flexcroll" style="border: 1px solid #ccc;padding: 10px;border-radius: 2px;">
+                  <form #organisationform="ngForm">
+                    <!--programme profile details starts-->
+                    <div class="col-lg-8">
+                      <h4><b>{{labelData.programmeHead}}</b></h4>
+                    </div>
+                    <div class="col-lg-4">
+                      <!-- <a *ngIf="btnreadonly" class=" pull-right"
+                       (click)="editProgramSubmit(142)">
+                        <i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a> -->
+                      <a  class="address-anchortag pull-right cursor-pointer" 
+                      id="editProgramSubmit" (click)="editProgramSubmit()"> 
+                            
+                                <img class="width35" src="assets/images/adress_edit_lighter icon (1).png"
+                                 title="Edit" *ngIf="showEditImag"
+                                onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+                                onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'">
+                                <!-- <img class="width45" src="assets/images/edit icon_enable.png" *ngIf="!showImagDisable"> -->
+                              </a>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
+                      <mat-form-field class="width100">
+                        <input matInput [readonly]="readonly" placeholder={{labelData.programmeName}} id="programName" minlength="3" maxlength="50"
+                           name="programName" required="required" [(ngModel)]="programme.programName"
+                          #programName="ngModel">
+                      </mat-form-field>
+
+
+                      <div *ngIf="programName.errors && (programName.dirty || programName.touched)" class="color-red m-btm5">
+                        <!-- <div [hidden]="!programName.hasError('pattern')">Special charecters not allowed</div> -->
+                        <div [hidden]="!programName.errors.minlength">{{labelData.programmeName}} Must be at least 3 characters long.</div>
+                        <div [hidden]="!programName.errors.maxlength">{{labelData.programmeName}} cannot be more than 50 characters long.</div>
+                      </div>
+                    </div>
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
+                      <mat-form-field class="width100 mtop10">
+                        <mat-select placeholder="Select Department" [(ngModel)]="programme.departmentId" name="departmentId" id="departmentId" [disabled]="readonly"
+                          #departmentId="ngModel" required="required">
+                          <mat-option [value]="">Select Department</mat-option>
+                          <mat-option *ngFor="let dept of deptList" [value]="dept.departmentId">{{dept.name}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0  m-top5">
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  ">
+                        <mat-form-field class="width100 mtop10">
+                          <input matInput [matDatepicker]="picker" [min]="instituteEstDate"
+                           placeholder="Start date" [readonly]="true"
+                            name="establishedDate" [(ngModel)]="programme.startDate"
+                            #startDate='ngModel' required>
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker touchUi="true" [disabled]="disableDate" #picker></mat-datepicker>
+                        </mat-form-field>
+                        <!-- <div *ngIf="startDate.errors && (startDate.dirty || startDate.touched)" class="color-red m-btm5">
+                          <div>Date Format Should be MM/DD/YYYY</div> 
+                        </div> -->
+                      </div>
+
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 " style="margin-top: 2px">
+                        <mat-form-field class="width100 mtop10">
+                          <input matInput [readonly]="readonly" type="text" placeholder={{labelData.noOfStudents}} id="Nstudents" name="numberOfStudents"
+                            minlength="1" pattern="[0-9]+" maxlength="15" class=" key-numeric " [(ngModel)]="programme.numberOfStudents"
+                            #numberOfStudents="ngModel" minlength="1" required="required">
+                        </mat-form-field>
+                        <div *ngIf="numberOfStudents.errors && (numberOfStudents.dirty || numberOfStudents.touched)" class="color-red m-btm5">
+                          <div [hidden]="!numberOfStudents.errors.pattern">Only numbers allowed.</div>
+                          <div [hidden]="!numberOfStudents.errors.minlength">Studetns count must be at least 1 characters long.</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <mat-form-field class="width100 mtop10">
+                        <mat-select placeholder={{labelData.progType}} [(ngModel)]="programme.programTypeValueId" name="programTypeValueId" id="programTypeValueId"
+                          [disabled]="readonly" #programTypeValueId="ngModel" required="required">
+                          <mat-option [value]="">Select Programme Type</mat-option>
+                          <mat-option *ngFor="let programLoopup of programTypeLookupArray" [value]="programLoopup.lookupValueId">{{programLoopup.lookupValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+                      <div *ngIf="programTypeValueId.errors && (programTypeValueId.dirty || programTypeValueId.touched)" class="color-red m-btm5">                
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <mat-form-field class="width100 mtop10">
+                        <mat-select placeholder={{labelData.progClassification}} [disabled]="readonly" [(ngModel)]="programme.programClassValueId"
+                          name="programClassValueId" id="programClassValueId" #programClassValueId="ngModel" required="required">
+                          <mat-option [value]="">Select Programme Classification</mat-option>
+                          <mat-option *ngFor="let programClasLoopup of programClassificationLookupArray" [value]="programClasLoopup.lookupValueId">{{programClasLoopup.lookupValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+                      <div *ngIf="programClassValueId.errors && (programClassValueId.dirty || programClassValueId.touched)" class="color-red m-btm5">
+                        <!-- <div [hidden]="!programClassValueId.errors.required">
+                          program Class is required
+                        </div> -->
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <mat-form-field class="width100 mtop10">
+                        <mat-select placeholder={{labelData.progCategory}} [(ngModel)]="programme.programCatValueId" name="programCatValueId" id="programCatValueId"
+                          #programCatValueId="ngModel" [disabled]="readonly" required="required">
+                          <mat-option [value]="">Select Programme Category</mat-option>
+                          <mat-option *ngFor="let programCatLoopup of programCatLookupArray" [value]="programCatLoopup.lookupValueId">{{programCatLoopup.lookupValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <div *ngIf="programCatValueId.errors && (programCatValueId.dirty || programCatValueId.touched)" class="color-red m-btm5">
+                        <!-- <div [hidden]="!programCatValueId.errors.required">
+                          Program Catagry is required
+                        </div> -->
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <mat-form-field class="width100 mtop10">
+                        <mat-select placeholder={{labelData.progMajor}} [(ngModel)]="programme.programMajorValueId" name="programMajorValueId" id="programMajorValueId"
+                          [disabled]="readonly" #programMajorValueId="ngModel" required="required">
+                          <mat-option [value]="">Select Programme Major</mat-option>
+                          <mat-option *ngFor="let programMajLoopup of programMajorLookupArray" [value]="programMajLoopup.lookupValueId">{{programMajLoopup.lookupValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <div *ngIf="programMajorValueId.errors && (programMajorValueId.dirty || programMajorValueId.touched)" class="color-red m-btm5">
+                        
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 mtop10">
+                      <div class="col-lg-4"> {{labelData.offCampusInd}}*</div>
+                      <div class="col-lg-8">
+                        <mat-radio-group class="example-radio-group" [disabled]="readonly" name="offCampusInd" [(ngModel)]="programme.offCampusInd" required>
+                          <mat-radio-button class="example-radio-button" *ngFor="let indType of offCampusType" [value]="indType.value">
+                              {{indType.indicatorName}}
+                          </mat-radio-button>
+                        </mat-radio-group>
+
+                        <!-- <mat-radio-group [(ngModel)]="programme.offCampusInd" name='fff'>
+                          <mat-radio-button value="Y" [checked]="true" [disabled]="readonly" [checked]="programme.offCampusInd == 'Y'"> Yes</mat-radio-button>
+                          <mat-radio-button value="N" [disabled]="readonly" [checked]="programme.offCampusInd == 'N'"> No </mat-radio-button>
+                        </mat-radio-group> -->
+
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                      <label>{{labelData.description}}</label>
+                      <textarea placeholder={{labelData.description}} [readonly]="readonly" name="desc" id="desc"  maxlength="2000"
+                        class="flexcroll textarea_boxes width100" [(ngModel)]="programme.description" #description="ngModel"></textarea>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-5">
+                        <div style="margin-top:20px;" class="flexcroll border_css box_shadow clearfix">
+                            <h4><b>{{labelData.uploadImgHead}}</b></h4>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  company_logo_inst">
+                              <div class="fileUpload btn padding0" >
+                                  <span *ngIf="!readonly"><img style="width:40%" src="assets/images/upload_side icon.png"><p class="f-size14">{{labelData.uploadCmpLogoText}}</p></span>
+                                   <input type="file" class="upload" [disabled]="readonly" [(ngModel)]="programme.logo" (change)="uploadDatasource($event.target.files)" name="logo" id="logo"
+                                   accept=".jpeg,.jpg,.png,.pdf" />
+                                 </div> 
+                                 <img style="width:40%" src="{{apiEndPoint}}Attachments/department-logo/download/{{programme.logo}}">
+      
+                            </div>
+                            
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 branding_logo_inst">
+                            
+                              <div class="fileUpload btn padding0">
+                                  <span *ngIf="!readonly"><img style="width:40%" src="assets/images/upload_side icon.png"><p class="f-size14">{{labelData.uploadBrdLogoText}}</p></span>
+                                   <input type="file" class="upload" [disabled]="readonly" [(ngModel)]="programme.brandingImage" (change)="uploadBrandLogo($event.target.files)" name="brandingImage"
+                                   id="brandingImage" accept=".jpeg,.jpg,.png,.pdf" />
+                                 </div>
+                                 <img style="width:40%" src="{{apiEndPoint}}Attachments/department-branding-image/download/{{programme.brandingImage}}">
+                            </div>
+        
+                          </div>
+                    </div> -->
+
+
+                    <!--programme profile details ends-->
+
+                    <!--programme profile buttons starts-->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:10px">
+                      <div class="pull-right" *ngIf="!showBtnDetails">
+                        <button type="submit" id="programProfileSubmit"
+                         (click)="programProfileSubmit($event)" *ngIf="!btnreadonly" 
+                         [disabled]="!organisationform.form.valid"
+                          class="btn  submit-btn"> {{labelData.btnSave}}</button>
+                        <button *ngIf="btnreadonly" class="btn submit-btn" 
+                        [disabled]="!organisationform.form.valid || !updateBtn" 
+                        (click)="updateProgramSubmit()"> {{labelData.btnUpdate}}</button>
+                        <a class="btn submit-btn " *ngIf="addCancelBtn" 
+                        (click)="resetProgramSubmit(organisationform)"> Clear</a>
+                        <a class="btn submit-btn" *ngIf="btnreadonly" 
+                        (click)="cancelProgramSubmit()"> {{labelData.btnCancel}}</a>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="clearfix"></div>
+                    <!--programme profile buttons ends-->
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <!-- contact information starts-->
+
+            <div class="row">
+              <div class="">
+                <div class="flexcroll border_css box_shadow col-lg-12" style="height:250px">
+                  <div class="m-top5">
+
+                    <h4 style="display: inline" class="text-capitalize f-size16"><b>{{labelData.contactInfoHead}}</b></h4>
+
+                    <div class="pull-right ">
+
+                      <button type="submit" class="btn backgroundColor_transperent color-theme f-size16" [disabled]="adBtncontact" *ngIf="showContactImagDisable"
+                        id="addProgramContact" id="addProgramContact" (click)="addProgramContact()" title="Add Contact">
+             <!-- <img class="width35 m-tr20" src="assets/images/add disable.png" *ngIf="!showAddImagDisable"> -->
+             
+
+             <img class="width35 m-tr20" src="assets/images/add__plus_icon.png">
+             &nbsp;</button>
+                    </div>
+                    <br>
+                    <br>
+                    <div>
+                      <div class="text-center" *ngIf="!programContactList || programContactList =='' && !showEditContact">
+                        <br>
+                        <br> <img class="width45" src="assets/images/add contact_icon.png"> {{labelData.noContactInfo}}
+
+                      </div>
+
+
+                      <div *ngIf="!showEditContact  && programContactList " class="col-lg-12 padding0 col-md-12 col-xs-12 col-sm-12 flexcroll"
+                        style="clear: both;
+            overflow: auto;
+            overflow-x: hidden;
+            height: 200px;">
+
+                        <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 ull-striped" *ngFor="let proContact of programContactList ;let i = index">
+                          <div class="row" style="padding:0px 0px;margin-bottom:5px " [ngClass]="{'color': i%2==0, 'three':i%2==1}">
+
+
+
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12" style="padding-top:4px">
+                              <ul style="list-style:none;margin-left:-45px">
+                                <li style="float:left;width:30px" *ngIf="proContact.programContact.contactTypeValueId == '13'">
+                                    <i class="fa fa-envelope f-size1em color_btn" aria-hidden="true"></i> 
+                                    </li>
+                                <li style="float:left;width:30px" *ngIf="proContact.programContact.contactTypeValueId == '14'">
+                                        <i class="fa fa-mobile f-size1em color_btn" aria-hidden="true"></i> 
+                                </li>
+                                <li style="float:left;width:30px" *ngIf="proContact.programContact.contactTypeValueId == '15'">
+                                        <i class="fa fa-phone f-size1em color_btn" aria-hidden="true"></i>
+                                </li>
+                                <li style="float:left;width:30px" *ngIf="proContact.programContact.contactTypeValueId == '16'">
+                                        <i class="fa fa-fax f-size1em color_btn" aria-hidden="true"></i>                  
+                                </li>
+                                <li style="float:left"> {{proContact.programContact.contactInfo}}</li>
+                                
+                              </ul>                                                                   
+                            </div>
+
+
+
+
+
+
+                            <!-- <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12" style="padding-top:4px">
+                              <span *ngIf="proContact.programContact.contactTypeValueId == '13'">
+                                <i class="fa fa-envelope f-size1em color_btn" aria-hidden="true"></i> 
+                                &nbsp;&nbsp;</span>
+                              <span *ngIf="proContact.programContact.contactTypeValueId == '14'">
+                                     <i class="fa fa-mobile f-size1em color_btn" aria-hidden="true"></i> &nbsp;&nbsp;</span>
+                              <span *ngIf="proContact.programContact.contactTypeValueId == '15'">
+                                         <i class="fa fa-phone f-size1em color_btn" aria-hidden="true"></i> &nbsp;&nbsp;</span>
+                              <span *ngIf="proContact.programContact.contactTypeValueId == '16'">
+                                             <i class="fa fa-fax f-size1em color_btn" aria-hidden="true"></i> &nbsp;&nbsp; </span>                            
+                                               {{proContact.programContact.contactInfo}}
+                            </div> -->
+
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                              <a (click)="editProgramContact(proContact,i)" id="editProgramContact" class="color_btn pull-right cursor-pointer">
+                    
+                      <img class="width35"  style="margin-right: -16px" src="assets/images/adress_edit_lighter icon (1).png"
+                     title="Edit"  onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+                      onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'">
+                  </a>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="showEditContact" style="clear: both; overflow: auto; overflow-x: hidden;height: 250px;">
+                      <form #programContactact="ngForm">
+                        <div *ngFor="let programContact of departmentContact">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top10">
+
+                            <mat-form-field class="width100">
+                              <mat-select placeholder="Contact Type" [disabled]="diesabled" (change)="onSelect(programContact.contactTypeValueId)" (ngModelChange)="programContact.contactInfo=''"
+                                [(ngModel)]="programContact.contactTypeValueId" name="contactTypeValueId" id="contactTypeValueId"
+                                #contactTypeValueId="ngModel" required="required">
+                                <mat-option [value]="">Select Contact Type</mat-option>
+                                <mat-option *ngFor="let cntctLookup of contactLookupArray" [value]="cntctLookup.lookupValueId">{{cntctLookup.lookupValue}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+
+
+                            <!-- <select class="input1 width100 m-btm8" [disabled]="diesabled" 
+                  (change)="onSelect($event.target.value)"  [(ngModel)]="programContact.contactTypeValueId"
+                    name="contactTypeValueId" id="contactTypeValueId" #contactTypeValueId="ngModel">                    
+
+                            <option  value="">{{labelData.contactType}}</option>
+                            <option *ngFor="let cntLookup of ContactLookups"
+                             [value]="cntLookup.lookupValueId" >{{cntLookup.lookupValue}}</option>
+                          </select> -->
+                            <!-- <div *ngIf="option == 'Contact Type'">            
+                    <mat-form-field class="width100">
+                      <input matInput [disabled]="disabled" name="contactInfo" [(ngModel)]="programContact.contactInfo" placeholder={{labelData.contactInfo}}
+                        id="contactInfo" #contactInfo="ngModel" required="required">
+                    </mat-form-field>
+                    <div *ngIf="contactInfo.errors && (contactInfo.dirty || contactInfo.touched)" class="color-red m-btm5" >
+                    </div>
+                  </div> -->
+
+
+                            <div *ngIf="option == '13'">
+                              <mat-form-field class="width100 mtop10">
+                                <input matInput type="email" email name="contactInfo" #contactInfo="ngModel" [(ngModel)]="programContact.contactInfo" placeholder={{labelData.email}}
+                                  id="contactInfo" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required/>
+                              </mat-form-field>
+                              <div *ngIf="contactInfo.errors && (contactInfo.dirty || contactInfo.touched)" class="color-red m-btm5">
+                                <div [hidden]="!contactInfo.hasError('required')">Email is required</div>
+                                <div [hidden]="!contactInfo.errors.pattern" class="color-red m-btm5">Email format should be
+                                  <small><b>abcd@abc.com</b></small></div>
+                              </div>
+                            </div>
+
+                            <div *ngIf="option == '14'">
+                              <mat-form-field class="width100 mtop10">
+                                <input matInput class="" name="Mobile" pattern="[0-9]+" maxlength="10" placeholder={{labelData.mobile}} [(ngModel)]="programContact.contactInfo"
+                                  #programmeMobile="ngModel" pattern="^[6789]\d{9}$" minlength="10" maxlength="10" id="programmeMobile"
+                                  required/>
+                              </mat-form-field>
+                              <div *ngIf="programmeMobile.errors && (programmeMobile.dirty || programmeMobile.touched)" class="color-red m-btm5 f-size12">
+                                <div [hidden]="!programmeMobile.hasError('pattern') && !programmeMobile.hasError('minlength') && !programmeMobile.hasError('maxlength')">Please Enter Valid Mobile Number</div>
+                              </div>
+                            </div>
+
+                            <div *ngIf="option == '15'">
+                              <mat-form-field class="width100 mtop10">
+                                <input matInput class=" " name="Phone"   placeholder={{labelData.phone}} [(ngModel)]="programContact.contactInfo"
+                                  id="programmePhone" #programmePhone="ngModel" pattern="[0-9]+" minlength="6" maxlength="11"
+                                  required/>
+                              </mat-form-field>
+                              <div *ngIf="programmePhone.errors && (programmePhone.dirty || programmePhone.touched)" class="color-red m-btm5 f-size12">
+                                <div [hidden]="!programmePhone.hasError('pattern') && !programmePhone.hasError('minlength')">Please Enter Valid Mobile Number</div>
+                              </div>
+                            </div>
+
+
+                            <!-- <div *ngIf="option == '16'">
+                              <mat-form-field class="width100 mtop10">
+                                <input matInput type="text" name="Fax" placeholder={{labelData.fax}} [(ngModel)]="programContact.contactInfo" id="programmeFax"
+                                  #programmeFax="ngModel" minlength="10" pattern="[0-9\+\-]+" required/>
+                              </mat-form-field>
+                              <div *ngIf="programmeFax.errors && (programmeFax.dirty || programmeFax.touched)" class="color-red m-btm5">
+                                <div [hidden]="!programmeFax.hasError('minlength') && !programmeFax.hasError('pattern')">Enter Valid Fax Number</div>
+                              </div>
+                            </div> -->
+
+                          </div>
+
+                          <!-- buttons for contact information starts -->
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:5px">
+                            <div class="pull-right">
+                              <button type="submit" *ngIf="!btnContactreadonly " class="btn submit-btn " [disabled]="!programContactact.form.valid" (click)="programContactSubmit($event)">{{labelData.btnSave}}</button>
+                              <button type="submit" *ngIf="btnContactreadonly" class="btn submit-btn" [disabled]="!programContactact.form.valid" (click)="updateProgramContactSubmit()"> {{labelData.btnUpdate}}</button>
+                              <a class="btn submit-btn " (click)="cancelProgramContact()"> {{labelData.btnCancel}}</a>
+                            </div>
+
+                          </div>
+                          <!-- buttons for contact information ends -->
+                        </div>
+                      </form>
+
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--contact information ends-->
+
+            <div class="clearfix"></div>
+
+            <br>
+
+            <!-- upload images starts -->
+            
+            <!-- upload images ends -->
+
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

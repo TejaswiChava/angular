@@ -1,0 +1,28 @@
+.panel-title .caret {
+    display: inline-block !important;
+    float: right !important;
+}
+.serachboxBg{
+    background-image: url('/../assets/images/company search_bg.jpg');
+}
+.divCenter{
+    left:0;
+    right: 0;
+    margin: auto;
+    display: table;
+}
+.data-count {
+    padding: 10px 0px;
+    /* border:1px solid red; */
+    background: #ea9215;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 3px;
+    margin-right: 2%;
+    border-radius: 4px;
+    width: 10%;
+}
+
+/*Will hide first checkbox from multiple select dropdown*/
+::ng-deep .mat-option:first-child .mat-pseudo-checkbox{ display: none; }
+  

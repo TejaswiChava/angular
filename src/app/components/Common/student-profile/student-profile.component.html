@@ -1,0 +1,338 @@
+<!-- cover pic section starts -->
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+      <img class="width100 coverpic" src="{{coverPic}}" onerror="this.src='assets/images/Profile_Page_Icons/company_default_cover_image.jpg'">
+      <!-- <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 padding0">
+          <img class="displaypic" src="assets/images/Profile_Page_Icons/profile_bg_image.jpg">
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+    <img class="display_wall_pic" src="assets/images/Profile_Page_Icons/profile_pic.png">
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+    <p class="display_name font_robotomedium"> {{firstName}} </p>
+    <p> {{middleName}} </p>
+    <p> {{lastName}}  </p>
+</div>
+      </div> -->
+  </div>
+</div>
+<!-- cover pic section starts -->
+
+<!-- display pic starts -->
+<div class="row background_ffff font_robotoregular">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding0 mtop-125" id="studentdisplayPic_bg">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+        <div class="mtop-23">
+      <img class="profilepic center-block"  src="{{profilePic}}"  onerror="this.src='assets/images/Profile_Page_Icons/company_default_cover_image.jpg'" >
+  </div>
+</div>
+
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+    <div class="mtop-23">  
+  <p class="display_name font_robotomedium wordBreak">{{firstName}} {{lastName}}</p>
+  <!-- <p class="display_name font_robotomedium"></p>  -->
+  <p>{{cityId}} </p>
+    </div>
+    <div>
+      <p class="display_name font_robotmedium" *ngIf="this.gender === 1">{{genderMale}}</p>
+      <p *ngIf="this.gender === 0">{{genderFemale}}</p>
+    </div>
+    <br>
+    <div style="margin-top:0%">
+    <p class="display_name font_robotmedium">Profile strength:<span>{{profileStrength}}</span>% </p> 
+    <img src="{{strength_image}}" style="margin-left:-10px" title="{{profileStrength}}" onerror="src='assets/images/Profile_Page_Icons/strength_09.png'" width="190px" height="25px" alt="strength">   
+    </div>
+  </div>
+</div>    
+<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 padding0">
+</div>        
+</div>        
+</div>  
+<!-- display pic ends -->
+
+
+
+
+<!-- <p> {{profilePic}} </p>
+<p> {{ coverPic }} </p> -->
+<!-- <img src="{{profilePic}}" alt="profile pic"> -->
+
+<!-- body section starts -->
+<div class="row background_ffff font_robotoregular">
+  <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+    <!-- content section starts -->
+   
+      <!-- summary section starts -->
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 m-top30 ">
+        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 padding0">
+          <h3 class="display_name font_robotomedium">About the Student:</h3>
+          <p class="regulartext">{{summaryDetails}}</p>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+          <!-- <h4 class="font_robotomedium">Profile strength</h4>
+          <img src="{{strength_image}}" title="{{profileStrength}}" onerror="src='assets/images/Profile_Page_Icons/strength_09.png'" width="220px" height="30px" alt="strength"><span class="font_robotomedium">{{profileStrength}}</span>% -->
+          <table class="m-top10 profileStrength">
+            <tr *ngIf="facebook">
+              <td><img  src="assets/images/Profile_Page_Icons/facebook_icon.png"  alt="facebook" class="Social_profile_Icons"></td>
+              <td> <a href="{{facebook}}" target="_blank" style="color:blue" class="wordBreak f-size13 regulartext">{{facebook}}</a> </td>
+            </tr>
+            <tr *ngIf="twitter">
+              <td> <img src="assets/images/Profile_Page_Icons/twitter_icon.png" alt="twitter image" class="Social_profile_Icons" > </td>
+              <td>  <a href="{{twitter}}" target="_blank" class="wordBreak f-size13 regulartext" style="color:blue">{{twitter}}</a></td>
+            </tr>
+            <tr *ngIf="youtube">
+              <td><img src="assets/images/Profile_Page_Icons/youtube_icon.png" alt="Youtube image" class="Social_profile_Icons"></td>
+              <td> <a href="{{youtube}}" target="_blank" class="wordBreak f-size13 regulartext" style="color:blue">{{youtube}}</a> </td>
+            </tr>
+            <tr *ngIf="linkdin">
+              <td>  <img src="assets/images/Profile_Page_Icons/linkedin_icon.png" alt="Linkdin image" class="Social_profile_Icons" > </td>
+              <td><a href="{{linkdin}}" target="_blank" class="wordBreak f-size13 regulartext" style="color:blue">{{linkdin}}</a></td>
+            </tr>
+            <tr *ngIf="github">
+              <td>  <img src="assets/images/Profile_Page_Icons/github.png" style="object-fit:cover" alt="Linkdin image" class="Social_profile_Icons" > </td>
+              <td><a href="{{github}}" target="_blank" class="wordBreak f-size13 regulartext" style="color:blue">{{github}}</a></td>
+            </tr>
+          </table>
+         
+          
+        </div>
+      </div>
+      <!-- summary section ends -->
+      <!-- academic information starts -->
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" style="margin-top:35px">
+        <div class="bottom_color">
+          <h4 style="display: inline-block;" class="studentprofile_color font_robotomedium">Academic Information</h4>
+        </div>
+      </div>
+        
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+        <div style="margin-top:20px">        
+              <div style="border:1px solid #ccc;padding:10px;margin-top:10px" *ngFor="let x of degreeInfo" >
+                <!-- <h4 class="text-uppercase studentprofile_color">{{ x.ProgramDetails.programTypeValueLookupValue.lookupValue }}
+                  </h4> -->
+                  <h4 class="studentprofile_color">{{x.CampusDetails.name}}, {{ x.UniversityDetails.name }}</h4>
+                  <div class="regulartext">
+                      <p>{{x.ProgramDetails.programName}}</p>
+                      <!-- <p> {{x.ProgramDetails.departmentDetails.name}} </p> -->
+                      <p *ngIf="x.Details.cgpaScore"><b>{{degreeScore}}:</b> {{x.Details.cgpaScore}}%  </p>               
+                      <p *ngIf="x.Details.highlights"><b>Highlights</b>: {{x.Details.highlights}}</p>      
+                  </div>
+               
+                <!-- <div class="pull-right">
+                <a *ngIf="!x.url"  class="btn  studentprofile_button" >No Attachments Avaliable</a> 
+                <a *ngIf="x.url"  href="{{x.url}}" class="btn  studentprofile_button" >View Attachment</a>                
+                </div> -->
+                <div class="clearfix"></div>
+              </div>
+          </div>
+      </div>
+
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 m-top10">
+          
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="border:1px solid #ccc;padding:10px;min-height:250px;overflow: auto;">
+            <div class="regulartext ">
+             
+                <h4 class=" studentprofile_color">12th Info</h4>
+                 <div *ngFor="let x of interInfo  | slice:0:1">
+                  <p>{{x.instituteName}}</p>
+                  <p *ngIf="x.scoreGrade"><b>{{degreeScore}}:</b> {{x.scoreGrade}}%</p>
+                  <p *ngIf="x.scoreGrade"><b>Completion Year:</b> {{x.completionYear}}</p>   
+                  <!-- <p>{{degreeUniversity}}</p> -->
+                  <p *ngIf="x.comment"><b>Highlights:</b> {{x.comment}} </p>
+                  <!-- <button class="btn pull-right studentprofile_button">
+                      <a *ngIf="!x.url" >No Attachments Avaliable</a>
+                      <a *ngIf="x.url" href="{{x.url}}" target="_blank"> View Attachment </a>
+                  </button> -->
+              </div>
+          </div>
+       </div>   
+
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="border:1px solid #ccc;padding:10px;min-height:250px;overflow: auto;">
+            <div class="regulartext">
+              <h4 class="studentprofile_color">10th Info</h4>
+              <p *ngIf="sscInfo"> {{sscInfo.instituteName}} </p>
+              <p *ngIf="sscInfo"><b>{{degreeScore}}:</b> {{sscInfo.scoreGrade}}% </p>
+              <p *ngIf="sscInfo"><b>Completion Year:</b> {{sscInfo.completionYear}}</p>
+              <p *ngIf="sscInfo"><b>Highlights:</b>{{sscInfo.comment}} </p>
+              <!-- <button *ngIf="sscInfo" class="btn pull-right studentprofile_button">
+                <a  *ngIf="sscInfo.url"  href="{{sscInfo.url}}" target="_blank">View Attachment </a>
+                <a *ngIf="!sscInfo.url"  >No Attachments Avaliable</a>
+              </button> -->
+              
+            </div>
+          </div>
+
+
+       </div>
+
+
+    
+      <!-- academic information ends -->
+
+      <!-- skills section starts -->
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" style="margin-top:35px">
+        <div class="bottom_color">
+          <h4 class="m-top20" style="display: inline-block;" class="studentprofile_color font_robotomedium">SKILLS</h4>
+        </div>
+        <div style="margin-top:20px">
+          <ul style="list-style:none;margin-left:-38px" *ngFor="let x of skillsfinal">
+            <li style="float:left;margin-right:15px;margin-bottom:25px"><a class="roundedBox_text">{{x}}</a></li>
+          </ul>          
+        </div>
+        </div>
+        <!-- skills section ends -->
+
+        <!-- intrests section starts -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" style="margin-top:35px">
+          <div class="bottom_color">
+            <h4 class="m-top20" style="display: inline-block;" class="studentprofile_color font_robotomedium">Interests</h4>
+          </div>
+          <div style="margin-top:20px">
+              <ul style="list-style:none;margin-left:-38px" *ngFor="let x of interestFinal">
+                <li style="float:left;margin-right:15px;margin-bottom:25px"><a class="roundedBox_text">{{x}}</a></li>
+              </ul>          
+            </div>
+        </div>
+        <!-- intrests section ends -->
+
+
+        <!-- hobbies section starts -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" style="margin-top:35px">
+          <div class="bottom_color">
+            <h4 class="m-top20" style="display: inline-block;" class="studentprofile_color font_robotomedium">Hobbies</h4>
+          </div>
+          <div style="margin-top:20px">
+              <ul style="list-style:none;margin-left:-38px" *ngFor="let x of hobbiesNames">
+                <li style="float:left;margin-right:15px;margin-bottom:25px"><a class="roundedBox_text">{{x}}</a></li>
+              </ul>          
+            </div>
+        </div>
+        <!-- hobbies section ends -->
+
+
+        <!-- project section starts -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" style="margin-top:35px;" >
+          <div class="">
+            <h4 class="m-top20" style="display: inline-block;" class="studentprofile_color font_robotomedium">Projects</h4>
+          </div>
+
+          <div *ngFor="let x of projectsInfo" >
+
+
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" style="border-top:1px solid #cccccc">
+              
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+              <div style="margin-top:15px;">
+               <p><b>Project Name:  </b> {{x.programName}}</p>
+                </div> 
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding0">
+                <p><b>Institute Name: </b>{{x.instituteName}} </p>  
+              </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding0">
+              <p><b>Duration:</b> {{x.Duration}} 
+                  <span *ngIf="x.DurationtypeValueId === 383 && x.DurationtypeValueId !== 1"> Months</span>
+                  <span *ngIf="x.DurationtypeValueId === 383 && x.DurationtypeValueId === 1"> Month</span>
+                  <span *ngIf="x.DurationtypeValueId === 395 && x.DurationtypeValueId !== 1"> Years</span>
+                  <span *ngIf="x.DurationtypeValueId === 395 && x.DurationtypeValueId === 1"> Year</span>
+              </p>
+              </div>
+              <p><b>Description:</b> </p>
+              <p> {{x.comment}} </p>
+             </div>
+
+             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding0" *ngIf="x.url;else displayNoData">
+                <a href='{{x.url}}' target="_blank" > <p class="text-center studentprofile_color" style="margin-top:15px;">View Attachment</p> 
+              <img style="height:120px;width:120px;object-fit:cover;" class="center-block mtop10 " alt="certficate icon" src="assets/images/certificate_icon.png"></a>
+              <!-- <img src=""> -->
+             </div>
+             </div>
+
+          </div>
+
+        </div>
+        <!-- project section ends -->
+
+        <!-- certificate section starts -->
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" >
+
+            <div class="">
+                <h4 class="m-top20" style="display: inline-block;" class="studentprofile_color font_robotomedium">Certificates</h4>
+              </div>
+
+
+          <div *ngFor="let x of certificateInfo">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" style="border-top:1px solid #cccccc">
+            
+              <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+              <div style="margin-top:15px;">
+               <p> <b>Certificate Name:  </b> {{x.programName}}</p>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding0">
+                <p >
+                  <b>institute Name:  </b> {{x.instituteName}} </p>    
+              </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding0">
+                <p><b>Duration: </b> {{x.Duration}} 
+                  <span *ngIf="x.DurationtypeValueId === 383 && x.DurationtypeValueId !== 1"> Months</span>
+                  <span *ngIf="x.DurationtypeValueId === 383 && x.DurationtypeValueId === 1"> Month</span>
+                  <span *ngIf="x.DurationtypeValueId === 395 && x.DurationtypeValueId !== 1"> Years</span>
+                  <span *ngIf="x.DurationtypeValueId === 395 && x.DurationtypeValueId === 1"> Year</span>
+                </p>
+              </div>
+              <p><b>Description:</b></p>
+              <p class="regulartext"> {{x.comment}} </p>
+             </div>
+
+
+             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding0" *ngIf="x.url;else displayNoData">
+              <a href={{x.url}} target="_blank" > <p class="text-center studentprofile_color " style="margin-top:15px;">View Attachment</p> 
+              <img style="height:120px;width:120px;object-fit:cover;" class="center-block mtop10 " alt="certficate icon" src="assets/images/certificate_icon.png"></a>
+              <!-- <img src=""> -->
+             </div>
+           
+            
+            </div>
+          
+           
+          </div>
+        </div>
+        <!-- certificate section ends -->
+
+        <!-- awards section starts -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" >
+          <div class="bottom_color">
+            <h4 class="m-top20" style="display: inline-block;" class="studentprofile_color font_robotomedium"> AWARDS </h4>
+            <!-- <img class="edit_css  cursor-pointer pull-right"  src="{{edit_img}}"> -->
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 m-top20">
+           <div>
+             <ul class="list-none m-left40" *ngFor="let x of awardsInfo">
+               <li class="awards_Css">
+               <a href='{{x.url}}' target="_blank"> <img  class="award_img" 
+                src="assets/images/certificate_icon.png"> 
+               <p style="text-align:center" class="color_black">{{x.programName}}</p></a>
+               </li>
+             </ul>
+           </div>
+          </div>
+        </div>
+        <!-- awards section starts -->
+        <ng-template #displayNoData>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding0" > 
+               
+                <a> <p class="text-center studentprofile_color " style="margin-top:15px;">No Attachments Avaliable</p> 
+                  <img style="height:120px;width:120px;object-fit:cover;" class="center-block mtop10 " alt="certficate icon" src="assets/images/certificate_icon.png"></a>
+          </div>
+         </ng-template>
+      
+      </div>
+      <!-- content section ends -->
+  <!-- body section ends -->
+
+  <div class="clearfix"></div>
+<app-footer></app-footer>

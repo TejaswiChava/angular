@@ -1,0 +1,75 @@
+<div *ngIf="!list" class="flexcroll table-scroll">
+<table class="table table-striped" id="myProgram" [mfData]="data | campusEventList : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+[(mfSortBy)]="sortBy" [(mfSortOrder)]='sortOrder'>
+
+<thead>
+    <input type="checkbox" (change)="showInactiveEvents($event)"> <b> Include Inactive Events</b><br>
+    <br>
+  <tr>
+    <th>
+      <mfDefaultSorter by="eventName">Event Name</mfDefaultSorter>
+    </th>
+
+    <th>
+      <mfDefaultSorter by="scheduledDate">Scheduled Date</mfDefaultSorter>
+    </th>
+
+    <th>
+      <mfDefaultSorter by="scheduledStartTime">Scheduled Start Time</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="duration">Duration</mfDefaultSorter>
+    </th>
+    <th>
+        <mfDefaultSorter by="eventStatusValueId">Event Status</mfDefaultSorter>
+      </th>
+      <th>
+          <mfDefaultSorter by="createDatetime">Creation Date</mfDefaultSorter>
+        </th>
+  </tr>
+</thead>
+<tbody>
+  <!-- (click)="viewPckg(searchList)" -->
+  <tr *ngFor="let eventList of mf.data" class="notfirst cursor-pointer" (click)="viewEvent(eventList)">
+
+    <td>
+      {{eventList.eventName | limitTo:[30]}}
+    </td>
+    <td>
+      {{eventList.scheduledDate | date}} </td>
+
+    <td>
+      {{eventList.scheduledStartTime}} </td>
+    <td>
+      {{eventList.duration}} </td>
+      <td *ngIf="eventList.eventStatusValueId">
+          <div>
+              <button type="button" class="btn" id="btn{{eventList.eventStatusValueId}}">
+                {{eventStatus[eventList.eventStatusValueId].lookupValue}}</button>
+            </div>
+         </td>
+          <td>
+              {{eventList.createDatetime | date}} </td>
+  </tr>
+  <tr *ngIf="mf.data == ''">
+    <td colspan="8" class="text-center">
+      <span>
+        No Data Found 
+      </span>
+    </td>
+  </tr>
+</tbody>
+<tfoot>
+  <tr>
+    <td colspan="12">
+      <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+    </td>
+  </tr>
+</tfoot>
+</table>
+</div>
+<div *ngIf="list"> 
+  <app-create-campus-event [selectedEvent]="sendList" ></app-create-campus-event>
+</div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,635 @@
+<div style="background:white;">
+  <div class="row  margin0">
+    <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+      <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 educationPerson">
+
+        <!--Education person info starts-->
+        <form #companyProfileForm="ngForm">
+          <div class="">
+            <div class="">
+              <div style="padding: 10px;border:1px solid #ccc;margin-top:20px;background:white; border-radius: 4px;">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    <h4 class="font_robotobold"> Basic Info</h4>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 padding0">
+                    <a *ngIf="btnreadonly" class=" pull-right" (click)="editSubmit()">  <img class="width35 cursor-pointer" src="assets/images/adress_edit_lighter icon (1).png" title="Edit" 
+                            onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+                            onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'"></a>
+                  </div>
+                </div>
+
+
+
+
+                <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 profile text-center">
+                  <div *ngIf="empPer">
+                    <!-- <img class="profile_css" src="{{apiEndPoint}}Attachments/employer-person-profile-picture/download/{{empPer.pictureUrl}}"> -->
+                    <img class="profile_css" alt="Person Profile Picture" src="{{apiEndPoint}}{{empPer.pictureUrl}}" 
+                    onerror="this.src='assets/images/default_user_icon.png'">
+                  </div>
+                </div>
+
+                <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12 profile text-center" *ngIf="!readonly">
+                  <div class="fileUpload btn padding0">
+                    <span><img style="width:20%" src="assets/images/upload_side icon.png">Upload Your Picture</span>
+                    <input type="file" class="upload" [disabled]="readonly"  (change)="uploadImage($event)" name="picture_url"
+                    id="logo" accept=".jpeg,.jpg,.png,.pdf" />
+
+                  </div>
+                </div>
+
+                <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12  ">
+                  <mat-form-field class="width100 mtop10">
+                    <mat-select placeholder="Prefix" name="prefixValueId" [disabled]="readonly" [(ngModel)]="empPer.prefixValueId" >
+                      <mat-option value="">Select Prefix</mat-option>
+                      <mat-option *ngFor="let preType of prefixLookups" [value]="preType.lookupValueId">
+                        {{ preType.lookupValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12  m-top10">
+                  <mat-form-field class="width100">
+                    <input matInput placeholder="First Name" [readonly]="readonly" name="firstName" id="firstName" [(ngModel)]="empPer.firstName"
+                      #firstName="ngModel" maxlength="50"  required>
+                  </mat-form-field>
+                  <!-- <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched)" class="color-red errormsg_css f-size12">
+                      <div [hidden]="!firstName.hasError('pattern')">Only Alphabets Allowed</div>
+                    </div> -->
+                </div>
+
+                <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12  m-top-15">
+                  <mat-form-field class="width100">
+                    <input matInput placeholder="Last Name" [readonly]="readonly" name="lastName" id="lastName" [(ngModel)]="empPer.lastName"
+                      #lastName="ngModel" maxlength="50"  >
+                  </mat-form-field>
+                  <!-- <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)" class="color-red errormsg_css f-size12">
+                      <div [hidden]="!lastName.hasError('pattern')">Only Alphabets Allowed</div>
+                    </div> -->
+                </div>
+
+                <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12  m-top-15">
+                  <mat-form-field class="width100">
+                    <input matInput placeholder="Middle Name" [readonly]="readonly" name="middleName" id="middleName" [(ngModel)]="empPer.middleName"
+                      #middleName="ngModel" maxlength="50"  >
+                  </mat-form-field>
+                  <!-- <div *ngIf="middleName.errors && (middleName.dirty || middleName.touched)" class="color-red errormsg_css f-size12">
+                      <div [hidden]="!middleName.hasError('pattern')">Only Alphabets Allowed</div>
+                    </div> -->
+                </div>
+
+                <div class="col-lg-offset-3 col-lg-6 col-lg-offset-3 col-md-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12 ">
+                    <div class="">
+                        
+                          <mat-radio-group class="example-radio-group" [disabled]="readonly" name="genderValueId" [(ngModel)]="empPer.genderValueId">
+                              <mat-radio-button class="example-radio-button"  *ngFor="let perInfo of personTypeInfo" [value]="perInfo.id">
+                               
+                                      <img  src="{{perInfo.disImgSrc}}">
+                                  
+                        
+                              </mat-radio-button>
+                            </mat-radio-group>
+                      </div>
+                </div>
+                <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12">
+                  <mat-form-field class="width100 ">
+                    <mat-select placeholder="Person Type" name="personTypeValueId" [disabled]="readonly" [(ngModel)]="empPer.personTypeValueId">
+                      <mat-option value="">Select Person Type</mat-option>
+                      <mat-option *ngFor="let pType of personType" [value]="pType.lookupValueId" >
+                        {{ pType.lookupValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <!-- <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12  ">
+                  <mat-form-field class="width100 mtop10">
+                    <mat-select placeholder="Prefix" name="prefixValueId" [disabled]="readonly" [(ngModel)]="empPer.prefixValueId" >
+                      <mat-option [value]="">Select Prefix</mat-option>
+                      <mat-option *ngFor="let preType of prefixLookups" [value]="preType.lookupValueId">
+                        {{ preType.lookupValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div> -->
+
+
+                <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 ">
+                  <mat-form-field class="width100 mtop10">
+                    <input matInput placeholder="Designation"  maxlength="100"  [readonly]="readonly" name="designation" id="designation" [(ngModel)]="empPer.designation"
+                      #designation="ngModel" >
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+
+                    <div class="pull-right">
+                         <button *ngIf="!btnreadonly" class="btn submit-btn m-top10 " [disabled]="!companyProfileForm.form.valid" 
+                         (click)="empPersonSubmit()"> Update</button>    
+                         <a *ngIf="!btnreadonly" class="btn submit-btn m-top10 "  id="cancelSubmit"  (click)="cancelSubmit()"> Cancel</a>
+                         
+                        </div>
+                  
+                  
+                </div>
+
+                <div class="clearfix"></div>
+
+              </div>
+            </div>
+          </div>
+        </form>
+        <!--Education person info ends-->
+
+      </div>
+
+
+
+      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+
+
+
+        <!-- contact information starts-->
+
+        <div class="row m-top20">
+          <div class="font_robotoregular">
+            <div class="flexcroll border_css box_shadow col-lg-12 col-md-12 col-sm-12 col-xs-12" style="min-height: 267px;">
+              <div class="m-top5">
+
+                <h4 style="display: inline" class="text-capitalize f-size16"><b>Contact Information</b></h4>
+
+                <div class="pull-right ">
+
+                  <button type="submit" class="btn backgroundColor_transperent color-theme f-size16" [disabled]="adBtncontact" (click)="addNewContact()">
+                 <!-- <img class="width35 m-tr20" src="assets/images/add disable.png" *ngIf="!showAddImagDisable"> -->
+                 <img class="width35 m-tr20" src="assets/images/add__plus_icon.png" title="Add" *ngIf="showContactImagDisable">
+                 </button>
+                </div>
+                <br>
+                <br>
+                <div>
+                  <div class="text-center" *ngIf="!contactList || contactList =='' && !showEditContact">
+                    <br>
+                    <br> <img class="width45" src="assets/images/add contact_icon.png"> Please Add Contact
+
+                  </div>
+
+
+                  <div *ngIf="!showEditContact  && contactList " class="col-lg-12  col-md-12 col-xs-12 col-sm-12 flexcroll padding0" style="clear: both;
+                overflow: auto;
+                overflow-x: hidden;
+                height: 200px;">
+
+                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ull-striped" *ngFor="let perCont of contactList ;let i = index">
+                      <div class="row" style="padding:0px 0px;margin-bottom:5px " [ngClass]="{'color': i%2==0, 'three':i%2==1}">
+
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12" style="padding-top:4px">
+                          <ul style="list-style:none;margin-left:-45px">
+                            <li style="float:left;width:30px" *ngIf="perCont.employerPersonContact.contactTypeValueId == '13'">
+                                <i class="fa fa-envelope f-size1em color_btn" aria-hidden="true"></i> 
+                                </li>
+                            <li style="float:left;width:30px" *ngIf="perCont.employerPersonContact.contactTypeValueId == '14'">
+                                    <i class="fa fa-mobile f-size1em color_btn" aria-hidden="true"></i> 
+                            </li>
+                            <li style="float:left;width:30px" *ngIf="perCont.employerPersonContact.contactTypeValueId == '15'">
+                                    <i class="fa fa-phone f-size1em color_btn" aria-hidden="true"></i>
+                            </li>
+                            <li style="float:left;width:30px" *ngIf="perCont.employerPersonContact.contactTypeValueId == '16'">
+                                    <i class="fa fa-fax f-size1em color_btn" aria-hidden="true"></i>                  
+                            </li>
+                            <li style="float:left">  {{perCont.employerPersonContact.contactInfo}}</li>
+                            
+                          </ul>                                                                   
+                        </div>
+                        
+                                      
+                        
+                        <!-- <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12" style="padding-top:4px">
+                          <span *ngIf="perCont.employerPersonContact.contactTypeValueId == '13'">
+                                    <i class="fa fa-envelope f-size1em color_btn" aria-hidden="true"></i> 
+                                    &nbsp;&nbsp;</span>
+                          <span *ngIf="perCont.employerPersonContact.contactTypeValueId == '14'">
+                                         <i class="fa fa-mobile f-size1em color_btn" aria-hidden="true"></i> &nbsp;&nbsp;</span>
+                          <span *ngIf="perCont.employerPersonContact.contactTypeValueId == '15'">
+                                             <i class="fa fa-phone f-size1em color_btn" aria-hidden="true"></i> &nbsp;&nbsp;</span>
+                          <span *ngIf="perCont.employerPersonContact.contactTypeValueId == '16'">
+                                                 <i class="fa fa-fax f-size1em color_btn" aria-hidden="true"></i> &nbsp;&nbsp; </span>                          
+                                                 {{perCont.employerPersonContact.contactInfo}}
+
+
+                        </div> -->
+
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                          <a (click)="editContact(perCont,i)" class="color_btn pull-right cursor-pointer">
+                        
+                          <img class="width35"  style="margin-right: -16px" src="assets/images/adress_edit_lighter icon (1).png" title="Edit"
+                          onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+                          onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'">
+                      </a>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="showEditContact" style="clear: both;
+              overflow: auto;
+              overflow-x: hidden;
+              height: 195px;">
+                  <form #companycontact="ngForm">
+                    <div *ngFor="let empPerCont of eduPerContNew">
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top10">
+
+
+                          <mat-form-field class="width100">
+                              <mat-select placeholder="Contact Type" [disabled]="disabled" (change)="onSelect(empPerCont.contactTypeValueId)" (ngModelChange)="empPerCont.contactInfo=''"
+                              [(ngModel)]="empPerCont.contactTypeValueId" name="contactTypeValueId" id="contactTypeValueId" #contactTypeValueId="ngModel" required="required">
+                              <mat-option [value]="">Select Contact Type</mat-option> 
+                              <mat-option *ngFor="let cntctLookup of ContactLookups" [value]="cntctLookup.lookupValueId" >{{cntctLookup.lookupValue}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+
+                        <!-- <select class="input1 width100 key-numeric" [disabled]="disabled" (change)="onSelect($event.target.value)" (ngModelChange)="empPerCont.contactInfo=''"
+                          [(ngModel)]="empPerCont.contactTypeValueId" name="contactTypeValueId" id="contactTypeValueId" #contactTypeValueId="ngModel">                    
+                                <option  >Contact Type</option>
+                                <option  *ngFor="let cntctLookup of ContactLookups" [value]="cntctLookup.lookupValueId" >{{cntctLookup.lookupValue}}</option>
+                              </select> -->
+                        <!-- <div *ngIf="option == 'Contact Type'">
+                          <mat-form-field class="width100 m-top20">
+                            <input matInput [disabled]="disabled" name="contactInfo" [(ngModel)]="empPerCont.contactInfo" placeholder="Please Enter Your Contact Info"
+                              id="contactInfo" #contactInfo="ngModel" required="required">
+                          </mat-form-field>
+                          <div *ngIf="contactInfo.errors && (contactInfo.dirty || contactInfo.touched)" class="color-red">
+                          </div>
+                        </div> -->
+
+
+                        <div *ngIf="option == '13'">
+                          <mat-form-field class="width100">
+                            <input matInput type="email"  name="contactInfo" #contactInfo="ngModel" [(ngModel)]="empPerCont.contactInfo" placeholder="Enter Email Address"
+                              id="contactInfo" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required/>
+                          </mat-form-field>
+
+
+                          <div *ngIf="contactInfo.errors && (contactInfo.dirty || contactInfo.touched)" class="color-red m-btm5 f-size12">
+                              <div [hidden]="!contactInfo.errors.pattern" class="color-red m-btm5" >Email format should be 
+                                <small><b>abcd@abc.com</b></small></div>
+                            </div>
+
+                        </div>
+
+
+                        <div *ngIf="option == '14'">                      
+                          <mat-form-field class="width100">
+                            <input matInput class="key-numeric" name="Mobile" placeholder="Enter Mobile Number" [(ngModel)]="empPerCont.contactInfo"
+                              #companyMobile="ngModel" id="companyMobile" pattern="^[6789]\d{9}$" minlength="10" maxlength="10" required/>
+                          </mat-form-field>
+
+                          <div *ngIf="companyMobile.errors && (companyMobile.dirty || companyMobile.touched)" class="color-red m-btm5 f-size12" >
+                              <div [hidden]="!companyMobile.hasError('pattern') && !companyMobile.hasError('minlength') && !companyMobile.hasError('maxlength')">Please Enter Valid Mobile Number</div>                       
+                            </div> 
+                          
+                        </div>
+
+
+
+
+                        <div *ngIf="option == '15'">
+                          <mat-form-field class="width100">
+                            <input matInput  pattern="[0-9]+"  minlength="6" maxlength="11" name="Phone" placeholder="Enter Phone Number" [(ngModel)]="empPerCont.contactInfo"
+                              id="companyPhone" #companyPhone="ngModel" required/>
+                          </mat-form-field>
+
+                          <div *ngIf="companyPhone.errors && (companyPhone.dirty || companyPhone.touched)" class="color-red m-btm5 f-size12" >
+                              <div [hidden]="!companyPhone.hasError('pattern') && !companyPhone.hasError('minlength')">Please Enter Valid Phone Number</div>                    
+                            </div> 
+
+                        </div>
+
+
+                        <!-- <div *ngIf="option == '16'">
+                          <mat-form-field class="width100">
+                            <input matInput type="text" class="key-numeric" name="Fax" placeholder="Enter Fax Number" [(ngModel)]="empPerCont.contactInfo"
+                              id="companyFax" #companyFax="ngModel" minlength="10"  pattern="[0-9\+\-]+" required/>
+                          </mat-form-field>
+                          <div *ngIf="companyFax.errors && (companyFax.dirty || companyFax.touched)" class="color-red m-btm5" >
+                              <div [hidden]="!companyFax.hasError('minlength') && !companyFax.hasError('pattern')">Enter Valid Fax Number</div>
+                            </div>
+                        </div> -->
+
+                      </div>
+
+                      <!-- buttons for contact information starts -->
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:10px">
+                        <div class="pull-right">
+                          <button type="submit" *ngIf="!btnContactreadonly" class="btn submit-btn" [disabled]="!companycontact.form.valid" id="empPerContactSubmit" (click)="empPerContactSubmit($event)">Save</button>
+                          <button type="submit" *ngIf="btnContactreadonly" [disabled]="!companycontact.form.valid" class="btn submit-btn" id="updatePersonContactSubmit" (click)="updatePersonContactSubmit()"> Update</button>
+                          <a class="btn submit-btn" id="cancelContact" (click)="cancelContact()"> Cancel</a>
+                        </div>
+
+                      </div>
+                      <!-- buttons for contact information ends -->
+                    </div>
+                  </form>
+
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--contact information ends-->
+
+
+
+
+
+
+
+
+        <!-- address information starts -->
+
+        <div class="font_robotoregular ">
+          <div class="m-top15">
+            <form #addressform="ngForm">
+              <div class="row borderAddress_profile1 flexcroll box_shadow">
+
+                <div class="m-top10">
+                  <h4 class="display-inline text-capitalize f-size16"><b>Address Information</b></h4>
+
+
+                  <div class="pull-right">
+                    <button type="submit" class="btn backgroundColor_transperent color-theme f-size16" [disabled]="adBtnAddress" (click)="addNew()">
+                   <!-- <img class="width35 m-right15" src="assets/images/add disable.png" *ngIf="!showAddImagDisable"> -->
+                   <img class="width35 mtop-20 m-right15" src="assets/images/add__plus_icon.png" title="Add" *ngIf="showAddImagDisable">
+                    
+                  </button>
+
+
+                  </div>
+
+                  <div>
+
+                    <div class="text-center f-bold" *ngIf="!PersonAddress || PersonAddress =='' && !showEditAddress">
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br> <img class="width45" src="assets/images/add address_icon.png"> Please Add Address
+                    </div>
+
+                    <div *ngIf="!showEditAddress && PersonAddress" class="col-lg-12  col-md-12 col-xs-12 col-sm-12 flexcroll" style="height: 210px;
+                   overflow: auto;
+                   overflow-x: hidden;">
+                      <div class="col-lg-12 padding0 ull-striped" *ngFor="let AddData of PersonAddress ;let k = index">
+                        <div class="row" style="padding:0px 0px;margin-bottom:5px " [ngClass]="{'color': k%2==0, 'three':k%2==1}">
+                          <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10 ">
+                            <!-- {{cmpData.companyAddress | json}} -->
+                            <ul class="ul_style">
+                                <li *ngIf="AddData.employerPersonAddress.addressTypeValueId">
+                                  <!-- {{AddData.employerPersonAddress.addressTypeValueId}}, -->
+                                 <b> {{addressTypeLookup[AddData.employerPersonAddress.addressTypeValueId].lookupValue}}:</b>
+                                </li>
+                                
+                              <li class="pull-left wordBreak">{{AddData.employerPersonAddress.addressLine1}}</li>
+                              <li *ngIf="AddData.employerPersonAddress.addressLine2" class="pull-left wordBreak">,{{AddData.employerPersonAddress.addressLine2}}&nbsp;</li>
+                              <li *ngIf="AddData.employerPersonAddress.addressLine3" class="wordBreak">,{{AddData.employerPersonAddress.addressLine3}}</li>
+                              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                                  <!-- <li class="pull-left">{{AddData.employerPersonAddress.cityId}}</li>
+                                  <li class="pull-left">,{{AddData.employerPersonAddress.stateCode}}</li>
+                                  <li class="pull-left">,{{AddData.employerPersonAddress.countryCode}}</li> -->
+                                  <li class="pull-left" *ngFor="let city of cityData">
+                                    <span *ngIf="city.cityId == AddData.employerPersonAddress.cityId">
+                                     {{city.cityName}}
+                                    </span>
+                                    </li>
+                                    <li class="pull-left" *ngFor="let state of stateCacheList">
+                                      <span *ngIf="state.stateCode == AddData.employerPersonAddress.stateCode">
+                                       ,{{state.stateName}}
+                                      </span>
+                                  </li>
+                                  <li class="pull-left" *ngFor="let country of countryCacheList">
+                                      <span *ngIf="country.countryCode == AddData.employerPersonAddress.countryCode">
+                                        ,{{country.countryName}}
+                                      </span>
+                                  </li>
+
+                                  <li *ngIf="AddData.employerPersonAddress.postalId" class="pull-left">,{{AddData.employerPersonAddress.postalId}}
+                                  </li>
+                              </div>                                  
+                            
+
+
+                            </ul>
+                          </div>
+                          <div class="col-lg-1 col-md-1 col-xs-1 col-sm-1">
+                            <input type="radio" class="m-top12" title="Mark Address as Primary" (click)="primary(AddData, k)" [checked]="AddData.primaryInd == 'Y'"
+                              name="primaryInd">                              
+                          </div>
+
+
+                          <div class="col-lg-1 col-md-1 col-xs-1 col-sm-1">
+                            <a (click)="editAddress(AddData,k)" class="color_btn pull-right cursor-pointer"> 
+                            <img class="width35" src="assets/images/adress_edit_lighter icon (1).png" style="margin-right: -16px" title="Edit"
+                            onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+                            onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'"></a>
+
+                          </div>
+
+
+
+                        </div>
+                      </div>
+
+                      <!-- </div> -->
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 flexcroll" *ngIf="showEditAddress" style="height:215px;overflow-y:scroll;overflow-x:hidden;">
+                  <div class="row" *ngFor="let empPerAdd of eduPerAddNew">
+                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                      <mat-form-field class="width100">
+                        <mat-select placeholder="Address Type" name="address_Dropdown" [disabled]="readonlyAdd" [(ngModel)]="empPerAdd.addressTypeValueId"
+                          #selectAddr="ngModel" id="selectAddr" required="required">
+                          <mat-option [value]="">Select Address Type</mat-option>
+                          <mat-option *ngFor="let AddLookup of AddressLookup" [value]="AddLookup.lookupValueId">{{AddLookup.lookupValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <div *ngIf="selectAddr.errors && (selectAddr.dirty || selectAddr.touched)" class="color-red">
+                        <!-- <div [hidden]="!selectAddr.errors.required">
+                      Please Select Address
+                    </div> -->
+                      </div>
+
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <mat-form-field class="width100">
+                        <input matInput [readonly]="readonlyAdd" placeholder="Address Line 1" [(ngModel)]="empPerAdd.addressLine1" name="address1"
+                          #addressLine1="ngModel" maxlength="100" required="required">
+                      </mat-form-field>
+                      <div *ngIf="addressLine1.errors && (addressLine1.dirty || addressLine1.touched)" class="color-red">
+                        <!-- <div [hidden]="!addressLine1.errors.required">
+                        Address is required
+    
+                      </div> -->
+
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-15">
+                      <mat-form-field class="width100">
+                        <input matInput [readonly]="readonlyAdd" placeholder="Address Line 2" [(ngModel)]="empPerAdd.addressLine2" 
+                        name="address2" maxlength="100">
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 m-top-15 ">
+                      <mat-form-field class="width100">
+                        <input matInput [(ngModel)]="empPerAdd.addressLine3" id="address3" #address3="ngModel" name="address3"
+                         placeholder="Address Line 3" maxlength="100">
+                      </mat-form-field>
+                    </div>
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  padding0 m-top-15">
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                          <mat-form-field class="width100">
+                              <mat-select placeholder="Select Country" [disabled]="readonlyCountry" name="country" (ngModelChange)="getStateDet($event)" [(ngModel)]="empPerAdd.countryCode"
+                              list="countries" placeholder="country" id="countryCode" #countryCode="ngModel" required="required"
+                              readonly>
+                              <mat-option [value]="">Select Country</mat-option>                              
+                              <mat-option *ngFor=" let s of countryList" [value]="s.countryCode">{{s.countryName}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <div *ngIf="countryCode.errors && (countryCode.dirty || countryCode.touched)" class="color-red">
+                              </div>
+                        <!-- <mat-form-field >
+                          <input matInput [disabled]="readonlyAdd" name="country" (ngModelChange)="getStateDet($event)" [(ngModel)]="empPerAdd.countryCode"
+                            list="countries" placeholder="country" id="countryCode" #countryCode="ngModel" required="required"
+                            readonly>
+                        </mat-form-field>
+                        <datalist id="countries">
+                          <option *ngFor=" let s of countryList" [value]="s.countryCode">{{s.countryName}}</option>
+                        </datalist> -->                        
+                      </div>
+
+
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                          <mat-form-field class="width100">
+                              <mat-select  name="state" list="states" (ngModelChange)="getCityDet($event);empPerAdd.cityId=''" [(ngModel)]="empPerAdd.stateCode" placeholder="State"
+                              id="stateCode" #stateCode="ngModel" required="required">
+                              <mat-option [value]="">Select State</mat-option>                              
+                              <mat-option *ngFor=" let s of stateList" [value]="s.stateCode">{{s.stateName}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <div *ngIf="stateCode.errors && (stateCode.dirty || stateCode.touched)" class="color-red">
+                              </div>
+                        <!-- <mat-form-field class="width100">
+                          <input matInput name="state" list="states" (ngModelChange)="getCityDet($event)" [(ngModel)]="empPerAdd.stateCode" placeholder="state"
+                            id="stateCode" #stateCode="ngModel" required="required">
+                        </mat-form-field>
+                        <datalist id="states">
+                          <option *ngFor=" let s of stateList" [value]="s.stateCode">{{s.stateName}}</option>
+                        </datalist> -->                      
+                      </div>
+                    </div>
+
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 m-top-15">
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  ">
+                          <mat-form-field class="width100">
+                              <mat-select placeholder="Select City" [disabled]="readonlyAdd" name="city" list="cities" (ngModelChange)="getPostalDet($event)" [(ngModel)]="empPerAdd.cityId"
+                              placeholder="City" id="city" #cityId="ngModel" required="required">
+                              <mat-option [value]="">Select City</mat-option>    
+                              <mat-option *ngFor=" let s of cityList" [value]="s.cityId">{{s.cityName}} </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <div *ngIf="cityId.errors && (cityId.dirty || cityId.touched)" class="color-red">
+                              </div>                             
+                        <!--  <mat-form-field class="width100">
+                          <input matInput [disabled]="readonlyAdd" name="city" list="cities" (ngModelChange)="getPostalDet($event)" [(ngModel)]="empPerAdd.cityId"
+                            placeholder="City" id="city" #cityId="ngModel" required="required">
+                        </mat-form-field>
+                        <datalist id="cities">
+                          <option *ngFor=" let s of cityList" [value]="s.cityId">{{s.cityName}}</option>
+                        </datalist>                         -->
+                      </div>
+
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        
+                        <mat-form-field class="width100">
+                          <input matInput  [disabled]="readonlyAdd"  name="postalId" list="postals" placeholder="Postal Code"
+                          [(ngModel)]="empPerAdd.postalId" id="postalCode" #postalCode="ngModel" pattern="^[0-9]*$" minlength="6" maxlength="6">
+                        </mat-form-field>
+                        <div *ngIf="postalCode.errors && (postalCode.dirty || postalCode.touched)" class="color-red m-btm5 f-size12" >
+                          <div [hidden]="!postalCode.hasError('pattern') && !postalCode.hasError('minlength') && !postalCode.hasError('maxlength')">Please Enter Valid Postal Code</div>                                                   
+                        </div>
+
+                     
+
+                          <!-- <mat-form-field class="width100">
+                              <mat-select placeholder="Select Postal Code" [disabled]="readonlyAdd"  name="postalId" list="postals" placeholder="Postal Code"
+                              [(ngModel)]="empPerAdd.postalId" id="postalId" #postalId="ngModel">
+                              <mat-option [value]="">Select Postal Code</mat-option>    
+                              <mat-option *ngFor=" let s of postalList" [value]="s.postalId">{{s.postalCode}}</mat-option>
+                              </mat-select>
+                            </mat-form-field> -->
+                        <!-- <mat-form-field class="width100">
+                          <input matInput [disabled]="readonlyAdd" class="input1 width95 key-numeric" name="postalId" list="postals" placeholder="Postal Code"
+                            [(ngModel)]="empPerAdd.postalId" id="postalId" #postalId="ngModel">
+                        </mat-form-field>
+                        <datalist id="postals">
+                          <option *ngFor=" let s of postalList" [value]="s.postalId">{{s.postalCode}}</option>
+                        </datalist> -->
+                        <!-- <div *ngIf="postalCode.errors && (postalCode.dirty || postalCode.touched)" class="color-red">
+                            <div [hidden]="!postalCode.errors.required">
+                              Postal is required
+                            </div>
+                          </div> -->
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <!-- buttons for Address information starts -->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-5" style="margin-bottom: 15px;">
+                      <div class="pull-right">
+                        <button type="submit" *ngIf="!btnaddressreadonly" id="empPerAddressSubmit" (click)="empPerAddressSubmit($event)" 
+                        [disabled]="!addressform.form.valid" class="btn  submit-btn"> Save</button>
+                        <button *ngIf="btnaddressreadonly" class="btn submit-btn" id="updatePerAddressSubmit" [disabled]="!addressform.form.valid" (click)="updatePerAddressSubmit(empPerAdd)"> Update</button>
+                        <a class="btn submit-btn" id="cancelAddress" (click)="cancelAddress()"> Cancel</a>
+
+                      </div>
+                    </div>
+                    <!-- buttons for Address information ends -->
+                    <div class="clearfix"></div>
+                  </div>
+
+
+                </div>
+
+              </div>
+
+            </form>
+          </div>
+        </div>
+        <!-- address information ends -->
+
+      </div>
+
+
+    </div>
+  </div>
+</div>

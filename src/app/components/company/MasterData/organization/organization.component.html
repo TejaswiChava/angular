@@ -1,0 +1,792 @@
+<div class="container-fluid mbtm-10">
+  <div class="row" >
+
+    <div class="col-lg-12">
+      <div class="pull-right searchbox">
+
+
+
+      <!-- <img class="width35 m-right15" src="assets/images/add disable.png" *ngIf="!showAddImagDisable"> -->
+      <i class="fa fa-times width35 mbtm-23 backgroundColor_transperent
+               color-theme f-size16 cursor-pointer" aria-hidden="true" title="Close" id="cancelOrgId" *ngIf="adMain" (click)="cancelOrg()"></i>
+
+      <input class="filter-input" [(ngModel)]="filterQuery" *ngIf="!showEditDetails"  id="addOrdId" placeholder="Search by {{labelData.organizationName}}" />
+      <img class="width35 m-btm5p cursor-pointer" title="Add Organization" id="addOrgid" src="assets/images/add__plus_icon.png" *ngIf="!adMain" (click)="addOrd()">
+
+    </div>
+  </div>
+    <div class="clearfix"></div>
+
+    <div class=" col-lg-12  col-md-12 col-sm-12 col-xs-12 padding0 mtop20">
+      <div>
+        <div *ngIf="!showEditDetails" class="box-border" >
+          <div class="">
+            <div class="flexcroll table-scroll">
+
+              <!-- {{data |json}} -->
+
+              <table class="table table-striped" id="myProgram" [mfData]="data | orgDataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+                [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+
+                <!-- <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5"> -->
+                <thead>
+
+                  <tr>
+
+
+                    <th colspan="2">
+                      <mfDefaultSorter by="name">{{labelData.organizationName}}</mfDefaultSorter>
+                    </th>
+                    <th colspan="2">
+                      <mfDefaultSorter by="shortName">{{labelData.shortName}}</mfDefaultSorter>
+                    </th>
+
+                    <th colspan="2">
+                      <mfDefaultSorter by="description">{{labelData.about }}</mfDefaultSorter>
+                    </th>
+                  </tr>
+                  <tr>
+
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr *ngFor="let orgList of mf.data" class="notfirst cursor-pointer" (click)=OrgEdit(orgList)>
+
+                    <td colspan="2">
+                      {{orgList.name}} </td>
+                    <td colspan="2">
+                      {{orgList.shortName}}
+                    </td>
+                    <td colspan="2" *ngIf="orgList.description">
+                      {{orgList.description | limitTo:[20]}} </td>
+                      <td colspan="2"  *ngIf="!orgList.description">
+                        {{orgList.description}} </td>
+
+                  </tr>
+                  <tr *ngIf="mf.data == ''">
+                    <td colspan="5" class="text-center">
+                      <span>
+                       {{labelData.noDataFound}}
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="6">
+                      <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngIf="showEditDetails">
+        <div class="row" *ngFor="let org of organisation">
+
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <div class="container-fluid">
+              <div class="row">
+                <div style="border: 1px solid #ccc;padding: 10px;border-radius: 2px;min-height:750px;height:auto" class="flexcroll">
+                  <form #organisationform="ngForm">
+                    <!--Campus details starts-->
+
+                    <!-- edit icon starts -->
+
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 padding0">
+                      <h4 class="font_roboto"><b>Organization Details</b></h4>
+                    </div>
+                    <div class="col-lg-4 col-md-8 col-sm-8 col-xs-8" >
+                      <a *ngIf="btnedit"  title="Edit Organization Details" class="address-anchortag pull-right cursor-pointer" id="editOrganisationSubmitid" (click)="editOrganisationSubmit()">
+
+                                  <img class="width35" id="editOrganisationSubmitimgid" src="assets/images/adress_edit_lighter icon (1).png"
+                                  onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+                                  onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'">
+
+                                </a>
+
+                      <div *ngIf="!btnedit"><br>
+                        <p></p>
+                      </div>
+
+
+                      <!-- <a *ngIf="btnreadonly" class=" pull-right" (click)="editOrganisationSubmit()"> <i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a> -->
+
+                    </div>
+
+                    <!-- edit icon ends -->
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
+                      <mat-form-field class="width100">
+                        <input matInput [readonly]="readonly" placeholder={{labelData.organizationName}} id="organizationname" name="organizationname"
+                          required="required" [(ngModel)]="orgs.name" #name="ngModel" minlength="3" maxlength="100" >
+                      </mat-form-field>
+                      <div *ngIf="name.errors && (name.dirty || name.touched)" class="color-red m-btm5">
+                        <div [hidden]="!name.errors.minlength">Name must be at least 3 characters long.</div>
+                        <div [hidden]="!name.errors.maxlength">Name cannot be more than 100 characters long.</div>
+                        <!-- <div [hidden]="!name.hasError('pattern')">Special characters not allowed</div> -->
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <mat-form-field class="width100" style="margin-top:-7px;">
+                        <input matInput [readonly]="readonly" placeholder={{labelData.organisationShortName}} id="shortname" name="shortname" class="input1 width95"
+                          [(ngModel)]="orgs.shortName" #shortName="ngModel"  maxlength="50">
+                      </mat-form-field>
+                      <div *ngIf="shortName.errors && (shortName.dirty || shortName.touched)" class="color-red m-btm5">
+                        <!-- <div [hidden]="!shortName.errors.minlength">Short Name must be at least 3 characters long.</div> -->
+                        <!-- <div [hidden]="!shortName.hasError('pattern')">Special characters not allowed</div> -->
+                        <div [hidden]="!shortName.errors.maxlength">Short Name cannot be more than 50 characters long.</div>
+
+                      </div>
+                    </div>
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mtop10">
+                      <label>About</label>
+                      <textarea placeholder={{labelData.about}} [readonly]="readonly" name="desc" id="desc" minlength="3" maxlength="2000" class="flexcroll textarea_boxes width100"
+                        [(ngModel)]="orgs.description" #description="ngModel"></textarea>
+                      <div *ngIf="description.errors && (description.dirty || description.touched)" class="color-red m-btm5">
+                        <div [hidden]="!description.errors.minlength">About must be at least 3 characters long.</div>
+                        <div [hidden]="!description.errors.maxlength">About cannot be more than 2000 characters long.</div>
+                      </div>
+                    </div>
+
+                    <!--Campus details ends-->
+
+
+
+
+                    <!--social media starts-->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top5">
+                      <label class="">{{labelData.socialMediaHead}}</label>
+                    </div>
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 ">
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                        <mat-form-field class="width100">
+                          <input matInput [readonly]="readonly"  [readonly]="readonly" placeholder={{labelData.facebook}}
+                          name="orgfacebook" [(ngModel)]="orgs.facebook" id="orgfacebook"
+                            #orgfacebook="ngModel">
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <mat-form-field class="width100">
+                          <input matInput [readonly]="readonly"
+                           placeholder={{labelData.twitter}} name="orgTwitter" [(ngModel)]="orgs.twitter" id="orgTwitter" #orgTwitter="ngModel">
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <mat-form-field class="width100 mtop10">
+                          <input matInput [readonly]="readonly"  placeholder={{labelData.youtube}}
+                          name="orgYoutube"  id="orgYoutube" #orgYoutube="ngModel" [(ngModel)]="orgs.youtube">
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <mat-form-field class="width100 mtop10">
+                          <input matInput [readonly]="readonly"
+                           placeholder={{labelData.linkedIn}} name="orglinkedin" id="orglinkedin" [(ngModel)]="orgs.linkedin" #orglinkedin="ngModel">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <!--social media ends-->
+                    <div class="clearfix"></div>
+<!-- upload section starts -->
+
+<div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-5 padding0">
+  <div style="margin-top:20px;" class=" border_css clearfix height240">
+      <h4><b>{{labelData.uploadImgHead}}</b></h4>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  company_logo_inst">
+        <div class="fileUpload btn padding0 mtop-20">
+            <span *ngIf="!readonly" >
+              <img style="width:40px" src="assets/images/upload_side icon.png">
+                <!-- <p class="f-size14">{{labelData.uploadCmpLogoText}}</p> -->
+                <p class="f-size14">Upload Logo</p>
+            </span>
+            <input type="file" class="upload" [disabled]="readonly"  (change)="uploadDatasource($event)" name="logo" id="logo"
+             accept=".jpeg,.jpg,.png,.pdf" />
+        </div>
+        <div *ngIf="orgs.logo == '' || orgs.logo == null && readonly " >
+          <b>Logo</b>
+        </div>
+        <div *ngIf="orgs.logo">
+          <img class="uplodimg_css" src="{{orgs.logo}}"><br>
+          <b style="padding:5px;">Logo</b>
+          <p class="logo_recomendation">Recommended Image Resolution: 245x150</p>
+        </div>
+
+
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 branding_logo_inst">
+
+        <div class="fileUpload btn padding0 mtop-20">
+            <span *ngIf="!readonly"><img style="width:40px" src="assets/images/upload_side icon.png"><p class="f-size14">{{labelData.uploadBrdLogoText}}</p></span>
+             <input type="file" class="upload" [disabled]="readonly"  (change)="uploadBrandLogo($event)" name="brandingImage"
+             id="brandingImage" accept=".jpeg,.jpg,.png,.pdf" />
+           </div>
+           <div *ngIf="orgs.brandingImage == '' || orgs.brandingImage == null && readonly " >
+              <b>Branding Image</b>
+            </div>
+            <div *ngIf="orgs.brandingImage">
+                <img class="uplodimg_css" src="{{orgs.brandingImage}}"><br>
+              <b style="padding:5px;">Branding Image</b>
+              <p class="logo_recomendation">Recommended Image Resolution: 1366x275</p>
+            </div>
+
+
+      </div>
+
+    </div>
+</div>
+
+<!-- upload section ends -->
+
+<!-- buttons for org submit starts -->
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="pull-right m-top10">
+                        <button type="submit" *ngIf="btnsave" [disabled]="readonly" id="OrganisationSubmitId" (click)="OrganisationSubmit($event)" [disabled]="!organisationform.form.valid"
+                          class="btn  submit-btn"> {{labelData.btnSave}}</button>
+                        <button *ngIf="!btnreadonly" class="btn submit-btn" id="updateOrganisationSubmitId" [disabled]="!organisationform.form.valid" (click)="updateOrganisationSubmit()"> {{labelData.btnUpdate}}</button>
+                        <a *ngIf="!btnreadonly" class="btn submit-btn " id="cancelOrganisationSubmitId" (click)="cancelOrganisationSubmit()"> {{labelData.btnCancel}}</a>
+                        <a *ngIf="btnsave" class="btn submit-btn" id="cancelDepartmentSubmit" (click)="cancelOrgnazation(organisationform)">Clear</a>
+                      </div>
+                    </div>
+<!-- buttons for org submit ends-->
+
+
+                    <div class="clearfix"></div>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+            <!-- contact information starts-->
+
+            <div class="row">
+              <div class="">
+                <div class="flexcroll border_css1 Contact box_shadow col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="m-top5">
+
+                    <h4 style="display: inline" class="text-capitalize f-size16"><b>{{labelData.contactInfoHead}}</b></h4>
+
+                    <div class="pull-right ">
+
+                      <button type="submit" title="Add Contact" class="btn backgroundColor_transperent color-theme f-size16" *ngIf="!adBtnCnt" id="orgContactId" (click)="orgContact()">
+               <!-- <img class="width35 m-tr20" src="assets/images/add disable.png" *ngIf="!showAddImagDisable"> -->
+               <img class="width35 mtop-20 m-right15" id="orgContactImgId" src="assets/images/add__plus_icon.png" >
+               </button>
+                    </div>
+                    <br>
+                    <br>
+                    <div>
+                      <div class="text-center" *ngIf="!orgContactList || orgContactList =='' && !showEditContact">
+                        <br>
+                        <br>
+                        <br>
+                        <br> <img class="width45" id="addcontactid" src="assets/images/add contact_icon.png"> {{labelData.noContactInfo}}
+
+                      </div>
+
+
+                      <div *ngIf="!showEditContact  && orgContactList " class="col-lg-12 padding0 col-md-12 col-xs-12 col-sm-12 flexcroll" style="clear: both;
+              overflow: auto;
+              overflow-x: hidden;
+              height: 225px;">
+
+                        <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ull-striped" *ngFor="let orgContact of orgContactList ;let i = index">
+                          <div class="row" style="padding:0px 0px;margin-bottom:5px " [ngClass]="{'color': i%2==0, 'three':i%2==1}">
+
+
+
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12" style="padding-top:4px">
+                              <ul style="list-style:none;margin-left:-45px">
+                                <li style="float:left;width:30px" *ngIf="orgContact.organizationContact.contactTypeValueId == '13'">
+                                    <i class="fa fa-envelope f-size1em color_btn" aria-hidden="true"></i>
+                                    </li>
+                                <li style="float:left;width:30px" *ngIf="orgContact.organizationContact.contactTypeValueId == '14'">
+                                        <i class="fa fa-mobile f-size1em color_btn" aria-hidden="true"></i>
+                                </li>
+                                <li style="float:left;width:30px" *ngIf="orgContact.organizationContact.contactTypeValueId == '15'">
+                                        <i class="fa fa-phone f-size1em color_btn" aria-hidden="true"></i>
+                                </li>
+                                <li style="float:left;width:30px" *ngIf="orgContact.organizationContact.contactTypeValueId == '16'">
+                                        <i class="fa fa-fax f-size1em color_btn" aria-hidden="true"></i>
+                                </li>
+                                <li style="float:left">  {{orgContact.organizationContact.contactInfo}}</li>
+
+                              </ul>
+                            </div>
+
+
+                            <!-- <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12" style="padding-top:4px">
+                              <span *ngIf="orgContact.organizationContact.contactTypeValueId == '13'">
+                                  <i class="fa fa-envelope f-size1em color_btn" aria-hidden="true"></i>
+                                  &nbsp;&nbsp;</span>
+                              <span *ngIf="orgContact.organizationContact.contactTypeValueId == '14'">
+                                       <i class="fa fa-mobile f-size1em color_btn" aria-hidden="true"></i> &nbsp;&nbsp;</span>
+                              <span *ngIf="orgContact.organizationContact.contactTypeValueId == '15'">
+                                           <i class="fa fa-phone f-size1em color_btn" aria-hidden="true"></i> &nbsp;&nbsp;</span>
+                              <span *ngIf="orgContact.organizationContact.contactTypeValueId == '16'">
+                                               <i class="fa fa-fax f-size1em color_btn" aria-hidden="true"></i> &nbsp;&nbsp; </span>
+                                                      {{orgContact.organizationContact.contactInfo}}
+
+
+                            </div> -->
+
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                              <a (click)="editContact(orgContact,i)" id="editContactIdImg" title="Edit Contact" class="color_btn pull-right cursor-pointer">
+
+                        <img class="width35"  id="editContactId" style="margin-right: -16px" src="assets/images/adress_edit_lighter icon (1).png"
+                        onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+                        onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'">
+                    </a>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="showEditContact" style="clear: both; overflow: auto;overflow-x: hidden;height: 195px;">
+                      <form #campuscontact="ngForm">
+                        <div *ngFor="let orgsCont of organisationContNew">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top10">
+
+
+
+                              <mat-form-field class="width100" id="OrgContactType" >
+                                  <mat-select placeholder="Contact Type" [disabled]="disabled" (change)="onSelect(orgsCont.contactTypeValueId)"
+                                   [(ngModel)]="orgsCont.contactTypeValueId" name="contactTypeValueId" (ngModelChange)="orgsCont.contactInfo=''"
+                                   id="contactTypeValueId" #contactTypeValueId="ngModel" required>
+                                    <mat-option [value]="">Select Contact Type</mat-option>
+                                    <mat-option *ngFor="let cntctLookup of ContactLookups" [value]="cntctLookup.lookupValueId">{{cntctLookup.lookupValue}}
+                                    </mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+
+
+                            <!-- <select class="input1 width100 key-numeric" [disabled]="disabled" (change)="onSelect($event.target.value)" [(ngModel)]="orgsCont.contactTypeValueId"
+                              name="contactTypeValueId" id="contactTypeValueId" #contactTypeValueId="ngModel">
+
+                              <option value="" selected="selected" disabled>{{labelData.contactType}}</option>
+                              <option *ngFor="let cntLookup of ContactLookups"
+                               [value]="cntLookup.lookupValueId" >{{cntLookup.lookupValue}}</option>
+                            </select> -->
+
+
+                            <!-- <div *ngIf="option == 'Contact Type'">
+                              <mat-form-field class="width100">
+                                <input matInput [disabled]="disabled" name="contactInfo" [(ngModel)]="orgsCont.contactInfo" placeholder={{labelData.contactInfo}}
+                                  id="contactInfo" #contactInfo="ngModel" required="required">
+                              </mat-form-field>
+                              <div *ngIf="contactInfo.errors && (contactInfo.dirty || contactInfo.touched)" class="color-red m-btm5">
+                              </div>
+                            </div> -->
+
+                            <div *ngIf="option == '13'">
+                              <mat-form-field class="width100" >
+                                <input matInput type="text" email name="contactInfo" #contactInfo="ngModel" [(ngModel)]="orgsCont.contactInfo" placeholder={{labelData.email}}
+                                  id="contactInfo" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required/>
+                              </mat-form-field>
+                              <div *ngIf="contactInfo.errors && (contactInfo.dirty || contactInfo.touched)" class="color-red m-btm5">
+                                  <div [hidden]="!contactInfo.hasError('required')">Email is required</div>
+                                  <div [hidden]="!contactInfo.errors.pattern" class="color-red m-btm5">Email format should be
+                                    <small><b>abcd@abc.com</b></small></div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="option == '14'">
+                              <mat-form-field class="width100" >
+                                <input matInput type="text"  pattern="^[6789]\d{9}$" minlength="10" maxlength="10"  name="orgMobile" placeholder={{labelData.mobile}}
+                                  [(ngModel)]="orgsCont.contactInfo" #orgMobile="ngModel" id="orgMobile" required/>
+                              </mat-form-field>
+                              <div *ngIf="orgMobile.errors && (orgMobile.dirty || orgMobile.touched)" class="color-red m-btm5 f-size12">
+                                  <div [hidden]="!orgMobile.hasError('pattern') && !orgMobile.hasError('minlength') && !orgMobile.hasError('maxlength')">Please Enter Valid Mobile Number</div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="option == '15'">
+                              <mat-form-field class="width100" >
+                                <input matInput type="text"  pattern="[0-9]+" minlength="6" maxlength="11" name="orgPhone" placeholder={{labelData.phone}}
+                                  [(ngModel)]="orgsCont.contactInfo" id="orgPhone" #orgPhone="ngModel" required/>
+                              </mat-form-field>
+                              <div *ngIf="orgPhone.errors && (orgPhone.dirty || orgPhone.touched)" class="color-red m-btm5 f-size12">
+                                  <div [hidden]="!orgPhone.hasError('pattern') && !orgPhone.hasError('minlength')">Please Enter Valid Phone Number</div>
+                                </div>
+                            </div>
+
+                            <!-- <div *ngIf="option == '16'">
+                              <mat-form-field class="width100">
+                                <input matInput type="text" class="key-numeric" name="Fax" placeholder={{labelData.fax}} [(ngModel)]="orgsCont.contactInfo"
+                                  id="orgFax" #orgFax="ngModel" minlength="10" pattern="[0-9\+\-]+" required/>
+                              </mat-form-field>
+                              <div *ngIf="orgFax.errors && (orgFax.dirty || orgFax.touched)" class="color-red m-btm5">
+                                  <div [hidden]="!orgFax.hasError('minlength') && !orgFax.hasError('pattern')">Enter Valid Fax Number</div>
+                                </div>
+                            </div> -->
+
+                          </div>
+
+                          <!-- buttons for contact information starts -->
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:10px">
+                            <div class="pull-right">
+                              <button type="submit" *ngIf="!btnContactreadonly" class="btn submit-btn" [disabled]="!campuscontact.form.valid" id="OrganisationContactSubmitId" (click)="OrganisationContactSubmit($event)">{{labelData.btnSave}}</button>
+                              <button *ngIf="btnContactreadonly" class="btn submit-btn" [disabled]="!campuscontact.form.valid" id="updateOrganisationContactSubmitId" (click)="updateOrganisationContactSubmit()">  {{labelData.btnUpdate}}</button>
+                              <a class="btn submit-btn " id="cancelOrgContId" (click)="cancelOrgCont()"> {{labelData.btnCancel}}</a>
+                            </div>
+
+                          </div>
+                          <!-- buttons for contact information ends -->
+                        </div>
+                      </form>
+
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--contact information ends-->
+
+
+
+
+            <!-- address info starts -->
+            <div class="" style="margin-top: 20px">
+              <div class="">
+                <form #addressform="ngForm">
+                  <div class="row border_cssOrg flexcroll box_shadow">
+
+                    <div class="m-top10">
+                      <h4 class="display-inline text-capitalize f-size16"><b>{{labelData.addressInfoHead}}</b></h4>
+
+
+                      <div class="pull-right">
+                        <button type="submit" title="Add Address" class="btn backgroundColor_transperent color-theme f-size16" *ngIf="!adBtnAddress" id="orgAddId" (click)="orgAdd()">
+                                 <!-- <img class="width35 m-right15" src="assets/images/add disable.png" *ngIf="!showAddImagDisable"> -->
+                                 <img class="width35 mtop-20 m-right15" id="orgAddplusId" src="assets/images/add__plus_icon.png" >
+
+                                </button>
+
+
+                      </div>
+
+                      <div>
+
+                        <div class="text-center f-bold" *ngIf="!orgAddressList || orgAddressList =='' && !showEditAddress">
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br> <img class="width45" src="assets/images/add address_icon.png"> {{labelData.noAddressInfo}}
+                        </div>
+
+
+                        <div *ngIf="!showEditAddress && orgAddressList" class="col-lg-12  col-md-12 col-xs-12 col-sm-12 flexcroll"
+                        style="height: 330px;
+                          clear:both;
+                          overflow: auto;
+                                 overflow-x: hidden;">
+                          <div class="col-lg-12 padding0 ull-striped" *ngFor="let cmpData of orgAddressList ;let k = index">
+                            <div class="row" style="padding:0px 0px;margin-bottom:5px " [ngClass]="{'color': k%2==0, 'three':k%2==1}">
+                              <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10 ">
+                                <!-- {{cmpData.companyAddress | json}} -->
+                                <ul class="ul_style">
+
+                                    <li  *ngIf="cmpData.organizationAddress.addressTypeValueId"><b>{{AddressLookup[cmpData.organizationAddress.addressTypeValueId].lookupValue}}:</b></li>
+                                  <li class="pull-left wordBreak">{{cmpData.organizationAddress.addressLine1}}</li>
+                                  <li *ngIf="cmpData.organizationAddress.addressLine2" class="pull-left wordBreak">,{{cmpData.organizationAddress.addressLine2}}</li>
+
+                                  <li *ngIf="cmpData.organizationAddress.addressLine3" class="wordBreak"> ,{{cmpData.organizationAddress.addressLine3}}</li>
+                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                                    <li class="pull-left" *ngFor="let city of cityData">
+                                      <span *ngIf="city.cityId == cmpData.organizationAddress.cityId">
+                                        {{city.cityName}}
+                                      </span>
+                                    </li>
+                                    <li class="pull-left" *ngFor="let state of stateCacheList">
+                                        <span *ngIf="state.stateCode == cmpData.organizationAddress.stateCode">
+                                         ,{{state.stateName}}
+                                        </span>
+                                    </li>
+                                    <li class="pull-left" *ngFor="let country of countryCacheList">
+                                        <span *ngIf="country.countryCode == cmpData.organizationAddress.countryCode">
+                                          ,{{country.countryName}}
+                                        </span>
+                                    </li>
+                                      <!-- <li class="pull-left">  {{cmpData.organizationAddress.cityId}}</li> -->
+                                      <!-- <li class="pull-left">,{{cmpData.organizationAddress.stateCode}}</li>
+                                      <li class="pull-left">,{{cmpData.organizationAddress.countryCode}}</li> -->
+                                      <li *ngIf="cmpData.organizationAddress.postalId" class="pull-left">,{{cmpData.organizationAddress.postalId}}
+                                      </li>
+
+                                  </div>
+
+                                  <!-- <li><input type="radio" (click)="primary(cmpData, k)" [checked]="cmpData.organizationAddress.primaryInd == 'Y'"
+                                          name="primaryInd"></li> -->
+                                </ul>
+                              </div>
+
+
+
+                              <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2">
+
+                                <input type="radio" (click)="primary(cmpData, k)" id="orgRadio" title="Mark Address as Primary" [checked]="cmpData.primaryInd == 'Y'"
+                                  name="primaryInd">
+                                <a (click)="editAddress(cmpData,k)" id="editOrgAddressId" title="Edit Address" class="color_btn pull-right cursor-pointer">
+                                          <img class="width35" id="editOrgAddressImgId" src="assets/images/adress_edit_lighter icon (1).png" style="margin-right: -16px"
+                                          onmouseover="this.src='assets/images/adress_edit_enable_colored.png'"
+                                          onmouseout="this.src='assets/images/adress_edit_lighter icon (1).png'"></a>
+
+                              </div>
+
+
+
+                            </div>
+                          </div>
+
+                          <!-- </div> -->
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 flexcroll" *ngIf="showEditAddress" style="height:340px;overflow-y:scroll;overflow-x:hidden;">
+                      <div class="row" *ngFor="let orgAddr of organisationAdd">
+
+
+
+                        <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                            <mat-form-field class="width100" id="orgAddressType">
+                          <mat-select  placeholder={{labelData.addressType}} name="address_Dropdown" [(ngModel)]="orgAddr.addressTypeValueId"
+                            #selectAddr="ngModel" id="selectAddr" required="required">
+                            <mat-option value="">Select Address Type</mat-option>
+                            <mat-option *ngFor="let AddLookup of addressLookupArray" [value]="AddLookup.lookupValueId">{{AddLookup.lookupValue}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                          <div *ngIf="selectAddr.errors && (selectAddr.dirty || selectAddr.touched)" class="color-red m-btm5">
+                            <!-- <div [hidden]="!selectAddr.errors.required">
+                                    Please Select Address
+                                  </div> -->
+                          </div>
+
+                        </div>
+
+
+
+
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                          <mat-form-field class="width100" >
+                            <input matInput [readonly]="readonlyAdd" id="addressLine1" placeholder={{labelData.addLine1}} [(ngModel)]="orgAddr.addressLine1" name="address1"
+                              #addressLine1="ngModel" required="required">
+                          </mat-form-field>
+                          <div *ngIf="addressLine1.errors && (addressLine1.dirty || addressLine1.touched)" class="color-red m-btm5">
+                            <!-- <div [hidden]="!addressLine1.errors.required">
+                                      Address is required
+
+                                    </div> -->
+
+                          </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-15">
+                          <mat-form-field class="width100">
+                            <input matInput [readonly]="readonlyAdd"
+                             placeholder={{labelData.addLine2}}  id="addLine2Org" [(ngModel)]="orgAddr.addressLine2" name="address2">
+                          </mat-form-field>
+                        </div>
+
+
+
+
+                        <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 m-top-15 ">
+
+                          <mat-form-field class="width100" >
+                            <input matInput [(ngModel)]="orgAddr.addressLine3" id="addressLine3Org"
+                            #address3="ngModel" name="address3" placeholder={{labelData.addLine3}}>
+                          </mat-form-field>
+                        </div>
+
+
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  padding0 m-top-15">
+
+
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+
+                              <mat-form-field class="width100" id="orgCountry" >
+                                  <mat-select [disabled]="readonlyAddCountry"  name="country" (ngModelChange)="getStateDet($event)" [(ngModel)]="orgAddr.countryCode"
+                                  list="countries" placeholder={{labelData.country}} id="countryCode" #countryCode="ngModel" required>
+                                  <mat-option [value]="">Select Country</mat-option>
+                                  <mat-option *ngFor=" let s of countryList" [value]="s.countryCode">{{s.countryName}}
+                                    </mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                                <div *ngIf="countryCode.errors && (countryCode.dirty || countryCode.touched)" class="color-red m-btm5">
+                                  </div>
+
+                            <!-- <mat-form-field class="width100">
+                              <input matInput [disabled]="readonlyAdd" name="country" (ngModelChange)="getStateDet($event)" [(ngModel)]="orgAddr.countryCode"
+                                list="countries" placeholder={{labelData.country}}
+                                id="countryCode" #countryCode="ngModel"
+                                required>
+                            </mat-form-field>
+                            <datalist id="countries">
+                              <option *ngFor=" let s of countryList" [value]="s.countryCode">{{s.countryName}}</option>
+                            </datalist> -->
+
+                          </div>
+
+
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+
+
+                              <mat-form-field class="width100" id="orgState" >
+                                  <mat-select [disabled]="readonlyAdd"  name="state" list="states" (ngModelChange)="getCityDet($event);orgAddr.cityId=''" [(ngModel)]="orgAddr.stateCode"
+                                  placeholder={{labelData.state}} id="state" #stateCode="ngModel" required>
+                                  <mat-option [value]="">Select State</mat-option>
+                                  <mat-option *ngFor=" let s of stateList" [value]="s.stateCode">{{s.stateName}}
+                                    </mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                                <div *ngIf="stateCode.errors && (stateCode.dirty || stateCode.touched)" class="color-red m-btm5">
+
+                                  </div>
+
+                            <!-- <mat-form-field class="width100">
+                              <input matInput [disabled]="readonlyAdd" name="state" list="states" (ngModelChange)="getCityDet($event)" [(ngModel)]="orgAddr.stateCode"
+                                placeholder={{labelData.state}} id="state" #stateCode="ngModel" required>
+                            </mat-form-field>
+                            <datalist id="states">
+                              <option *ngFor=" let s of stateList" [value]="s.stateCode">{{s.stateName}}</option>
+                            </datalist> -->
+
+                          </div>
+                        </div>
+
+
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 m-top-15">
+
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  ">
+
+                              <mat-form-field class="width100" id="orgCity" >
+                                  <mat-select [disabled]="readonlyAdd"  name="city" list="cities"  [(ngModel)]="orgAddr.cityId"
+                                  placeholder={{labelData.city}} id="city" #cityId="ngModel" required>
+                                  <mat-option [value]="">Select City</mat-option>
+                                  <mat-option  *ngFor=" let s of cityList" [value]="s.cityId">{{s.cityName}}
+                                    </mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                                <div *ngIf="cityId.errors && (cityId.dirty || cityId.touched)" class="color-red m-btm5">
+                                   </div>
+
+                            <!-- <mat-form-field class="width100">
+                              <input matInput [disabled]="readonlyAdd" name="city" list="cities" (ngModelChange)="getPostalDet($event)" [(ngModel)]="orgAddr.cityId"
+                                placeholder={{labelData.city}} id="city" #cityId="ngModel" required>
+                            </mat-form-field>
+                            <datalist id="cities">
+                              <option *ngFor=" let s of cityList" [value]="s.cityId">{{s.cityName}}</option>
+                            </datalist> -->
+
+                          </div>
+
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                              <!-- <mat-form-field class="width100">
+                                  <mat-select placeholder="Postal Code" [disabled]="readonlyAdd"
+                                   name="postalId" list="postals"
+                                  [(ngModel)]="orgAddr.postalId"
+                                  id="postalId" #postalId="ngModel" required>
+                                  <mat-option [value]="">Select Postal Code</mat-option>
+                                  <mat-option  *ngFor=" let s of postalList" [value]="s.postalId">{{s.postalCode}}
+                                    </mat-option>
+                                  </mat-select>
+                                </mat-form-field> -->
+
+                                <mat-form-field class="width100" >
+                                    <input matInput   placeholder="Postal Code" [disabled]="readonlyAdd"
+                                    name="postalId" list="postals"
+                                   [(ngModel)]="orgAddr.postalId"
+                                   id="postalCode" #postalId="ngModel"  pattern="^[0-9]*$" minlength="6" maxlength="6" >
+                                  </mat-form-field>
+                                  <div *ngIf="postalId.errors && (postalId.dirty || postalId.touched)" class="color-red m-btm5 f-size12" >
+                                    <div [hidden]="!postalId.hasError('pattern') && !postalId.hasError('minlength') && !postalId.hasError('maxlength')">Please Enter Valid Postal Code</div>
+                                  </div>
+                            <!-- <mat-form-field class="width100">
+                              <input matInput [disabled]="readonlyAdd" maxlength="6" minlength="6" pattern="[0-9]+" name="postalCode"
+                               [(ngModel)]="orgAddr.postalId"
+                                list="postals" placeholder={{labelData.postal}} id="postalCode" #postalCode="ngModel">
+                            </mat-form-field>
+                            <datalist id="postals">
+                              <option *ngFor=" let s of postalList" [value]="s.postalId">{{s.postalCode}}</option>
+                            </datalist> -->
+
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                        <!-- buttons for Address information starts -->
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top-5 mbtm-20">
+                          <div class="pull-right">
+                            <button type="submit" *ngIf="!btnaddressreadonly" id="OrganisationAddressSubmitId" (click)="OrganisationAddressSubmit($event)" [disabled]="!addressform.form.valid"
+                              class="btn  submit-btn"> {{labelData.btnSave}}</button>
+                            <button *ngIf="btnaddressreadonly" class="btn submit-btn" id="updateOrganisationAddressSubmitId" [disabled]="!addressform.form.valid" (click)="updateOrganisationAddressSubmit()"> {{labelData.btnUpdate}} </button>
+                            <a class="btn submit-btn " id="cancelOrgAddId" (click)="cancelOrgAdd()"> {{labelData.btnCancel}}</a>
+                          </div>
+                        </div>
+                        <!-- buttons for Address information ends -->
+                        <div class="clearfix"></div>
+                      </div>
+
+
+                    </div>
+
+                  </div>
+
+                </form>
+              </div>
+            </div>
+            <!-- address information ends -->
+
+
+
+            <div class="clearfix"></div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,17 @@
+
+
+            <nav mat-tab-nav-bar aria-label="weather navigation links" class="master" id="aa">
+                    <a  mat-tab-link
+                        *ngFor="let routeLink of masterValue; let i = index"
+                         [routerLink]="routeLink.urlLink"
+                         routerLinkActive="active"
+                         [active]="activeLinkIndex === i"
+                         (click)="activeLinkIndex = i;MenuActiveFun(routeLink.urlLink)"  
+                         [ngClass]="{'active123': MasterMenuActive==routeLink.urlLink}">
+                         {{routeLink.urlName}}
+                     </a>
+                </nav>
+          
+                <router-outlet></router-outlet>
+
+         

@@ -1,0 +1,115 @@
+<div class="clearfix"></div>
+<div class="row footer">
+  <div class="container font_robotoregular">
+
+<!-- connect with us starts -->
+<div class="col-lg-12  col-md-12  col-sm-12 col-xs-12">
+<div class="col-lg-4 col-md-5 col-sm-5 col-xs-12 padding0 margintop-35">
+   
+        <div>         
+            <ul style="margin-left: -25px;"><li> <h4 class="themeColor font_robotobold">
+                CONNECT WITH US
+            </h4></li></ul>
+          <ul style="list-style:none;margin-left: -25px;">
+              <li class="float_left">
+                <img class="width40 cursor-pointer" src="assets/images/facebook.png" onmouseover="this.src='assets/images/facebook_enable.png'"
+                  onmouseout="this.src='assets/images/facebook.png'">
+              </li>
+              <li class="float_left" style="margin-left: 5px;">
+                <img class="width40 cursor-pointer" src="assets/images/insta_icon.png" onmouseover="this.src=this.src.replace('insta_icon','insta_icon_enable')"
+                  onmouseout="this.src=this.src.replace('insta_icon_enable','insta_icon')">
+              </li>
+              <li class="float_left" style="margin-left: 5px;">
+                <img class="width40 cursor-pointer" src="assets/images/linkedin.png" onmouseover="this.src='assets/images/linkedin_enable.png'"
+                  onmouseout="this.src='assets/images/linkedin.png'">
+              </li>
+              <li class="float_left" style="margin-left: 5px;">
+                <img class="width40 cursor-pointer" src="assets/images/twitter.png" onmouseover="this.src='assets/images/twitter_enable.png'"
+                  onmouseout="this.src='assets/images/twitter.png'">
+              </li>
+              <li class="float_left" style="margin-left: 5px;">
+                <img class="width40 cursor-pointer" src="assets/images/google_icon.png" onmouseover="this.src='assets/images/google_icon_enable (1).png'"
+                  onmouseout="this.src='assets/images/google_icon.png'">
+              </li>
+            </ul>
+      </div>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 padding0">
+</div>
+  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 padding0 margintop-35" style="float:right;">
+      <a href="http://scoratech.com/" target="_blank"><img src="assets/images/logo_footer.png" class="img-responsive width180"></a>
+  </div>
+</div>
+<!-- connect with us ends -->
+
+
+<!-- ourservices,sitelinks and newsletter section starts -->
+<div class="col-lg-12  col-md-12  col-sm-12 col-xs-12 margintop-35">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 ">
+      <h4 class="themeColor font_robotobold" id="col1">OUR SERVICES</h4>
+      <div class="footer_textColor font_robotoregular">
+        
+        <p><span><a routerLink="/comapanyLandingPage" fragment="col3" [scrollTo]="'#place1'" [scrollDuration]="1000" [scrollOffset]="-100">Recruitment</a></span></p>
+        <p><span><a routerLink="/campusLandingPage" fragment="Ideas" [scrollTo]="'#Ideas'" [scrollDuration]="1000" [scrollOffset]="-100">Placement</a></span></p>
+        <p><span><a routerLink="/studentLandingPage" fragment="Perfect" [scrollTo]="'#Perfect'" [scrollDuration]="1000" [scrollOffset]="-100">Digital Profiles</a></span></p>
+        <p><span><a routerLink="/comapanyLandingPage" fragment="EndtoEnd" [scrollTo]="'#EndtoEnd'" [scrollDuration]="1000" [scrollOffset]="-100">Data Driven Insights</a></span></p>
+        <p><span><a routerLink="/scoraLandingPage" fragment="EventsHighlight" [scrollTo]="'#EventsHighlight'" [scrollDuration]="1000" [scrollOffset]="-100">Engagements</a></span></p>
+        <!-- <p><span><a routerLink="/privacyPolicy">Communication</a></span></p> -->
+      </div>
+    </div>  
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <h4 class="themeColor font_robotobold">SITE LINKS</h4> 
+        <div class="footer_textColor font_robotoregular"> 
+        <p><a href="http://www.scoratech.com/" fragment="ABOUT" target="_blank">About Us</a></p>    
+        <p>
+            <a routerLink="/privacyPolicy">Privacy Policy</a>
+        </p>
+        <p>
+            <a routerLink="/termsOfUse">Terms Of Use</a>
+        </p>
+        <p>
+          <a style="color:#95999f;" class="textdecoration-none" href="mailto:support@scoraxchange.com?subject=Issue reported by user">Report An Issue</a>          
+        </p>
+        </div>
+    </div>  
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <h4 class="themeColor font_robotobold">NEWS LETTER</h4> 
+        <form #newsletterSubscription="ngForm" #myForm="ngForm"> 
+
+            <!-- <mat-form-field  class="width100 m-top10" >
+                <input matInput  pattern="^\w+([.-]\w+)*@\w+([.-]\w+)*(\.\w{2,3})+$" name="campusUsername" [(ngModel)]="Newsletter.emailId"
+                maxlength="512" class="form-control form-control1" id="emailid" minlength="6" #campusUsername="ngModel" placeholder="Email ID" required>
+                </mat-form-field> -->
+
+
+
+        <input pattern="^\w+([.-]\w+)*@\w+([.-]\w+)*(\.\w{2,3})+$" name="campusUsername" [(ngModel)]="Newsletter.emailId"
+         id="emailid" placeholder="Email ID" minlength="6" maxlength="512" type="text" class="form-control form-control1" required> 
+
+
+
+
+
+
+
+
+        <button type="submit" (click)="NewsletterSubscr(newsletterSubscription)" [disabled]="!myForm.form.valid" class="btn submit-btn m-top10" disabled>Subscribe</button>
+        </form>
+    </div>      
+</div>
+<!-- ourservices,sitelinks and newsletter section ends -->
+
+
+<!-- copy right and line starts -->
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margintop-10">
+    <img src="assets/images/footer_seperator lineN.png" class="width100">
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 copyRight">
+    <p class="text-center color_sitelinks">Copyright &copy; 2018. All Rights Reserved</p>
+  </div>
+<!-- copy right and line ends -->
+
+    
+
+  </div>
+</div>

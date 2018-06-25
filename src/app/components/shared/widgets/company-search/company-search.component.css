@@ -1,0 +1,38 @@
+.company_css .mat-form-field-underline {
+    background-color: black !important;
+}
+.company_css .mat-form-field-placeholder {
+    color: black !important;
+}
+
+.mat-radio-outer-circle {
+    box-sizing: border-box;
+    height: 15px !important;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: border-color ease 280ms;
+    width: 15px !important;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 50%;
+}
+.mat-radio-label-content {
+    display: inline-block;
+    order: 0;
+    line-height: inherit;
+    padding-left: 0px !important;
+    padding-right: 0;
+    margin-top: -5px !important;
+}
+
+.data-count {
+    padding: 10px 0px;
+    /* border:1px solid red; */
+    background: #ea9215;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 3px;
+    border-radius: 4px;
+    width: 10%;
+}

@@ -1,0 +1,208 @@
+<div class="container-fluid padding0">
+  <!-- upload cover starts -->
+  <div class="row">
+  <div style="overflow: hidden;" >
+  <img src="assets/images/cover_image.jpg" style="margin-bottom:5px">
+  <div style="background-color:white;">
+    <img  src="assets/images/KtBlog1.jpg" style="width:150px;height:150px;border-radius:100%;    margin-top: -74px;
+      margin-left: 70%;" >
+  </div>
+   
+  </div>
+  </div>
+  <!-- upload cover ends -->
+    <!-- profile starts -->
+    <div class="row">
+      <app-profile></app-profile>
+    </div>
+    <!-- profile ends -->
+  
+    <!-- skills,intrests starts -->
+    <div class="row">
+      <section class="module parallax parallax-1 height500">
+        <div class="parallaxInner1" style="padding:1px">
+          <div class="col-lg-12 col-md-12 colsm-12 col-xs-12" style="margin-top:50px">
+            <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+              <h3 class=" color-fff">
+                Skills, Intrests & Hobbies
+              </h3>
+  
+              <div class="" style="margin-top:30px">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <h4 class="color-fff">Add Skills</h4>
+                  <div class="input-group width80">
+                    <input type="text" class="form-control" placeholder="Search" name="q">
+                    <div class="input-group-btn">
+                      <button class="btn btn-default color_add" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <h4 class="color-fff">Add Intrests</h4>
+                  <div class="input-group width80">
+                    <input type="text" class="form-control" placeholder="Search" name="q">
+                    <div class="input-group-btn">
+                      <button class="btn btn-default color_add" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <h4 class="color-fff">Add Hobbies</h4>
+                  <div class="input-group width80">
+                    <input type="text" class="form-control" placeholder="Search" name="q">
+                    <div class="input-group-btn">
+                      <button class="btn btn-default color_add" type="submit">Add</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 colsm-12 col-xs-12" style="margin-top:50px;">
+                <button class="btn btn-default skip_button">Skip</button>&nbsp;&nbsp;
+                <button class="btn btn-default next_button">Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  
+    <!-- skills,intrests ends -->
+  
+  
+  
+    <!-- projects heading starts -->
+    <div class="row" style="margin-top:50px">
+  
+      <section class="module parallax parallax-1 height150px">
+        <div class="parallaxInner">
+          <h3 class=" color-fff">
+            Projects, Certificates & Awards
+          </h3>
+        </div>
+      </section>
+    </div>
+    <!-- projects heading ends -->
+  
+  
+    <!-- project starts -->
+    <div class="row">
+      <app-project></app-project>
+    </div>
+    <!-- project ends -->
+  
+    <!-- Address & contact information starts -->
+    <div class="row" >
+  
+      <section class="module parallax parallax-2 height500">
+        <div class="parallaxInner1" style="padding:1px">
+          <div class="col-lg-12 col-md-12 colsm-12 col-xs-12" style="margin-top:50px">
+            <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1">
+              <h3 class=" color-fff">
+                Address & Contact Information
+              </h3>
+  
+  
+               <!-- address information starts -->
+  
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <h4>Address</h4>
+                <mat-select placeholder="Address Type" class="width80">
+                  <mat-option *ngFor="let food of foods" [value]="food.value">
+                    {{ food.viewValue }}
+                  </mat-option>
+                </mat-select>
+  
+                <mat-form-field class="width80">
+                  <input matInput placeholder="Address Line 1">
+                </mat-form-field>
+  
+                <mat-form-field class="width80">
+                          <input matInput placeholder="Address Line 2">
+                        </mat-form-field>
+                        
+                 <mat-form-field class="width80">
+                      <input matInput placeholder="Address Line 3">
+                  </mat-form-field>
+  
+                  <mat-select placeholder="Country" class="width80">
+                   <mat-option *ngFor="let food of foods" [value]="food.value">
+                  {{ food.viewValue }}
+                  </mat-option>
+                </mat-select>
+                
+                  <mat-select placeholder="State" class="width80">
+                  <mat-option *ngFor="let food of foods" [value]="food.value">
+                   {{ food.viewValue }}
+                  </mat-option>
+                </mat-select>
+                
+                  <mat-select placeholder="City" class="width80">
+                   <mat-option *ngFor="let food of foods" [value]="food.value">
+                   {{ food.viewValue }}
+                  </mat-option>  
+                </mat-select>
+                
+                  <mat-form-field class="width80" >
+                  <input matInput placeholder="Postal Code">
+                  </mat-form-field>    
+                  
+                  <p>+ Add Secondary Contact </p>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" style="margin-top:20px;margin-bottom:50px;">
+                    <button class="btn btn-default skip_button">Skip</button>&nbsp;&nbsp;
+                    <button class="btn btn-default next_button">Submit</button>
+                  </div>
+      
+  
+  
+              </div>
+  
+  
+           
+  
+              <!-- address information ends -->
+  
+              <!-- contact information starts -->
+  
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <h4>Contact</h4>
+              <mat-form-field class="width80" >
+                  <input matInput placeholder="Phone Number">
+                  </mat-form-field>   
+  
+                   <mat-form-field class="width80" >
+                  <input matInput placeholder="Facebook URL">
+                  </mat-form-field>   
+  
+                   <mat-form-field class="width80" >
+                  <input matInput placeholder="Linked In URL">
+                  </mat-form-field>   
+  
+                   <mat-form-field class="width80" >
+                  <input matInput placeholder="Twitter URL">
+                  </mat-form-field>   
+  
+                   <mat-form-field class="width80" >
+                  <input matInput placeholder="Youtube URL">
+                  </mat-form-field>   
+  
+                   <mat-form-field class="width80" >
+                  <input matInput placeholder="Youtube URL">
+                  </mat-form-field>   
+              </div>
+  
+   <!-- contact information ends -->
+  
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Address & contact information ends -->
+  
+  </div>
+  
+  
+  
+  
+  
+  

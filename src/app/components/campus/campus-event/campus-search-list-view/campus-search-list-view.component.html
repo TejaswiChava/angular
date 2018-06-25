@@ -1,0 +1,79 @@
+<table class="table table-striped" id="myProgram" [mfData]="data | campusListSearch : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+[(mfSortBy)]="sortBy" [(mfSortOrder)]='sortOrder'>
+
+<thead>
+  <tr>
+    <th>
+      <mfDefaultSorter by="campusName">Campus Name</mfDefaultSorter>
+    </th>
+
+    <th>
+      <mfDefaultSorter by="universityName">University Name</mfDefaultSorter>
+    </th>
+
+    <th>
+      <mfDefaultSorter by="regionFlag">Region</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="cityName">City</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="stateCode">State</mfDefaultSorter>
+    </th>
+    <th>
+      <mfDefaultSorter by="tier">Tier</mfDefaultSorter>
+    </th>
+    
+
+  </tr>
+  <tr>
+
+  </tr>
+</thead>
+<tbody>
+  <!-- (click)="viewPckg(searchList)" -->
+  <tr *ngFor="let searchList of mf.data" class="notfirst cursor-pointer">
+
+    <td>
+        <a routerLink="/campus/campusListProfile/{{searchList.campusId}}"
+        target="_blank"
+        class="color-blue"> {{searchList.campusName}} </a>
+        
+    </td>
+    <td>
+      {{searchList.universityName}} </td>
+
+    <td>
+      {{searchList.regionFlag}} </td>
+    <td>
+      {{searchList.cityName}} </td>
+    <td>
+      {{searchList.stateCode}} </td>
+    <td>
+      {{searchList.internshipInd}} </td>
+
+    <td>
+      {{searchList.tier}} </td>
+
+
+
+
+
+
+  </tr>
+  <tr *ngIf="mf.data == ''">
+    <td colspan="8" class="text-center">
+      <span>
+        No Data Found
+      </span>
+    </td>
+  </tr>
+</tbody>
+<tfoot>
+  <tr>
+    <td colspan="12">
+      <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+    </td>
+  </tr>
+</tfoot>
+</table>

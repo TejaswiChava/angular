@@ -1,0 +1,122 @@
+<div *ngIf='noDetails' class=" m-top20">
+  <h3>Campus Details</h3>
+  <div class="search-box">
+    <div *ngIf='noData'>No data found</div>
+    <div *ngIf='single'>
+      <table class="table">
+
+        <tr>
+          <td> <b> University Name </b> </td>
+          <td>:</td>
+          <td>{{singleData[0].universityName}}</td>
+          <td> <b>  Campus Name </b>  </td>
+          <td>:</td>
+          <td>
+              <span *ngIf="singleData[0].campusStatusValueId == 369;else displayclickbleName">
+                    {{singleData[0].campusName}}
+              </span>
+              <ng-template #displayclickbleName>
+                  <a routerLink='/campusListProfile/{{singleData[0].campusId}}' target="_blank" >
+                    {{singleData[0].campusName}} 
+                  </a>
+              </ng-template>
+          </td>
+        </tr>
+        <tr>
+          <td> <b>  City Name  </b> </td>
+          <td>:</td>
+          <td>{{singleData[0].cityName}}</td>
+          <td><b>  Number Of Students </b></td>
+          <td>:</td>
+          <td>{{this.numberOfStudents}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- <div  *ngIf='single'>
+    <table class="table table-striped">
+        <thead>
+          <tr style="color:orange">
+            <th>University Name</th>
+            <th>Campus Name</th>
+            <th>City Name</th>
+            <th>Number Of Students </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{singleData[0].universityName}}</td>
+            <td>
+               <a routerLink='/campusListProfile/{{singleData[0].campusId}}' target="_blank" >
+              {{singleData[0].campusName}} 
+            </a>
+          </td>
+            <td>{{singleData[0].cityName}}</td>
+            <td>{{singleData[0].numberOfStudents}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+
+    <div *ngIf='multiple'>
+      <table class="table table-striped" id="myProgram" [mfData]="data | checkedCampusList : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+        [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+
+        <!-- <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5"> -->
+        <thead>
+          <tr>
+            <th>
+              <mfDefaultSorter by="universityName">University Name</mfDefaultSorter>
+            </th>
+            <th>
+              <mfDefaultSorter by="campusName">Campus Name</mfDefaultSorter>
+            </th>
+            <th>
+              <mfDefaultSorter by="numberOfStudents">Number of Students</mfDefaultSorter>
+            </th>
+            <!-- <th>
+            <mfDefaultSorter by="hostName">Host</mfDefaultSorter>
+          </th> -->
+
+
+          </tr>
+          <tr>
+
+          </tr>
+        </thead>
+        <tbody>
+          <!-- {{data|json}} -->
+          <tr *ngFor="let checkedData of mf.data" class="notfirst cursor-pointer">
+
+            <td>
+              {{checkedData.universityName}}
+            </td>
+            <td>
+                <a routerLink='/campusListProfile/{{checkedData.campusId}}' target="_blank" >
+              {{checkedData.campusName}} 
+            </a></td>
+            <td>
+              {{checkedData.numberOfStudents}} </td>
+            <!-- <td>
+            {{checkedData.hostName}}
+
+          </td> -->
+          </tr>
+          <tr *ngIf="mf.data == ''">
+            <td colspan="5" class="text-center">
+              <span>
+                {{labelData.noDataFound}}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="6">
+              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>

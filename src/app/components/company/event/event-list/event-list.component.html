@@ -1,0 +1,80 @@
+ <div class="flexcroll table-scroll" *ngIf="!list || !sendList" >
+      <!-- <input class="pull-left filter-input" [(ngModel)]="filterQuery" *ngIf="!showEditDetails" placeholder="Filter by name"/> -->
+    <table class="table table-striped" id="myProgram" [mfData]="data | eventList : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+      [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+
+      <!-- <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5"> -->
+      <thead>
+          <input type="checkbox" (change)="showInactiveEvents($event)"> <b> Include Inactive Events</b><br>
+          <br>
+        <tr>
+          <th>
+            <mfDefaultSorter by="eventName">Event Name</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="scheduledDate">Scheduled Date</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="scheduledStartTime">Scheduled Start Time</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="hostName">Host</mfDefaultSorter>
+          </th>
+          <th>
+              <mfDefaultSorter by="eventStatusValueId">Event Status</mfDefaultSorter>
+            </th>
+            <th>
+                <mfDefaultSorter by="createDatetime">Creation Date</mfDefaultSorter>
+              </th>
+        </tr>
+      </thead>
+      <tbody>
+   
+        <tr *ngFor="let events of mf.data" class="notfirst cursor-pointer" (click)="viewEvent(events)">
+
+          <td>
+            {{events.eventName}}
+          </td>
+          <td>
+            {{events.scheduledDate | date}} 
+          <td>
+            {{events.scheduledStartTime}} </td>
+          <td>
+            {{events.hostName}}
+          </td>
+          <td *ngIf="events.eventStatusValueId">
+              <div>
+                  <button type="button" class="btn" id="btn{{events.eventStatusValueId}}">
+                    {{eventStatus[events.eventStatusValueId].lookupValue}}</button>
+                </div>
+            </td>
+            <td>
+                {{events.createDatetime | date}}
+              </td>
+      
+
+
+        </tr>
+        <tr *ngIf="mf.data == ''">
+          <td colspan="5" class="text-center">
+            <span>
+              {{labelData.noDataFound}}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="6">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div *ngIf="list">
+      <app-create-event [selectedEvent]="sendList" [(getEventStatus)]="list"></app-create-event>
+  </div>
+  
+    <router-outlet></router-outlet>
+

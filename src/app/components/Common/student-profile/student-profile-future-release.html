@@ -1,0 +1,411 @@
+<!-- cover pic section starts -->
+<div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+            <img class="width100 coverpic" src="assets/images/Profile_Page_Icons/company_default_cover_image.jpg">
+            <!-- <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 padding0">
+                <img class="displaypic" src="assets/images/Profile_Page_Icons/profile_bg_image.jpg">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <img class="display_wall_pic" src="assets/images/Profile_Page_Icons/profile_pic.png">
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <p class="display_name font_robotomedium"> {{firstName}} </p>
+          <p> {{middleName}} </p>
+          <p> {{lastName}}  </p>
+      </div>
+            </div> -->
+        </div>
+      </div>
+      <!-- cover pic section starts -->
+      
+      <!-- display pic starts -->
+      <div class="row background_ffff font_robotoregular">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding0 mtop-125" id="studentdisplayPic_bg">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+        <div class="mtop-23">
+            <img class="profilepic center-block" src="assets/images/Profile_Page_Icons/profile_pic.png">
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+          <div class="mtop-23">  
+        <p class="display_name font_robotomedium">{{firstName}} </p>
+          <p> {{middleName}}</p>
+          <p> {{lastName}} </p>
+          </div>
+      </div>
+      </div>    
+      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 padding0">
+      </div>        
+      </div>        
+      </div>  
+      <!-- display pic ends -->
+      
+      
+      
+      
+      <!-- <p> {{profilePic}} </p>
+      <p> {{ coverPic }} </p> -->
+      <!-- <img src="{{profilePic}}" alt="profile pic"> -->
+      <!-- header section starts -->
+      <div class="row background_ffff font_robotoregular">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="center-block">
+              <ul class="text-center m-top20 list-none studentheader">
+                  <li style="float:left" class="mright30 paddingLi10">
+                    <a class="padding10 f-size18">Personal Info</a>
+                  </li>
+                  <li style="float:left" class="mright30 paddingLi10">
+                    <a class="padding10 f-size18">Academic Information</a>
+                  </li>
+                  <li style="float:left" class="mright30 paddingLi10">
+                    <a class="padding10 f-size18">Skills & Intrests</a>
+                  </li>
+                  <li style="float:left" class="mright30 paddingLi10">
+                    <a class="padding10 f-size18">Projects & Certificates</a>
+                  </li>
+                  <li style="float:left" class="paddingLi10">
+                    <a class="padding10 f-size18">Contact & Address</a>
+                  </li>
+                </ul>
+          </div>
+            
+        </div>
+          
+      </div>
+      
+      <!-- header section ends -->
+      <!-- body section starts -->
+      <div class="row background_ffff font_robotoregular">
+        <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+          <!-- content section starts -->
+          <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 padding0">
+            <!-- summary section starts -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 m-top30 ">
+              <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 padding0">
+                <h4 class="">{{summary}}:</h4>
+                <p class="regulartext">{{summaryDetails}}</p>
+                <!--p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                  the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
+                  it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+                  remaining essentially unchanged.</p-->
+                <br>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding0">
+                  <table>
+                    <tr *ngIf="this.gender === 1">
+                      <td  class="text-uppercase">GENDER</td>
+                      <td class="paddingLeftRight-10">:</td>
+                      <td class="regulartext">{{genderMale}}</td>
+                    </tr>
+                    <tr *ngIf="this.gender === 0">
+                      <td  class="text-uppercase">GENDER</td>
+                      <td class="paddingLeftRight-10">:</td>
+                      <td class="regulartext">{{genderFemale}}</td>
+                    </tr>
+                    <tr>
+                      <td class="text-uppercase">{{dob}}</td>
+                      <td class="paddingLeftRight-10">:</td>
+                      <td class="regulartext">{{dobDate | date: 'dd/MM/yyyy'}}</td>
+                    </tr>
+                    <tr>
+                      <td>NATIONALITY</td>
+                      <td class="paddingLeftRight-10">:</td>
+                      <td class="regulartext">{{Nationality}}</td>
+                    </tr>
+                  </table>           
+                </div>
+               
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <h4 class="">Profile Strength</h4>
+                <img src="{{strength_img}}" width="220px" height="30px" alt="strength">
+                <br>
+                <table class="m-top10 profileStrength">
+                  <tr>
+                    <td><img src="{{facebook_img}}" alt="facebook" class="Social_profile_Icons"></td>
+                    <td> <a class="wordBreak f-size13 regulartext">{{facebook}}</a> </td>
+                  </tr>
+                  <tr>
+                    <td> <img src="{{twitter_img}}" alt="twitter image" class="Social_profile_Icons" > </td>
+                    <td>  <a class="wordBreak f-size13 regulartext">{{github}}</a></td>
+                  </tr>
+                  <tr>
+                    <td><img src="{{youtube_img}}" alt="Youtube image" class="Social_profile_Icons"></td>
+                    <td> <a class="wordBreak f-size13 regulartext">{{youtube}}</a> </td>
+                  </tr>
+                  <tr>
+                    <td>  <img src="{{linkdin_img}}" alt="Linkdin image" class="Social_profile_Icons" > </td>
+                    <td><a class="wordBreak f-size13 regulartext">{{linkdin}}</a></td>
+                  </tr>
+                </table>
+               
+              </div>
+            </div>
+            <!-- summary section ends -->
+            <!-- academic information starts -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" style="margin-top:35px">
+              <div class="bottom_color">
+                <h4 style="display: inline-block;" class="studentprofile_color font_robotomedium">ACADEMIC INFORMATION</h4>
+                <img class="edit_css cursor-pointer pull-right"  src="{{edit_img}}">
+              </div>
+              <div style="margin-top:20px">
+      
+      
+                <div>
+                  <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12  ">
+                    <div style="border:1px solid #ccc;padding:10px;height:300px;height:410px">
+                      <h4 class="text-uppercase studentprofile_color">{{degreeName}}</h4>
+                      <p>{{degreeCollegeName}}</p>
+                      <p>{{degreeScore}}: {{degreeScoreNumber}}</p>
+                      <p>{{degreeUniversity}}</p>
+                      <p>{{bachelorDegree}}</p>
+                      <p>Scores:</p>
+                      <p>{{fistYear}}&nbsp;:&nbsp;  %</p>
+                      <p>{{secoundYear}}&nbsp;:&nbsp;68%</p>
+                      <p>{{thirdYear}}&nbsp;:&nbsp;68%</p>
+                      <p>{{fourthYear}}&nbsp;:&nbsp;68%</p>
+                      <p>Highlights of your degree</p>
+                      <button class="btn pull-right studentprofile_button">View Attachment</button>
+                    </div>
+                  </div>
+                </div>
+      
+      
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <div style="border:1px solid #ccc;padding:10px;height:300px;height:410px">
+                    <div *ngFor="let x of interInfo">
+                      <h4 class="text-uppercase studentprofile_color">12th INFO</h4>
+                        <p>{{x.instituteName}}</p>
+                        <p>{{degreeScore}}: {{x.scoreGrade}}</p>
+                        <p>{{degreeUniversity}}</p>
+                        <p>Highlights of your degree {{x.comment}} </p>
+                        <button class="btn pull-right studentprofile_button">
+                          <a href="" target="_blank"> View Attachment </a>
+                        </button>
+                    </div>
+                </div>
+             </div>   
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <div style="border:1px solid #ccc;padding:10px;height:300px;height:410px">
+                    <h4 class="text-uppercase studentprofile_color"> 10Th INFO </h4>
+                    <p> {{sscInfo.instituteName}} </p>
+                    <p> {{sscInfo.scoreGrade}} </p>
+                    <p>Highlights of your degree :{{sscInfo.comment}} </p>
+                    <button class="btn pull-right studentprofile_button">
+                      <a href="{{sscInfo.url}}" target="_blank">View Attachment </a>
+                    </button>
+                  </div>
+                </div>
+      
+      
+              </div>
+      
+      
+            </div>
+            <!-- academic information ends -->
+      
+            <!-- skills section starts -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" style="margin-top:35px">
+              <div class="bottom_color">
+                <h4 class="m-top20" style="display: inline-block;" class="studentprofile_color font_robotomedium">SKILLS</h4>
+                <img class="edit_css cursor-pointer pull-right" src="{{edit_img}}">
+              </div>
+              <div style="margin-top:20px">
+                <ul style="list-style:none;margin-left:-45px" *ngFor="let x of skillsfinal">
+                  <li style="float:left;margin-right:15px"><a style="border-radius:15px;padding:8px 20px;border:1px solid;">{{x}}</a></li>
+                </ul>
+                
+              </div>
+              <!-- skills section ends -->
+      
+              <!-- intrests section starts -->
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" style="margin-top:35px">
+                <div class="bottom_color">
+                  <h4 class="m-top20" style="display: inline-block;" class="studentprofile_color font_robotomedium">INTRESTS</h4>
+                  <img class="edit_css cursor-pointer pull-right"  src="{{edit_img}}">
+                </div>
+                <DIV style="margin-top:20px" *ngFor="let x of interestFinal">
+                  <p class="btn studentprofile_button inline_block">{{x}}</p>
+                </DIV>
+              </div>
+              <!-- intrests section ends -->
+      
+      
+              <!-- hobbies section starts -->
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" style="margin-top:35px">
+                <div class="bottom_color">
+                  <h4 class="m-top20" style="display: inline-block;" class="studentprofile_color font_robotomedium">HOBBIES</h4>
+                  <img class="edit_css cursor-pointer pull-right"  src="{{edit_img}}">
+                </div>
+                <DIV style="margin-top:20px">
+                  <div *ngFor="let x of splitHobbies">
+                    <p class="btn studentprofile_button inline_block">{{x}}</p>
+                  </div>
+                </DIV>
+              </div>
+              <!-- hobbies section ends -->
+      
+      
+              <!-- project section starts -->
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" style="margin-top:35px">
+                <div class="bottom_color">
+                  <h4 class="m-top20" style="display: inline-block;" class="studentprofile_color font_robotomedium">PROJECTS</h4>
+                  <img class="edit_css cursor-pointer pull-right" src="{{edit_img}}">
+                </div>
+      
+                <div *ngFor="let x of projectsInfo">
+      
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding0">Project Name</div>
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 padding0">
+                      Reference &emsp; Contact
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding0">Institute Name: {{x.instituteName}} </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding0">Duration: {{x.Duration}} </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding0">View Attachment</div>
+      
+                  </div>
+      
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                    <div>
+                      <p>Description:</p>
+                      <p> {{x.comment}} </p>
+                    </div>
+                  </div>
+      
+      
+                </div>
+      
+              </div>
+              <!-- project section ends -->
+      
+              <!-- certificate section starts -->
+      
+      
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" style="margin-top:35px">
+      
+                  <div class="bottom_color">
+                      <h4 class="m-top20" style="display: inline-block;" class="studentprofile_color font_robotomedium">CERTIFICATES</h4>
+                      <img class="edit_css cursor-pointer pull-right"  src="{{edit_img}}">
+                    </div>
+      
+      
+                <div *ngFor="let x of certificateInfo">
+      
+      
+      
+      
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding0">Certificate Name</div>
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 padding0">
+                      <p class="pull-right">View Attachment</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding0"> institute Name: {{x.instituteName}} </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding0"> Duration:{{x.Duration}}</div>
+                  </div>
+      
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 padding0">
+                      <p>Description:</p>
+                      <p> {{x.comment}} </p>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 padding0">
+                      <img style="width:50%" class="center-block" alt="certficate icon" src="{{x.url}">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- certificate section ends -->
+      
+              <!-- awards section starts -->
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" style="margin-top:35px">
+                <div class="bottom_color">
+                  <h4 class="m-top20" style="display: inline-block;" class="studentprofile_color font_robotomedium"> AWARDS </h4>
+                  <img class="edit_css  cursor-pointer pull-right"  src="{{edit_img}}">
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 m-top20">
+                  <div *ngFor="let x of awardsInfo">
+                    <img style="width:15%;display:inline" class="center-block" src="assets/images/Profile_Page_Icons/Campus_default_profile pic.png"> Description : {{x.comment}}
+                  </div>
+                </div>
+              </div>
+              <!-- awards section starts -->
+      
+              <!-- contact and address section starts -->
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" style="margin-top:35px">
+      
+                <!-- contact section starts -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 " style="margin-top:35px">
+                  <div class="bottom_color">
+                    <h4 class="m-top20" style="display: inline-block;" class="studentprofile_color font_robotomedium">CONTACT</h4>
+                    <img class="edit_css  cursor-pointer pull-right"  src="{{edit_img}}">
+                  </div>
+                  <div class="box_shadow_student">
+                    <table cellspacing="10">
+                      <tr>
+                        <td>Mobile Number</td>
+                        <td>:</td>
+                        <td>9391122550</td>
+                      </tr>
+                      <tr>
+                        <td>Facebook URL</td>
+                        <td>:</td>
+                        <td> {{facebook}} </td>
+                      </tr>
+                      <tr>
+                        <td>Github URL</td>
+                        <td>:</td>
+                        <td> {{github}} </td>
+                      </tr>
+                      <tr>
+                        <td>Linked in URL</td>
+                        <td>:</td>
+                        <td> {{linkdin}} </td>
+                      </tr>
+                      <tr>
+                        <td>Youtube URL</td>
+                        <td>:</td>
+                        <td> {{youtube}} </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <!-- contact section ends -->
+      
+      
+                <!-- address section starts -->
+      
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 " style="margin-top:35px">
+                  <div class="bottom_color">
+                    <h4 class="m-top20" style="display: inline-block;" class="studentprofile_color font_robotomedium">ADDRESS</h4>
+                    <img class="edit_css  cursor-pointer pull-right"  src="{{edit_img}}">
+                  </div>
+                  <div class="box_shadow_student">
+                    <p> AddressLine1 : {{ address1 }} </p>
+                    <p> AddressLine2 : {{ address2 }} </p>
+                    <p> AddressLine3 : {{ address3 }} </p>
+                    <p> PostalID : {{postalId}} </p>
+                    <p> cityId : {{cityId}} </p>
+                    <p> stateCode : {{stateCode}} </p>
+                    <p> countryCode : {{countryCode}} </p>
+                  </div>
+      
+      
+      
+                </div>
+                <!-- address section ends -->
+      
+              </div>
+              <!-- contact and address section ends -->
+      
+            </div>
+            <!-- content section ends -->
+            <!-- advertisement sectio starts -->
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
+            <!-- advertisement sectio ends -->
+          </div>
+        </div>
+        <!-- body section ends -->

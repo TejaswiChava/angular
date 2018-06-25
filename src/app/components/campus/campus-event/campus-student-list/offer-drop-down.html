@@ -1,0 +1,19 @@
+<div mat-dialog-content>
+    <p>Enter Compensation Package</p>
+    <mat-form-field class="width100">
+        <input matInput tabindex="5" placeholder="Total Compensation value" id="totalCompValue" name="totalCompValue" class="input1 width95" required="required"
+         type="number"  [(ngModel)]="totalCompValue" pattern="^[0-9\.]*$" required>
+    </mat-form-field>
+
+    <!-- <mat-form-field>
+      <mat-select placeholder="Compensation Packages"  [(ngModel)]="compensationValue" name="Compensation Package">
+        <mat-option *ngFor="let compensationItem of data" [value]="compensationItem.compensationValue">
+          {{ compensationItem.compensationName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field> -->
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="totalCompValue" tabindex="2">Ok</button>
+    <button mat-button (click)="onNoClick()" tabindex="-1">No Thanks</button>
+  </div>

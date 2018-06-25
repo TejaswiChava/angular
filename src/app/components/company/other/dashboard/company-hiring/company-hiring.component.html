@@ -1,0 +1,26 @@
+<div>
+  <!-- <label>Organization Placed</label> -->
+  <form>
+  <mat-form-field>
+    <mat-select placeholder="Organization Placed" name="selectedOrg" (change)="onSelectDropdown($event.value)">
+        <mat-option [value]=0> Select Organization </mat-option>
+      <mat-option *ngFor="let org of companyOrgDetails" [value]="org.orgId">
+        {{org.orgName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field> 
+</form>
+</div>
+<div>
+  <ngx-charts-pie-chart 
+  [view]="view"
+  [scheme]="colorScheme" 
+  [results]="data" 
+  [legend]="showLegend" 
+  [legendTitle] = 'legendTitle'
+  [explodeSlices]="explodeSlices"
+  [labels]="showLabels" 
+  [doughnut]="doughnut" 
+  (select)="onSelect($event)">
+  </ngx-charts-pie-chart>
+</div>

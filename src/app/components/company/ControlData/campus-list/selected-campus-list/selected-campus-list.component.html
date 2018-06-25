@@ -1,0 +1,114 @@
+<div *ngIf="campusListCount" class="data-count pull-left">Total Count: <span class="data-number">{{campusListCount}}</span></div>
+<div style="padding: 10px;padding-left: 10px;min-height:400px"  >
+  <input class="pull-right filter-input" [(ngModel)]="filterQuery"  placeholder="Filter by Campus Name"/>
+<table class="table table-striped" id="myProgram" [mfData]="data | selectedCampusList : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+  [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+
+  <!-- <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5"> -->
+  <thead>
+    <tr>
+      <th>
+        <mfDefaultSorter by="employerCampusListDtlCampus.name">Campus Name</mfDefaultSorter>
+      </th>
+      <!-- <th>
+        <mfDefaultSorter by="employerCampusListDtlCampus.description"> Description </mfDefaultSorter>
+      </th> -->
+      <th>
+          <mfDefaultSorter by="employerCampusListDtlCampus.universityId">University Name </mfDefaultSorter>
+      </th>
+      <th>
+        <mfDefaultSorter by="employerCampusListDtlCampus.numberOfStudents">Number Of Students</mfDefaultSorter>
+      </th>
+      <th>
+          <mfDefaultSorter by="campusInfo.cityId">City </mfDefaultSorter>
+      </th>
+      <th>
+          <mfDefaultSorter by="campusInfo.stateCode">State </mfDefaultSorter>
+      </th>
+      <th>
+        <mfDefaultSorter by="employerCampusListDtlCampus.tierValueId">Tier</mfDefaultSorter>
+      </th>
+
+
+    </tr>
+    <tr>
+
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr *ngFor="let selectedCList of mf.data" class="notfirst cursor-pointer"  id="viewEvent" (click)="  viewEvent(selectedCList)">
+    
+      <td>
+          <a routerLink="/campusListProfile/{{selectedCList.campusId}}"
+          target="_blank"
+          class="color-blue">  {{selectedCList.employerCampusListDtlCampus.name}} </a>
+
+       
+      </td>
+      <td>
+        <span *ngFor="let university of univList">
+            <span *ngIf="university.universityId == selectedCList.employerCampusListDtlCampus.universityId">
+              {{university.name}}
+             </span>
+          </span>
+      </td>
+      <!-- <td *ngIf="selectedCList.employerCampusListDtlCampus.description">
+        {{selectedCList.employerCampusListDtlCampus.description | limitTo:[30]}} 
+      </td> -->
+      <!-- <td *ngIf="!selectedCList.employerCampusListDtlCampus.description">
+        
+              {{selectedCList.employerCampusListDtlCampus.description}} </td> -->
+
+      <td>
+        {{selectedCList.employerCampusListDtlCampus.numberOfStudents}} </td>
+      <td>
+        <span *ngIf="selectedCList.campusInfo">        
+          <span *ngFor="let city of cityList">
+              <span *ngIf="city.cityId == selectedCList.campusInfo.cityId">
+                {{city.cityName}}
+              </span>
+            </span>
+          </span>
+      </td>
+      <td>
+          <span *ngIf="selectedCList.campusInfo">
+            <span *ngFor="let state of stateList">
+              <span *ngIf="state.stateCode == selectedCList.campusInfo.stateCode">
+                {{state.stateName}}
+              </span>
+            </span>
+          </span>
+      </td>
+      <td>
+        <span *ngIf="selectedCList.employerCampusListDtlCampus.tierValueId">
+          {{tierValue[selectedCList.employerCampusListDtlCampus.tierValueId].lookupValue}}
+        </span>
+      </td>
+
+
+
+    </tr>
+    <tr *ngIf="mf.data == ''">
+      <td colspan="5" class="text-center">
+        <span>
+          {{labelData.noDataFound}}
+        </span>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="6">
+        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+<!-- <div *ngIf="list">
+  <app-create-event [selectedEvent]="sendList" [(getEventStatus)]="list"></app-create-event>
+</div> -->
+
+<router-outlet></router-outlet>
+

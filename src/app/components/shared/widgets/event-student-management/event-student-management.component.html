@@ -1,0 +1,213 @@
+<div class="container-fluid ">
+  <form [formGroup]="StudentListSearch">
+    <div class="row ">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 companySearch_bg">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <h3 class="text-center">Search For Students</h3>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:20px;">
+
+          <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <mat-form-field class="width100">
+                <input matInput placeholder="First Name" formControlName="firstName" name="firstName">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <mat-form-field class="width100">
+                <input matInput placeholder="Last Name" formControlName="lastName" name="lastName">
+              </mat-form-field>
+            </div>
+             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <mat-form-field class="width100">
+                <mat-select placeholder="Department" formControlName="departmentId" name="departmentId"
+                (change)="getPrograms()">
+                  <mat-option value="departmentIdData">Select Department</mat-option>
+                  <mat-option *ngFor="let dept of departments" [value]="dept.departmentId">{{dept.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <mat-form-field class="width100">
+                <mat-select placeholder="Programme"
+                 formControlName="programId" name="programId">
+                  <mat-option value="">Select Programme</mat-option>
+                  <mat-option *ngFor=" let program of programmes" [value]="program.programId">{{program.programName}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 padding0">          
+              <mat-form-field class="width100">
+                <input matInput placeholder="CGPA >=" formControlName="cgpa" name="lastName">
+              </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mbtm-20">
+          <div class="pull-right">
+            <button class="btn submit-btn" value="submit" (click)='searchCampus(campusId)'>Search</button>
+            <button class="btn submit-btn" (click)='reset()'>Reset</button>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+  </form>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <!-- This is the part for filter -->
+  <div *ngIf="this.searchFlag && !noResultStatus">
+    <form >
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 flexcroll search-box" style="height: 470px;overflow:auto;background:#fff; overflow-y:scroll">
+  
+        <accordion [showArrows]="true" class="programstyle">
+              <accordion-group heading="SKILLS"  [isOpened]="true">
+                <div class="">
+                  <mat-form-field class="width100">
+                    <mat-select multiple class="width100" placeholder="Select Skills" [(ngModel)]="studentInput.skills" (change)="searchFilterFunction()"  id="skillTypeValueId" name="skillTypeValueId">
+                        <!-- <mat-option [value]="">Select Skill</mat-option> -->
+                      <mat-option *ngFor="let skill of skills" [value]="skill.lookupValueId">{{skill.lookupValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </accordion-group>
+              <accordion-group heading="INTERESTS">
+                <div class="">
+                  <mat-form-field class="width100">
+                    <mat-select multiple class="width100" placeholder="Select Interests"  [(ngModel)]="studentInput.interest" (change)="searchFilterFunction()" id="interestTypeValueId"
+                      name="interestTypeValueId">
+                      <!-- <mat-option [value]="">Select Interest</mat-option> -->
+                      <mat-option *ngFor="let interest of interests" [value]="interest.lookupValueId">{{interest.lookupValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </accordion-group>
+            </accordion>
+            <div class="divCenter">
+              <button  type="reset" (click)='resetFilter()' class="btn submit-btn">Reset</button>
+              </div>
+      </div>
+      </form>
+  <!-- This part refers to the list section  -->
+  <!-- datatable starts -->
+
+  <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 search-box" >
+  <div class="row" >
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 padding0">
+
+        <input class="pull-right filter-input" [(ngModel)]="filterQuery" placeholder="Search for Student" />
+        <div class="data-count col-md-2 col-sm-4 col-xs-4">
+            Total Count: <span class="data-number">{{this.getSearchCount()}}</span>
+      </div>
+      <div class="data-count col-md-2 col-sm-4 col-xs-4" *ngIf="this.filterCountFlag"> 
+        Filtered Count: <span class="data-number">{{this.getFilterSearchCount()}}</span>
+    </div>
+        <table class="table table-striped" id="myProgram" [mfData]="data | eventStudentList : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
+          [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+
+          <thead>
+            <tr>
+              <th>
+                <mfDefaultSorter by="studentDetails.firstName"> First Name</mfDefaultSorter>
+              </th>
+              <th>
+                <mfDefaultSorter by="studentDetails.lastName">Last Name</mfDefaultSorter>
+              </th>
+              <th>
+                <mfDefaultSorter by="studentDetails.programName"> Program Name </mfDefaultSorter>
+              </th>
+
+              <th>
+                <mfDefaultSorter by="studentList.studentFullDetails.skills">Skills</mfDefaultSorter>
+              </th>
+              <th>
+                <mfDefaultSorter by="studentList.studentFullDetails.interest">Interest </mfDefaultSorter>
+              </th>
+              <th *ngIf="!hideCheckbox" style="color: #ea9215;">
+                <!-- <mfDefaultSorter>Select </mfDefaultSorter> -->
+                <input type="checkbox" [(ngModel)]="selectedAll" (change)="selectAll($event)">
+                <span *ngIf="selectedAll">Un-</span>Select All
+
+              </th>
+
+            </tr>
+            <tr>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let studentList of mf.data; let i = index" class="notfirst">
+
+              <td *ngIf="studentList.studentDetails">
+
+                <a routerLink="/studentProfile/{{studentList.studentDetails.studentId}}" target="_blank" class="color-blue">
+                  {{studentList.studentDetails.firstName}}
+                </a>
+              </td>
+              <td *ngIf="studentList.studentDetails">
+                {{studentList.studentDetails.lastName}}
+              </td>
+              <td *ngIf="studentList.studentDetails">
+                {{studentList.studentDetails.programName}}
+
+              </td>
+              <td *ngIf="studentList.studentDetails">
+
+                <div *ngFor="let skills of studentList.skills">
+                  {{skills.skillData.lookupValue}}
+                </div>
+
+              </td>
+              <td *ngIf="studentList.studentDetails">
+
+                <div *ngFor="let interest of studentList.intrests">
+                  {{interest.intrestsData.lookupValue}}
+                </div>
+
+              </td>
+              <td *ngIf="!hideCheckbox">
+                <input type="checkbox" [(ngModel)]="studentList.selected" (change)="selectedStudent(studentList, $event)">
+              </td>
+
+
+
+            </tr>
+            <tr *ngIf="mf.data === []">
+              <td colspan="6" class="text-center">
+                <span>
+                  No Data Found
+                </span>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="6">
+                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+    </div>
+  </div>
+  <!-- datatable ends -->
+  </div>
+</div>
+
+<!-- Condition to check whether their is a response or not -->
+<div *ngIf="noResultStatus" style="width:100%">
+  <app-no-response></app-no-response>
+</div>
+</div>

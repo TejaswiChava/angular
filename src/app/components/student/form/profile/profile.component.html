@@ -1,0 +1,73 @@
+<div class="col-lg-12" style="background:white;overflow:auto;">
+  <div class="col-lg-offset-2 col-lg-8 col-lg-offset-2 col-md-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+    <h3>Create Your Profile</h3>
+    <form [formGroup]="StudentForm" novalidate>
+      <div class="col-lg-12 col-md-12 colsm-12 col-xs-12 padding0">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <mat-form-field class="width100">
+            <input matInput placeholder="Firstname" formControlName="firstName">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <mat-form-field class="width100">
+            <input matInput placeholder="Middlename" formControlName="middleName">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <mat-form-field class="width100">
+            <input matInput placeholder="Lastname" formControlName="lastName">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <mat-select class="width100" placeholder="Gender" style="margin-top:-7px">
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{ food.viewValue }}
+            </mat-option>
+          </mat-select>
+
+        </div>
+      </div>
+      <div class="col-lg-12 col-md-12 colsm-12 col-xs-12 padding0">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+          <mat-form-field class="width100">
+            <input matInput placeholder="Email ID" formControlName="lastName">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+          <mat-form-field class="width100">
+            <input matInput placeholder="Mobile Number" formControlName="lastName">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+          <mat-form-field class="width100">
+            <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+          <mat-select class="width100" placeholder="Nationality" style="margin-top:-7px">
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{ food.viewValue }}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+
+      <div class="col-lg-12 col-md-12 colsm-12 col-xs-12">
+        <label>About Me</label>
+        <textarea placeholder="Type something great about you" name="desc" id="desc" class="flexcroll textarea_boxes1 width100"></textarea>
+      </div>
+
+
+      <div class="col-lg-12 col-md-12 colsm-12 col-xs-12" style="margin-bottom:30px;margin-top:20px;">
+        <button class="btn btn-default skip_button">Skip</button>&nbsp;&nbsp;
+        <button class="btn btn-default next_button" (onclick)="submitProfileForm()">Next</button>
+      </div>
+    </form>
+
+  </div>
+</div>

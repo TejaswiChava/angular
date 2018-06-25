@@ -1,0 +1,8 @@
+.ngx-datatable.material{
+    background: #FFF;
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+}
+.ngx-datatable.material .datatable-header .datatable-header-cell {
+    color: pink !important;
+}

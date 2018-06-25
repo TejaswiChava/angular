@@ -1,0 +1,91 @@
+<div class="row" style="background:white">
+  <div class="col-lg-12">
+      <mat-form-field class="width100">
+          <input matInput placeholder="Campus Name">
+        </mat-form-field>
+  </div>
+  
+  
+  <div class="col-lg-12 padding0">
+  <div class="col-lg-6">
+      <mat-select placeholder="University" class="width100">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{ food.viewValue }}
+          </mat-option>
+        </mat-select>
+  </div>
+  <div class="col-lg-6">
+      <mat-select placeholder="Department" class="width100">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{ food.viewValue }}
+          </mat-option>
+        </mat-select>
+  </div>
+  </div>
+  
+  <div class="col-lg-12">
+      <mat-select placeholder="Programm Name" class="width100">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{ food.viewValue }}
+          </mat-option>
+        </mat-select>
+  </div>
+  
+  
+  <div class="col-lg-12 padding0">
+      <div class="col-lg-6">
+          <mat-select placeholder="Programm Type" class="width100">
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{ food.viewValue }}
+              </mat-option>
+            </mat-select>
+      </div>
+      <div class="col-lg-6">
+          <mat-select placeholder="Programm Class" class="width100">
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{ food.viewValue }}
+              </mat-option>
+            </mat-select>
+      </div>
+      <div class="col-lg-6">
+          <mat-select placeholder="Programm Category" class="width100">
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{ food.viewValue }}
+              </mat-option>
+            </mat-select>
+      </div>
+      <div class="col-lg-6">
+          <mat-select placeholder="Programm Major" class="width100">
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{ food.viewValue }}
+              </mat-option>
+            </mat-select>
+      </div>
+      <div class="col-lg-6">
+          <mat-form-field class="width100">
+              <input matInput [matDatepicker]="picker" placeholder="Start Year">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+          <mat-form-field class="width100">
+              <input matInput [matDatepicker]="picker1" placeholder="End Year">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+          <label>Highlights of your degree</label>
+          <textarea placeholder="Description"  
+          class="flexcroll textarea_boxes1 width80"></textarea>
+      </div>
+      <div class="col-lg-6">
+          <div class="fileUpload btn">
+              <span><img style="width:20%" src="assets/images/upload_side icon.png">UPLOAD MEDIA</span>
+               <input type="file" class="upload" />
+             </div> 
+      </div>
+      </div>
+  
+    </div>

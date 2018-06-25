@@ -1,0 +1,81 @@
+<div class="container-fluid ">
+  <form [formGroup]="StudentListSearch">
+    <div class="row ">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 companySearch_bg">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <h3 class="text-center">Search For Students</h3>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:20px;">
+
+          <div class="col-lg-10 col-md-9 col-sm-9 col-xs-9">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" >
+              <mat-form-field class="width100">
+                <input matInput placeholder="First Name" formControlName="firstName" name="firstName">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <mat-form-field class="width100">
+                <input matInput placeholder="Last Name" formControlName="lastName" name="lastName">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <mat-form-field class="width100">
+                <mat-select placeholder="Department" formControlName="departmentId" (change)="getPrograms()" name="departmentId">
+                  <mat-option value="">Select Department</mat-option>
+                  <mat-option *ngFor="let dept of departments" [value]="dept.departmentId">{{dept.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <mat-form-field class="width100">
+                <mat-select placeholder="Programme" formControlName="programId" name="programId">
+                  <mat-option value="">Select Programme</mat-option>
+                  <mat-option *ngFor=" let program of programmes" [value]="program.programId">{{program.programName}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 padding0">
+            <!-- <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 padding0"> -->
+              <mat-form-field class="width100">
+                <input matInput placeholder="CGPA >="  type='number' formControlName="cgpa" name="lastName">
+              </mat-form-field>
+            <!-- </div> -->
+            <!-- <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 text-center padding0">
+              <div class="">
+                <button class="btn submit-btn" value="submit" (click)='searchStudents()'>Search</button>
+                <button class="btn submit-btn" (click)='reset()'>Reset</button>
+              </div>
+            </div> -->
+          </div>
+        </div>
+       
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mbtm-20" >
+                <div class="pull-right">
+                    <button class="btn submit-btn" value="submit" (click)='searchStudents()' >Search</button>
+                    <button class="btn submit-btn" (click)='reset()'>Reset</button>
+                </div>
+               
+              </div>
+              <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  padding0" style="margin-top:0.5%">
+                 
+                </div> -->
+
+       
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+<!-- This part refers to the list section  -->
+
+
+<div *ngIf="searchFlag" style="width:100%">
+  <app-student-search-result [searchData]="searchData" [studentSearchResult]="studentData" [campusId]="campusId"></app-student-search-result>
+</div>

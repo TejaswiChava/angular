@@ -1,0 +1,148 @@
+<div class="container-fluid padding0">
+  <div class="row ">
+    <div class="" *ngIf="showDocumentview">
+      <!-- upload box starts -->
+      <!-- <app-upload-file></app-upload-file> -->
+      <app-campus-upload-file></app-campus-upload-file>
+      <!-- upload box ends -->
+
+      <div class="col-lg-12 m-top20 m-btm20">
+        <div *ngIf="this.data == ''">
+          <h3 style="text-align:center;">No Documents Uploaded</h3>
+        </div>
+        <div *ngIf="this.data !=''">
+            <h4 class="color-heading">Uploaded Documents</h4>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+    
+              <table class="table table-striped" id="myMassupload" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy"
+                [(mfSortOrder)]="sortOrder">
+    
+                <thead>
+    
+                  <tr>
+    
+    
+                    <th>
+                      <mfDefaultSorter by="csvFileLocation">Document Name</mfDefaultSorter>
+                    </th>
+    
+                    <th>
+    
+                      <mfDefaultSorter by="compUploadTypeValueId">Document Type</mfDefaultSorter>
+                    </th>
+                    
+                    <th>
+                      <mfDefaultSorter by="createDatetime"> Upload Date </mfDefaultSorter>
+                    </th>
+    
+    
+                    <th>
+                      <mfDefaultSorter by="totalNoRecs"> No. of Records </mfDefaultSorter>
+                    </th>
+                    <th>
+                      <mfDefaultSorter by="noSuccessRecs"> Success </mfDefaultSorter>
+                    </th>
+                    <th>
+                      <mfDefaultSorter by="noFailRecs"> 
+                        Error
+                      </mfDefaultSorter>
+                    </th>
+                    <!-- <th>
+                      <mfDefaultSorter by=""> Remove </mfDefaultSorter>
+                    </th> -->
+    
+    
+                  </tr>
+                  <tr>
+    
+                  </tr>
+                </thead>
+                <tbody>
+    
+                  <tr *ngFor="let massUploadList of mf.data" class="notfirst cursor-pointer">
+                    <!-- <td>dssdssd</td> -->
+                    <td>{{massUploadList.csvFileLocation}}</td>
+                    
+                    <!-- <td >{{massUploadList.campusUploadTypeValueId}}</td> -->
+                    <td>
+                        {{DocumentTypeLookup[massUploadList.campusUploadTypeValueId].lookupValue}}
+                    </td>
+
+                    <td>{{massUploadList.createDatetime | date}} | {{massUploadList.createDatetime | date:'shortTime'}}</td>
+                    <td>{{massUploadList.totalNoRecs}}</td>
+                    <td>{{massUploadList.noSuccessRecs}}</td>
+                    <!-- massUploadList.errorFileLocation -->
+                    <td>
+                        <a class="errorfileLink" (click)="downloadCampusDoc(massUploadList.errorFileLocation)">
+                          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </a> 
+                      {{massUploadList.noFailRecs}}
+                    </td>
+                    <!-- <td>rrrr</td> -->
+    
+    
+    
+    
+                  </tr>
+                  <!-- <tr *ngIf="mf.data == ''">
+                    <td colspan="6" class="text-center">
+                      <span>
+                   No Data Found
+                  </span>
+                    </td>
+                  </tr> -->
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="6">
+                      <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+    
+            </div>
+            <!--table ends  -->
+            <!-- upload analysis starts -->
+            <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+    
+              <div class="flexcroll border_css box_shadow" style="height:230px;
+              overflow: auto;
+              overflow-x: hidden;">
+                <h4 class="color-heading">Upload analysis</h4>
+                <hr class="hr-massupload">
+                <table class="table">
+    
+                  <tbody>
+                    <tr class="table-border">
+                      <td>John</td>
+                      <td>:</td>
+                      <td>Doe</td>
+    
+                    </tr>
+                    <tr class="table-border">
+                      <td>Mary</td>
+                      <td>:</td>
+                      <td>Moe</td>
+    
+                    </tr>
+                    <tr class="table-border">
+                      <td>July</td>
+                      <td>:</td>
+                      <td>Dooley</td>
+    
+                    </tr>
+                  </tbody>
+                </table>
+    
+              </div>
+            </div> -->
+        </div>
+        
+        <!-- upload analysis ends -->
+      </div>
+    </div>
+    <!-- view list in mass upload starts -->
+    <!-- view list in mass upload ends -->
+  </div>
+</div>
